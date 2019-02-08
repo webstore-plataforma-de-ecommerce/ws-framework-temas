@@ -1,0 +1,11 @@
+/*ULTIMOS PRODUTOS VISTOS*/
+#ultimos-vistos,
+#ultimos-list{
+	height: 1px;
+	opacity: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+#ultimos-vistos{
+	margin-top: 3rem;
+}

@@ -1,0 +1,150 @@
+<!--##CLEAR_CSS##-->
+<div id="main">
+
+<header>
+    <div class="header-content hidden-xs">
+
+        <div class="topo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="login-cadastro">Ol&aacute; <span id="user-nome">Visitante</span>! <div id="link-user"><a href="" id="link-login">Fa&ccedil;a seu login</a> ou <a href="" id="link-login-2">cadastre-se</a></div></div>
+                    </div>
+
+
+                    <div class="col-xs-6 text-right">
+                        
+                        <div class="conta-lista">
+                            <a href="" id="link-cadastro">Minha conta</a>
+                            <a href="" id="link-meus-pedidos">Meus pedidos</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-4 search-holder">
+                    <fieldset>
+                        <input type="text" class="input-busca" id="input-busca" placeholder='' value="">
+                        <button type="submit" class="botao-busca" id="botao-busca">
+                            <i class="fa fa-search"></i> Busca
+                        </button>
+                    </fieldset>
+                </div>
+
+                <div class="col-xs-4">
+                    <<!--##H1_DIV##--> class="logotipo"><!--##LOGOTIPO##--></<!--##H1_DIV##-->>
+                </div>
+
+                <div class="col-xs-4 cart-holder">
+                    <a href="" rel="Carrinho de compras" class="div-carrinho" id="link-carrinho">
+                        <span class="fa fa-shopping-cart">
+                            <span class="tooltip-carrinho"><!--##ONLY_NUM_PRODUTOS_CARRINHO##--></span>
+                        </span>
+                        <div class="cart-content hidden-sm">
+                            <p class="carrinho-texto"></p>
+                            <p class="cart-total">R$ <!--##VALOR_PRODUTOS_CARRINHO##--></p>
+                        </div>
+                        <div id="LV_CARRINHO_ON_PAGE" class="CarrinhoExibeTopo hidden-xs hidden-sm hidden-md"></div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div id="mobile-placeholder"></div>
+<div id="header-mobile">
+    <div class="container">
+        <div class="row logo-container">
+            <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu">
+                <span class="fa fa-bars"></span>
+            </a>
+            <!--##LOGOTIPO##-->
+            <a href="javascript:void(openCart())" rel="Carrinho de compras" class="link-carrinho-mobile">
+                <span class="fa fa-shopping-cart"></span>
+            </a>
+        </div>
+        <div class="row nav-mobile">
+            <fieldset>
+                <input type="text" class="input-busca" id="input-busca-2" placeholder='' value="">
+                <button type="submit" class="botao-busca" id="botao-busca-2">
+                    <i class="fa fa-search"></i>
+                </button>
+            </fieldset>                
+        </div>
+    </div>
+</div>
+
+<nav class="hidden-xs menu-topo" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="departamentos-nav"></ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="overlay"></div>
+<nav id="menu-drawer" role="navigation">
+    <span onclick="closeNav()">&times;</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 no-gutter">
+                <div class="menu-header">
+                    <span class="telefone-topo"></span>
+                    <a href="" id="link-entrar"><i class="fa fa-user"></i>Entrar</a>
+                    <a href="" id="link-pedidos">Meus pedidos</a>
+                </div>
+                <ul class="departamentos-nav"></ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="carrinho-drawer" class="hidden-sm hidden-md hidden-lg">
+    <div class="carrinho-header">
+        <span onclick="closeCart()" class="fa fa-times"></span>
+        <h3>Carrinho</h3>
+    </div>
+    <div id="cart-content"></div>
+</div>
+
+<div id="barra-flutuante" class="hidden-xs">
+    <div class="container">
+        <span rel="Menu de categorias" id="burguer-menu" class="hidden-xs">
+            <i class="fa fa-bars"></i>
+        </span>
+        <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu hidden-sm hidden-md hidden-lg">
+            <span class="fa fa-bars"></span>
+        </a>
+        <div class="logotipo"><!--##LOGOTIPO##--></div>
+        <fieldset>
+            <input type="text" class="input-busca" id="input-busca-3" placeholder='' value="">
+            <button type="submit" class="botao-busca" id="botao-busca-3">
+                <i class="fa fa-search"></i> Busca
+            </button>
+        </fieldset>
+        <a href="/carrinho/<!--##CODIGO_LOJA##-->/carrinho" rel="Carrinho de compras" class="div-carrinho">
+            <span class="fa fa-shopping-cart"></span>
+        </a>
+        <a href="" rel="Meus pedidos" class="link-meus-pedidos">
+            <span class="fa fa-user"></span>
+        </a>
+    </div>
+    <nav id="float-menu" class="" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="departamentos-nav"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

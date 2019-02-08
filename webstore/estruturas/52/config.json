@@ -1,0 +1,196 @@
+{
+  "PREF_1": "ffffff",
+  "PREF_2": "222222",
+  "PREF_3": "222222",
+  "PREF_4": "222222",
+  "PREF_5": "ffffff",
+  "PREF_6": "ffffff",
+  "PREF_7": "222222",
+  "PREF_8": "ffffff",
+  "PREF_9": null,
+  "PREF_10": null,
+  "PREF_11": null,
+  "PREF_12": "ffffff",
+  "PREF_13": "222222",
+  "PREF_14": null,
+  "PREF_15": null,
+  "PREF_16": "222222",
+  "PREF_17": null,
+  "PREF_18": null,
+  "PREF_19": null,
+  "PREF_20": null,
+  "PREF_21": null,
+  "PREF_22": "222222",
+  "PREF_23": null,
+  "PREF_24": null,
+  "PREF_25": null,
+  "PREF_26": null,
+  "PREF_27": null,
+  "PREF_28": null,
+  "PREF_29": "ffffff",
+  "PREF_30": "222222",
+  "PREF_31": "666666",
+  "PREF_32": "222222",
+  "PREF_33": "ffffff",
+  "PREF_34": "ffffff",
+  "PREF_35": null,
+  "PREF_36": null,
+  "PREF_37": null,
+  "PREF_38": null,
+  "PREF_39": null,
+  "PREF_40": "ffffff",
+  "PREF_41": "222222",
+  "PREF_42": null,
+  "PREF_43": null,
+  "PREF_44": null,
+  "PREF_45": null,
+  "PREF_46": null,
+  "PREF_47": null,
+  "PREF_48": "222222",
+  "PREF_49": "ededed",
+  "PREF_50": null,
+  "MENU_LATERAL": true,
+  "MENU_LATERAL_HOME": false,
+  "PRODS_PAG": 24,
+  "PRODS_LINHA": 0,
+  "BUSCA_TEXTO": "O que está procurando?",
+  "CARRINHO_TEXTO": "Meu carrinho",
+  "FPGTO": "|1|2|3|4|5|6|",
+  "modulos": [
+    {
+      "nome": "wsjs",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "plugin_bootstrap",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "plugin_clamp",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "plugin_elevatezoom",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "plugin_fontawesome",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "plugin_slick",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "fonts_opensans",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "main",
+      "versao": "1.1",
+      "etapa": "*"
+    },
+    {
+      "nome": "login",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "barra_lateral",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "pagina_interna",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "preloader",
+      "versao": "1.0",
+      "etapa": "HOME, LISTAGEM"
+    },
+    {
+      "nome": "bloco_produto",
+      "versao": "1.1",
+      "etapa": "*"
+    },
+    {
+      "nome": "pag_produto",
+      "versao": "1.0",
+      "etapa": "PRODUTO"
+    },
+    {
+      "nome": "banners",
+      "versao": "1.0",
+      "etapa": "HOME, LISTAGEM"
+    },
+    {
+      "nome": "categorias",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "fabricantes",
+      "versao": "1.0",
+      "etapa": "HOME"
+    },
+    {
+      "nome": "fale_conosco",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "footer",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "loja_vazia",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "menu_mobile",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "newsletter",
+      "versao": "1.0",
+      "etapa": "*"
+    },
+    {
+      "nome": "produtos_destaque",
+      "versao": "1.2",
+      "etapa": "HOME"
+    },
+    {
+      "nome": "produtos_grupos",
+      "versao": "1.1",
+      "etapa": "HOME"
+    },
+    {
+      "nome": "produtos_home",
+      "versao": "1.1",
+      "etapa": "HOME"
+    },
+    {
+      "nome": "produtos_listagem",
+      "versao": "1.1",
+      "etapa": "LISTAGEM"
+    },
+    {
+      "nome": "produtos_ultimos",
+      "versao": "1.1",
+      "etapa": "HOME"
+    }
+  ]
+}

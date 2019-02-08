@@ -1,0 +1,115 @@
+/*HEADER MOBILE*/
+#header-mobile {
+	background-color: <!--###PREF_1###-->;
+	padding: 1rem;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 97;
+}
+#mobile-placeholder {
+	display: block;
+	position: relative;
+	width: 100%;
+	clear: both;
+}
+#header-mobile .link-menu{
+	border-radius: 4px;
+	display: inline-block;
+	float: left;
+	font-size: 3rem;
+	height: 5rem;
+	text-align: center;
+	width: 5rem;
+    margin-top: 20px;
+}
+#header-mobile .link-carrinho-mobile{
+	border-radius: 4px;
+	display: inline-block;
+	float: right;
+	font-size: 3rem;
+	height: 5rem;
+	text-align: center;
+	width: 5rem;
+    margin-top: 20px;
+}
+
+.header-fixed .link-carrinho-mobile, .header-fixed .link-menu{
+    margin-top:0px !important;
+}
+
+#header-mobile .link-user span,
+#header-mobile .link-carrinho-mobile span,
+#header-mobile .link-menu span {
+	color: <!--###PREF_4###-->;
+	line-height: 5rem;
+	line-height: calc(5rem - 2px);
+	width: 100%;
+}
+#header-mobile .logo-container .LV_LogotipoImg, #header-mobile .logo-container .LV_LOGO_TOPO {
+	display: block;
+	float: left;
+	height: 10rem;
+	margin: 0 3rem 1rem;
+	position: relative;
+	transition: 0.2s ease;
+	width: 100%;
+	width: calc(100% - 16rem);
+}
+#header-mobile .logo-container .LV_LogotipoImg img, #header-mobile .logo-container .LV_LOGO_TOPO img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-height: 100%;
+	max-width: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#header-mobile fieldset {
+	display: block;
+	float: left;
+	position: relative;
+	width: 100%;
+}
+#header-mobile fieldset .input-busca {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	border-radius: 4px;
+	font-size: 12px;
+	height: 5rem;
+	line-height: 5rem;
+	padding: 0 1rem;
+	width: 100%;
+}
+#header-mobile fieldset .botao-busca {
+	background-color: <!--###PREF_2###-->;
+	color: <!--###PREF_5###-->;
+	border: 1px solid <!--###PREF_2###-->;
+	border-radius: 4px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	height: 5rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 5rem;
+}
+#header-mobile.header-fixed .LV_LogotipoImg, #header-mobile.header-fixed .LV_LOGO_TOPO {
+	height: 5rem;
+	margin: 0 3rem;
+}
+#header-mobile.header-fixed .nav-mobile {
+	display: none;
+}
+
+
+/*MEDIAS*/
+@media screen and (min-width: 768px){
+	#header-mobile, #mobile-placeholder{
+		display: none;
+	}
+	.dados-produto-mobile{
+		display: none;
+	}
+}

@@ -1,0 +1,32 @@
+/*FABRICANTES*/
+#fabricantes{
+	background-color: white;
+	padding: 1rem 3rem;
+}
+#fabricantes .slick-track {
+    margin: auto;
+}
+#fabricantes .slick-slide{
+	height: 20rem;
+	padding: 0 0.5rem;
+	transition: 0.2s ease;
+}
+#fabricantes .slick-slide:hover {
+	opacity: 0.6;
+}
+#fabricantes .slick-slide a {
+	display: block;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+#fabricantes img{
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}

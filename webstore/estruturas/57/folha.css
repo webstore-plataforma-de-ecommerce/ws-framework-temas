@@ -1,0 +1,816 @@
+fieldset{
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+footer .input-news{
+	background-color: white;
+	border-radius: 3rem;
+	border: 1px solid <!--###PREF_31###-->;
+	box-shadow: 2px 1px <!--###PREF_31###-->;	
+	line-height: 4rem;
+	margin: 0;
+	padding: 0 1.5rem;
+	position: relative;
+	transition: 0.2s ease;
+	width: 100%;
+}
+#barra-flutuante .input-busca:hover,
+#barra-flutuante .input-busca:focus,
+footer .input-news:hover,
+footer .input-news:focus{
+	box-shadow: 3px 3px <!--###PREF_31###-->;
+}
+footer #botao-news {
+	background-color: <!--###PREF_31###-->;
+	border-radius: 3rem;
+	border: 1px solid <!--###PREF_31###-->;
+	color: <!--###PREF_34###-->;
+	display: block;
+	font-size: 0;
+	margin: 1px;
+	padding: 0 1rem;
+	position: absolute;
+	right: 1rem;
+	right: calc(1rem - 1px);
+	text-transform: uppercase;
+	top: -1px;
+	width: 4.2rem;
+}
+footer #botao-news i{
+    line-height: 4rem;
+}
+.text-right{
+	text-align: right;
+}
+#produtos .div-grupo .slick-arrow{
+    border-radius: 4rem;
+    margin-top: 2px;
+}
+.titulo-grupo {
+    border: 1px solid #d7d7d7;
+    background-color: white;
+    border-radius: 4px;
+    margin: 0 0.5rem 1rem;
+    overflow: hidden;
+    padding: 0.8rem 0 0.8rem 0.5rem;
+    text-align: left;
+    transition: 0.2s ease;
+}
+.div-item .prod-botao-comprar span a{
+	border-radius: 3rem;
+	width: unset;
+}
+.div-item .prod-detalhes {
+    bottom: -15rem;
+    display: block;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    transition: 0.2s ease;
+    width: 100%;
+}
+.div-item:hover .prod-detalhes {
+    bottom: 1rem;
+}
+.div-item .prod-img .prod-detalhes a {
+    border-radius: 5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0;
+    padding: 3rem 0;
+    width: 10rem;
+    height: 10rem;
+    line-break: loose;
+}
+
+/*HEADER*/
+header{
+	background-color: <!--###PREF_2###-->;
+	box-shadow: 0px 1px 5px 0px rgba(78, 78, 78, 0.6);
+	color: <!--###PREF_5###-->;
+	position: relative;
+	top: 0;
+	z-index: 99;
+}
+header .topo{
+	background-color: <!--###PREF_1###-->;
+	color: <!--###PREF_4###-->;
+	font-size: 11px;
+	line-height: 2.5rem;
+}
+header .topo a{
+	color: <!--###PREF_4###-->;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	transition: 0.2s ease;
+}
+header .topo a:hover {
+	text-decoration: underline;
+}
+header .topo .login-cadastro{
+	display: inline-block;
+}
+header .topo .link-user{
+	display: inline-block;
+}
+header .topo .link-user a:before {
+    content: "|";
+    padding: 0 1rem;
+    position: relative;
+    top: -2px;
+}
+header .telefone-topo i{
+    bottom: -1px;
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+    position: relative;
+}
+header fieldset{
+	display: block;
+	float: right;
+	margin: 0 0 0 2rem;
+	padding: 0;
+	position: relative;
+}
+header fieldset.sem-carrinho{
+	width: 100%;
+}
+header .input-busca {
+	background-color: white;
+	border-radius: 2.25rem;
+	border: 1px solid <!--###PREF_3###-->;
+	box-shadow: none;
+	color: #666;
+	display: block;
+	float: left;
+	font-size: 1.2rem;
+	height: 4.5rem;
+	line-height: 4.5rem;
+	margin: 0;
+	opacity: 0;
+	padding: 0 2rem;
+	position: absolute;
+	right: 1px;
+	transition: 0.4s ease;
+	width: 4rem;
+}
+header fieldset:hover .input-busca,
+header .input-busca:focus {
+    width: 40rem;
+    opacity: 1;
+    box-shadow: 2px 2px <!--###PREF_3###-->;
+}
+header .botao-busca {
+	background-color: <!--###PREF_3###-->;
+	border-radius: 50%;
+	border: 0;
+	color: <!--###PREF_6###-->;
+	display: block;
+	float: left;
+	font-size: 0;
+	margin: 0;
+	padding: 0;
+	width: 4.5rem;
+    position: relative;
+    z-index: 99;
+}
+header .botao-busca i{
+	display: block;
+	float: left;
+	font-size: 1.8rem;
+	height: 4.5rem;
+	line-height: 4.5rem;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+header .logo-holder{
+	overflow: hidden;
+}
+header .nav-holder{
+	margin-top: 5rem;
+}
+header .logotipo {
+	height: 14.5rem;
+	margin: 0;
+}
+header .logotipo a {
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+header .logotipo a img{
+	bottom: 0;
+	display: block;
+	height: auto;
+	left: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 1rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
+}
+header .div-carrinho {
+	color: #666;
+	display: inline-block;
+	float: right;
+	margin: 0 0 0 2rem;
+	position: relative;
+}
+header .div-carrinho .fa {
+	background-color: <!--###PREF_3###-->;
+	border: 0;
+	border-radius: 50%;
+	color: <!--###PREF_6###-->;
+	display: block;
+	float: left;
+	font-size: 1.9rem;
+	height: 4.5rem;
+	line-height: 4.5rem;
+	padding: 0;
+	text-align: center;
+	width: 4.5rem;
+}
+header .div-carrinho .cart-content {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	border-left: 0;
+	border-radius: 4px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	display: block;
+	float: left;
+	padding: 0.5rem;
+	width: calc(100% - 4.2rem);
+}
+header .div-carrinho p {
+	font-size: 1.2rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	margin: 0;
+}
+header .div-carrinho .carrinho-texto {
+	font-weight: 600;
+}
+#link-user {
+	display: inline-block;
+	font-size: 11px;
+	line-height: 2rem;
+}
+header #LV_CARRINHO_ON_PAGE {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	border-radius: 4px;
+	color: #333;
+	min-width: 50rem;
+	opacity: 0;
+	padding: 1rem;
+	position: absolute;
+	right: -1px;
+	top: 20rem;
+	transition: top 0.3s ease, opacity 0.2s ease, visibility 0.1s ease;
+	transition-delay: 0s, 0s, 0.1s;
+	visibility: hidden;
+	width: 100%;
+	z-index: 99;
+}
+header .div-carrinho:hover > #LV_CARRINHO_ON_PAGE {
+	opacity: 1;
+	top: 100%;
+	visibility: visible;
+	transition: top 0.3s ease, opacity 0.2s ease;
+}
+header #LV_CARRINHO_ON_PAGE img {
+	display: none;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal {
+	background-color: #d2d2d2;
+	color: black;
+	display: inline-block;
+	float: left;
+	line-height: 3rem;
+	padding: 0 1rem;
+	text-align: right;
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .TabelaCarOnPage {
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes {
+	background-color: <!--###PREF_41###-->;
+	border-radius: 4px;
+	color: <!--###PREF_40###-->;
+	display: inline-block;
+	float: left;
+	margin: 0.5rem 0 0;
+	padding: 1rem;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.3s ease;
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes:hover {
+	opacity: 0.7;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes a:hover{
+	text-decoration: none;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal label {
+	margin: 0;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal span {
+	font-weight: 600;
+	margin-right: 1rem;
+}
+tr.TrCarOnPage {
+	background-color: #d2d2d2;
+	color: black;
+	line-height: 3rem;
+}
+tr.TrCarOnPage td {
+	font-weight: 600;
+	padding: 0 1rem;
+	text-align: center;
+}
+span.CarOnPageCodigoProduto {
+	display: block;
+}
+.DivDadosProdCarOnPage {
+	font-size: 12px;
+}
+/*HEADER MOBILE*/
+#header-mobile {
+	background-color: <!--###PREF_2###-->;
+	padding: 1rem;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 97;
+}
+#mobile-placeholder {
+	display: block;
+	position: relative;
+	width: 100%;
+	clear: both;
+}
+#header-mobile .link-menu{
+	border-radius: 4px;
+	display: inline-block;
+	float: left;
+	font-size: 3rem;
+	height: 4rem;
+	text-align: center;
+	width: 4rem;
+}
+#header-mobile .link-carrinho-mobile{
+	border-radius: 4px;
+	display: inline-block;
+	float: right;
+	font-size: 3rem;
+	height: 4rem;
+	text-align: center;
+	width: 4rem;
+}
+#header-mobile .link-user span, #header-mobile .link-carrinho-mobile span, #header-mobile .link-menu span {
+	color: <!--###PREF_3###-->;
+	line-height: 4rem;
+	line-height: calc(4rem - 2px);
+	width: 100%;
+}
+#header-mobile .logo-container{
+    
+}
+#header-mobile .logo-container .LV_LogotipoImg, #header-mobile .logo-container .LV_LOGO_TOPO {
+	display: block;
+	float: left;
+	height: 10rem;
+	margin: 0 3rem 1rem;
+	position: relative;
+	transition: 0.2s ease;
+	width: 100%;
+	width: calc(100% - 20rem);
+}
+#header-mobile .logo-container .LV_LogotipoImg img, #header-mobile .logo-container .LV_LOGO_TOPO img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-height: 60%;
+	max-width: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#header-mobile fieldset {
+	display: block;
+	float: left;
+	position: relative;
+	width: 100%;
+}
+#header-mobile fieldset .input-busca {
+	background-color: white;
+	border: 1px solid <!--###PREF_3###-->;
+	border-radius: 4rem;
+	box-shadow: 0px 0px <!--###PREF_3###-->;
+	font-size: 12px;
+	height: 4rem;
+	line-height: 4rem;
+	padding: 0 1.5rem;
+	width: 100%;
+}
+#header-mobile fieldset .input-busca:hover {
+	box-shadow: 2px 2px <!--###PREF_3###-->;
+}
+#header-mobile fieldset .botao-busca {
+	background-color: <!--###PREF_3###-->;
+    color: <!--###PREF_6###-->;
+    border: 0;
+    border-radius: 4rem;
+    height: 4rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4rem;
+}
+#header-mobile.header-fixed .LV_LogotipoImg, #header-mobile.header-fixed .LV_LOGO_TOPO {
+	height: 4rem;
+	margin: 0 3rem;
+}
+#header-mobile.header-fixed .nav-mobile {
+	display: none;
+}
+/*NAVBAR*/
+nav#float-menu{
+	background-color: <!--###PREF_12###-->;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 1rem;
+	width: 100%;
+}
+nav.menu-topo{
+    display: block;
+    float: left;
+    width: calc(100% - 13rem);
+}
+.todo-departamento {
+	display: none;
+}
+.departamentos-nav li{
+	position: relative;
+	text-align: left;
+}
+.departamentos-nav ul{
+	border-radius: 0 1rem 1rem 1rem;
+	background-color: <!--###PREF_13###-->;
+	opacity: 0;
+	padding-bottom: 1rem;
+	transition: 150ms ease;
+	visibility: hidden;
+}
+.departamentos-nav ul li:hover > ul{
+	left: 100%;
+	opacity: 1;
+	transition: 150ms ease;
+	visibility: visible;
+	top: 0;
+}
+.departamentos-nav > li > ul {
+	color: <!--###PREF_8###-->;
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 150%;
+	visibility: hidden;
+	min-width: 20rem;
+	width: 110%;
+	z-index: 99;
+}
+.departamentos-nav ul li ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	left: 100%;
+	position: absolute;
+	top: 20rem;
+	width: 100%;
+}
+.departamentos-nav ul a {
+	border-radius: 5px;
+	display: inline-block;
+	line-height: 3rem;
+	padding: 0.2rem 1rem;
+	width: 100%;
+}
+.departamentos-nav ul li:hover > a {
+	background-color: <!--###PREF_12###-->;
+	color: <!--###PREF_7###-->;
+}
+.departamentos-nav > li:hover > ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	opacity: 1;
+	top: 100%;
+	transition: 150ms ease;
+	visibility: visible;
+}
+.departamentos-nav ul .com-sub:after {
+	content: "\f105";
+	font-family: FontAwesome;
+	position: absolute;
+	right: 1rem;
+}
+.departamentos-nav > li{
+	display: inline-block;
+	position: relative;
+	text-align: center;
+}
+.departamentos-nav{
+	text-align: left;
+	width: 100%;
+}
+.departamentos-nav > li > a{
+	border-radius: 2.25rem;
+	color: <!--###PREF_7###-->;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 700;
+	line-height: 2.5rem;
+	margin: 0;
+	padding: 1rem 2rem;
+	text-transform: uppercase;
+	transition: 300ms ease;
+}
+.departamentos-nav > li.todos-departamentos:hover > a,
+.departamentos-nav > li:hover > a.com-sub {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.departamentos-nav > li:hover > a {
+	background-color: <!--###PREF_13###-->;
+	color: <!--###PREF_8###-->;
+}
+/*BARRA FLUTUANTE*/
+#barra-flutuante {
+	background-color: <!--###PREF_2###-->;
+    box-shadow: 0px 1px 5px 0px rgba(78, 78, 78, 0.6);
+	opacity: 0;
+	padding: 0;
+	position: fixed;
+	top: -30%;
+	transition: 0.2s ease;
+	visibility: hidden;
+	width: 100%;
+	z-index: 999;
+}
+#barra-flutuante.active {
+	opacity: 1;
+	top: 0;
+	visibility: visible;
+}
+#barra-flutuante nav {
+	max-height: 0rem;
+	margin: 0;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	min-height: unset;
+	transition: 0.2s ease;
+}
+#barra-flutuante nav.active{
+	max-height: 10rem;
+	overflow: visible;
+}
+#barra-flutuante #burguer-menu{
+	cursor: pointer;
+	display: block;
+	float: left;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 8rem;
+}
+#barra-flutuante #burguer-menu i {
+	color: <!--###PREF_3###-->;
+	display: inline-block;
+	font-size: 2rem;
+	line-height: 4rem;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 4rem;
+}
+#barra-flutuante .logotipo {
+	display: block;
+	float: left;
+	height: 6.2rem;
+	margin: 0 3rem 0 0;
+	overflow: hidden;
+	padding: 0;
+	text-align: center;
+	width: 16rem;
+}
+#barra-flutuante .logotipo > a {
+	display: block;
+	height: 100%;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+#barra-flutuante .logotipo img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 0.5rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#barra-flutuante .input-busca {
+	background-color: white;
+	border-radius: 3rem;
+	border: 1px solid <!--###PREF_3###-->;
+    box-shadow: 2px 1px <!--###PREF_3###-->;
+	font-size: 1.2rem;
+	height: 4rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0 1rem;
+	transition: 0.4s ease;
+	width: 100%;
+}
+#barra-flutuante .botao-busca {
+	border-radius: 4rem;
+    background-color: <!--###PREF_3###-->;
+    border: 0;
+    color: white;
+    display: block;
+    font-size: 0;
+    line-height: 4rem;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+#barra-flutuante .botao-busca i {
+	display: block;
+	float: left;
+	font-size: 1.5rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0;
+	width: 4rem;
+}
+#barra-flutuante fieldset {
+	display: block;
+	float: left;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+	width: 70%;
+	width: calc(100% - 35rem - 4px);
+}
+#barra-flutuante fieldset.sem-carrinho {
+	width: calc(100% - 27rem);
+}
+#barra-flutuante .div-carrinho {
+	display: block;
+	float: right;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 8rem;
+}
+#barra-flutuante .div-carrinho .fa {
+	color: <!--###PREF_3###-->;
+	font-size: 2rem;
+	line-height: 4rem;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 4rem;
+}
+#barra-flutuante .link-menu {
+	float: left;
+	width: 8rem;
+	text-align: center;
+	margin: 3rem 0;
+	height: 4rem;
+	display: inline-block;
+}
+#barra-flutuante .link-menu span {
+	line-height: 4rem;
+	width: 100%;
+	font-size: 2rem;
+	color: white;
+}
+
+/*PLACEHOLDER PRODUTO*/
+.prod-fake .prod-img a{
+	background-color: #f2f2f2;
+}
+.prod-fake .prod-img a img{
+	max-height: 50%;
+	opacity: 0.5
+}
+.prod-fake .div-item .prod-detalhes a {
+    background-color: #cccccc;
+    color: #666;
+    font-size: 1.8rem;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+/*MEDIAS*/
+@media screen and (min-width: 768px){
+	#header-mobile, #mobile-placeholder{
+		display: none;
+	}
+	.dados-produto-mobile{
+		display: none;
+	}
+}
+@media screen and (max-width: 767px){
+	.item-tipo-lista .prod-info{
+		width: 55% 
+	}
+	.item-tipo-lista .prod-img{
+		width: 45%;
+	}
+	footer #cnpj-footer{
+		text-align: left;
+		width: 100%;
+	}
+	.PageCheckout header{
+		display: none;
+	}
+	#barra-flutuante fieldset {
+		width: 48%;
+		width: calc(100% - 32rem - 4px);
+	}
+	.paginacao-ordem{
+		font-size: 12px;
+	}
+	#preco-produto{
+		margin-bottom: 1rem;
+	}
+	#preco-produto > p{
+		margin-bottom: 1rem;
+	}
+}
+@media screen and (max-width: 480px){
+	.div-item .add span.prod-lancamento{
+		float: right;
+	}
+	#barra-flutuante fieldset{
+		display: none;
+	}
+	.PageCheckout #barra-flutuante .logotipo, #barra-flutuante .logotipo{
+		width: calc(100% - 16rem)!important;
+		margin: 0;
+	}
+	#lista-parcelas{
+		column-count: 1;
+	}
+}
+@media screen and (max-width: 374px){
+	#barra-flutuante fieldset {
+		margin-left: 2rem;
+		width: calc(100% - 12rem - 4px);
+	}
+	.list-item.col-xs-6{
+		width: 100%;
+	}
+}
+@media screen and (max-width: 991px){
+	.newsletter-footer fieldset > div {
+		margin-bottom: 1rem;
+	}
+	header .topo .links-topo{
+		width: calc(100% - 15rem);
+	}
+	header .div-carrinho{
+		padding: 0;
+		width: 4rem;
+	}
+	header .div-carrinho{
+		border: none;
+	}
+	footer .footer-content .contato{
+		clear: left;
+	}
+	footer .footer-content .institucional{
+		clear: both;
+	}
+}

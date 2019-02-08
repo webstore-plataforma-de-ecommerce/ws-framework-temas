@@ -1,0 +1,49 @@
+#preloader .div-item{
+	opacity: 0.7;
+}
+#preloader .div-item .prod-img:before{
+    background-color: #d7d7d7;
+    content: " ";
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+#preloader .div-item .prod-info-pre{
+    min-height: 20rem;
+    position: relative;
+}
+#preloader .div-item .prod-info-pre:before{
+    background-color: #d7d7d7;
+    content: " ";
+    display: block;
+    height: 20%;
+    left: 1rem;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 2rem);
+}
+#preloader .div-item .prod-info-pre:after{
+    background-color: #d7d7d7;
+    content: " ";
+    display: block;
+    height: 10%;
+    left: 1rem;
+    position: absolute;
+    top: 25%;
+    width: calc(80% - 2rem);
+}
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.5;}
+}
+.blink{
+    will-change:contents;
+	text-decoration: blink;
+	-webkit-animation-name: blinker;
+	-webkit-animation-duration: 0.8s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-direction: alternate;
+}    
+        
+    

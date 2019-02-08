@@ -1,0 +1,369 @@
+/*BLOCO PRODUTO*/
+#produtos.produtos-index{
+	padding-bottom: 2rem;
+}
+#prod-list{
+	/*display: none;*/
+	margin-bottom: 2rem;
+	padding: 0 0.5rem;
+	transition: 0.2s linear;
+}
+.div-item {
+	background-color: white;
+	padding: 0;
+	position: relative;
+	transition: 0.2s ease;
+}
+.div-grupo {
+	margin: 0 0 2rem;
+	padding: 0 0.5rem;
+}
+.titulo-grupo{
+	border-bottom: 1px solid <!--###PREF_16###-->;
+	margin: 0 0.5rem 1rem;
+	overflow: hidden;
+	padding: 1rem 0;
+	position: relative;
+	text-align: center;
+	transition: 0.2s ease;
+}
+.titulo-grupo:hover{
+	background-color: #f9f9f9;
+}
+.titulo-grupo h3 {
+	color: <!--###PREF_16###-->;
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 2.4rem;
+	font-weight: 300;
+	line-height: 3rem;
+	margin: 0;
+	padding: 0 1rem;
+	text-align: center;
+	text-transform: uppercase;
+}
+.arrow{
+	bottom: 0;
+	display: block;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#produtos .div-grupo .slick-arrow {
+	bottom: 0;
+	color: #666;
+	display: block!important;
+	font-size: 4rem;
+	height: 5rem;
+	line-height: 5rem;
+	margin: auto;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	transition: 0.2s ease;
+	width: 3rem;
+}
+#produtos .div-grupo .slick-arrow.right-arrow {
+    right: 0;
+}
+#produtos .div-grupo .slick-arrow.left-arrow {
+    left: 0;
+}
+#produtos .div-grupo .slick-arrow:hover{
+	background-color: <!--###PREF_48###-->;
+	border-color: <!--###PREF_48###-->;
+	color: white;
+}
+.foto-vertical .div-item .prod-img{
+	height: 40rem;	
+}
+.div-item .prod-img {
+	height: 30rem;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
+}
+.div-item .prod-img a {
+	display: block;
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+.div-item .prod-img a img {
+	bottom: 0;
+	left: 0;
+	max-height: 100%;
+	max-width: 100%;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: opacity 0.5s ease, transform 0.2s ease;
+	will-change: opacity;
+}
+.list-item:hover .div-item .prod-img a img{
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}
+.div-item .prod-img a .img-1{
+	opacity: 1;
+}
+.div-item .prod-img a .img-2{
+	opacity: 0;
+}
+.div-item:hover .prod-img a .img-1{
+	opacity: 0;
+}
+.div-item:hover .prod-img a .img-2{
+	opacity: 1;
+}
+.list-item{
+	padding: 0 0.5rem 2rem;
+}
+.list-item:hover .div-item {
+	box-shadow: 0px 1px 6px 2px rgba(0, 0, 0, 0.09);
+}
+.div-item .prod-detalhes {
+	background-color: <!--###PREF_41###-->;
+	color: <!--###PREF_40###-->;
+	display: block;
+	float: left;
+	height: 5rem;
+	line-height: 5rem;
+	text-align: center;
+	transition: 200ms ease;
+	width: 50%;
+}
+.div-item .prod-detalhes:before {
+	background-color: <!--###PREF_48###-->;
+	color: white;
+	content: "\e9c1";
+	display: block;
+	float: left;
+	font-family: "icomoon";
+	font-size: 1.6rem;
+	height: 5rem;
+	right: 0;
+	line-height: 5rem;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 4rem;
+}
+.div-item .prod-detalhes a {
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 1.6rem;
+	font-weight: 300;
+	height: 5rem;
+	letter-spacing: 1px;
+	line-height: 5rem;
+	padding: 0 4rem 0 0;
+	position: relative;
+	text-transform: uppercase;
+	width: 100%;
+	z-index: 10;
+}
+.div-item .prod-img .prod-detalhes a {
+	display: inline-block;
+	font-size: 0;
+	text-transform: uppercase;
+	width: unset;
+}
+.div-item .prod-info {
+	padding: 0 1rem 0.5rem;
+	position: relative;
+	overflow: hidden;
+}
+.preco-null .div-item .prod-info {
+	min-height: unset;
+}
+.div-item .prod-info p {
+	line-height: 2rem;
+	margin: 0;
+	text-align: left;
+}
+.div-item .prod-info .prod-fabricante {
+	display: block;
+	height: 2rem;
+	margin: 0.5rem 0;
+	overflow: hidden;
+}
+.div-item .prod-info .prod-avaliacao {
+	display: none;
+    height: 3rem;
+    text-align: center;
+}
+.div-item .prod-info .prod-avaliacao > * {
+    display: inline-block;
+}
+.div-item .prod-info .variacao-preco{
+	display: table!important;
+	height: 4rem;
+	margin: 0.5rem 0;
+	width: 100%;
+}
+.div-item .prod-info .variacao-preco .holder {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+}
+.div-item .prod-info .prod-nome {
+	display: block;
+	height: 6rem;
+	margin: 0.5rem 0;
+	overflow: hidden;
+	text-align: left;
+	width: 100%;
+}
+.div-item .prod-info .prod-nome a {
+	color: #333;
+	display: inline-block;
+	font-family: "Roboto Condensed", sans-serif;
+	font-size: 1.5rem;
+	letter-spacing: 1px;
+	line-height: 2rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+.div-item .prod-info .prod-preco{
+	margin: 0.5rem 0;	
+}
+.div-item .prod-info .produto-indisponivel a{
+	background-color: #666;
+	color: #fff;
+	display: inline-block;
+	font-size: 1.2rem;
+	padding: 0.2rem 4rem;
+	text-transform: uppercase;
+}
+.div-item .prod-info .prod-preco a {
+	color: <!--###PREF_22###-->;
+	display: block;
+	font-family: "Roboto Condensed";
+	font-size: 1.8rem;
+	font-weight: 500;
+	height: 2rem;
+	letter-spacing: 2px;
+}
+.div-item .prod-info .prod-preco .tarja-indisponivel{
+	display: inline-block;
+	margin: 0 auto;
+	padding: 1rem 1rem;
+}
+.div-item .prod-info .prod-preco a strike {
+	color: #999;
+	font-size: 1.4rem;
+	margin-right: 1rem;
+}
+.div-item .prod-botao-comprar {
+	display: block;
+	float: left;
+	margin: 0;
+	text-align: center;
+	transition: 200ms ease;
+	width: 50%;
+}
+.div-item .prod-info .cta {
+    position: absolute;
+    bottom: -10rem;
+    display: block;
+    width: 100%;
+    left: 0;
+    transition: 300ms ease;
+}
+.list-item:hover .prod-info .cta {
+    bottom: 0;
+}
+.div-item .prod-botao-comprar span {
+    display: block;
+    float: left;
+    width: 100%;
+}
+.div-item .prod-botao-comprar span a {
+	background-color: <!--###PREF_41###-->;
+    border-right: 2px solid <!--###PREF_48###-->;
+	color: <!--###PREF_40###-->;
+	display: block;
+	font-family: "Roboto Condensed";
+	font-size: 1.6rem;
+	font-weight: 300;
+	height: 5rem;
+	letter-spacing: 1px;
+	line-height: 5rem;
+	padding: 0 0 0 4rem;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%;
+}
+.div-item .prod-botao-comprar span a i {
+	background-color: #333;
+	height: 5rem;
+	left: 0;
+	line-height: 5rem;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 4rem;
+}
+.div-item .prod-fabricante a {
+	color: #999;
+	font-size: 1.2rem;
+}
+.div-item .prod-mais {
+	display: none;
+	height: 2rem;
+}
+.div-item .prod-mais a{
+	color: #333;
+	display: inline-block;
+	font-family: "Roboto Condensed";
+	font-size: 1rem;
+	font-weight: 500;
+	height: 2rem;
+	letter-spacing: 1px;
+	line-height: 2rem;
+	margin-right: 5px;
+	text-transform: uppercase;
+}
+.div-item .prod-mais a:hover, .div-item .prod-fabricante a:hover {
+	text-decoration: underline;
+}
+.div-item .prod-mais a:before {
+	content: '+ ';
+}
+.div-item .add{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+}
+.div-item .add span{
+	background-color: <!--###PREF_48###-->;
+	color: white;
+	box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
+	border: 1px solid white;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 0.2rem 1.3rem;
+	text-transform: uppercase;
+	display: inline-block;
+	float: right;
+	margin-top: 1rem;
+	margin-right: 1rem;
+}
+.div-item .add span.prod-lancamento{
+	float: left;
+	margin-left: 1rem;
+}
+#produtos hr {
+	border-top: 1px solid #d7d7d7;
+}
+.produto-indisponivel .prod-img, .produto-indisponivel .prod-nome {
+	opacity: 0.5;
+}

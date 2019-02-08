@@ -1,0 +1,85 @@
+<!--##CLEAR_CSS##-->
+<div id="main">
+
+<header class="hidden-xs">
+    <div class="container">
+        <div class="row topo">
+            <div id="link-user">
+                <a href="" id="link-login">Login</a>
+                <span>|</span>
+                <a href="" id="link-login-2">Cadastro</a>
+            </div>                
+
+            <div class="link-topo">
+                <a href="" id="link-meus-pedidos">Fale conosco</a>
+                <span>|</span>
+                <a href="" id="link-meus-pedidos">Meus pedidos</a>
+                <span>|</span>
+                <a href="" rel="Carrinho de compras" class="div-carrinho" class="link-carrinho">
+                    <span class="fa fa-shopping-cart"></span>
+                    <!--##ONLY_NUM_PRODUTOS_CARRINHO##-->
+                    <div id="LV_CARRINHO_ON_PAGE" class="CarrinhoExibeTopo hidden-xs hidden-sm hidden-md"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-content hidden-xs">
+        <div class="container">
+
+            <div class="row">
+                <<!--##H1_DIV##--> class="logotipo"><!--##LOGOTIPO##--></<!--##H1_DIV##-->>
+                <ul class="departamentos-nav"></ul>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div id="mobile-placeholder"></div>
+<div id="header-mobile">
+    <div class="container">
+        <div class="row topo-mobile">
+            <div id="link-user-mobile">
+                <a href="" class="link-login">
+                    <span class="fa fa-user"></span>
+                </a>
+            </div>
+            <div class="link-topo-mobile">
+                <a href="" class="link-meus-pedidos">Fale conosco</a>
+                <span>|</span>
+                <a href="" class="link-meus-pedidos">Meus pedidos</a>
+                <span>|</span>
+                <a href="" rel="Carrinho de compras" class="div-carrinho link-carrinho">
+                    <span class="fa fa-shopping-cart"></span>
+                    <div class="tooltip-carrinho">
+                        <!--##ONLY_NUM_PRODUTOS_CARRINHO##-->
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row logo-container">
+            <!--##LOGOTIPO##-->
+            <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu">
+                <span class="fa fa-bars"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="overlay"></div>
+<nav id="menu-drawer" role="navigation">
+    <span onclick="closeNav()">&times;</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 no-gutter">
+                <div class="menu-header">
+                    <span class="telefone-topo"></span>
+                    <a href="" id="link-entrar"><i class="fa fa-user"></i>Entrar</a>
+                    <a href="" id="link-pedidos">Meus pedidos</a>
+                </div>
+                <ul class="departamentos-nav"></ul>
+            </div>
+        </div>
+    </div>
+</nav>

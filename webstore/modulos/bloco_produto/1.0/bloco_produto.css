@@ -1,0 +1,407 @@
+/*BLOCO PRODUTO*/
+#produtos.produtos-index
+{
+    padding-bottom: 2rem;
+}
+#prod-list
+{
+    /*display: none;*/
+    margin-bottom: 2rem;
+    padding: 0 .5rem;
+
+    transition: .2s linear;
+}
+.div-item
+{
+    position: relative;
+
+    padding: 0;
+
+    transition: .2s ease;
+
+    border: 1px solid #d7d7d7;
+    border-top: 2px solid #d7d7d7;
+    border-radius: 4px;
+    background-color: white;
+}
+.div-grupo
+{
+    margin: 0 0 2rem;
+    padding: 0 .5rem;
+}
+.titulo-grupo
+{
+    overflow: hidden;
+
+    margin: 0 .5rem 1rem;
+    padding: 0;
+
+    transition: .2s ease;
+    text-align: left;
+
+    border-top: 2px solid #d7d7d7;
+}
+.titulo-grupo:hover
+{
+    background-color: #f9f9f9;
+}
+
+.titulo-grupo h3 {
+	color: <!--###PREF_16###-->;
+	display: inline-block;
+	font-size: 1.8rem;
+	font-weight: 600;
+	line-height: 3rem;
+	margin: 0;
+	padding: 1rem;
+	text-align: center;
+}
+.arrow
+{
+    position: relative;
+
+    display: block;
+    float: right;
+
+    padding: 1rem 0;
+}
+#produtos .div-grupo .slick-arrow
+{
+    line-height: 3rem!important;
+
+    position: relative;
+    top: auto;
+    bottom: 1px;
+
+    display: inline-block!important;
+
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+    padding: 0;
+
+    transition: .2s ease;
+    text-align: center;
+
+    color: #666;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    background-color: white;
+}
+
+#produtos .div-grupo .slick-arrow:hover{
+	background-color: <!--###PREF_48###-->;
+	border-color: <!--###PREF_48###-->;
+	color: white;
+}
+.foto-vertical .div-item .prod-img
+{
+    height: 35rem;
+}
+.div-item .prod-img
+{
+    position: relative;
+
+    overflow: hidden;
+
+    height: 25rem;
+    padding: 1rem;
+}
+.div-item .prod-img a
+{
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+.div-item .prod-img a img
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+
+    transition: .5s ease;
+
+    will-change: opacity;
+}
+.div-item .prod-img a .img-1
+{
+    opacity: 1;
+}
+.div-item .prod-img a .img-2
+{
+    opacity: 0;
+}
+.div-item:hover .prod-img a .img-1
+{
+    opacity: 0;
+}
+.div-item:hover .prod-img a .img-2
+{
+    opacity: 1;
+}
+.list-item
+{
+    padding: 0 .5rem 2rem;
+}
+
+.list-item:hover .div-item {
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	border-top: 2px solid <!--###PREF_48###-->;
+}
+.div-item .prod-detalhes
+{
+    position: absolute;
+    bottom: -9rem;
+    left: 0;
+
+    display: block;
+
+    width: 100%;
+
+    transition: .2s ease;
+    text-align: center;
+}
+.div-item:hover .prod-detalhes
+{
+    bottom: 2rem;
+}
+
+.div-item .prod-img .prod-detalhes a {
+	background-color: <!--###PREF_48###-->;
+	color: white;
+	display: inline-block;
+	font-size: 1.2rem;
+	font-weight: 600;
+	opacity: 0.9;
+	padding: 1rem 5rem;
+	text-transform: uppercase;
+	width: unset;
+}
+.div-item .prod-info
+{
+    position: initial;
+
+    padding: 0 5px;
+}
+.div-item .prod-info p
+{
+    line-height: 20px;
+
+    margin: 0;
+
+    text-align: center;
+}
+.div-item .prod-info .prod-fabricante{
+    display: block;
+    height: 2rem;
+    margin: .5rem 0;
+    overflow: hidden;
+}
+.div-item .prod-info .prod-avaliacao{
+    display: none;
+    height: 3rem;
+    text-align: center;
+}
+.div-item .prod-info .prod-avaliacao > *{
+    display: inline-block;
+}
+
+.div-item .prod-info .variacao-preco
+{
+    display: table!important;
+    width: 100%;
+    height: 4rem;
+    margin: .5rem 0;
+}
+.div-item .prod-info .variacao-preco .holder
+{
+    display: table-cell;
+
+    width: 100%;
+
+    vertical-align: middle;
+}
+.div-item .prod-info .prod-nome
+{
+    display: block;
+    overflow: hidden;
+
+    width: 100%;
+    height: 60px;
+    margin: .5rem 0;
+
+    text-align: center;
+}
+.div-item .prod-info .prod-nome a
+{
+    line-height: 20px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    color: #333;
+}
+.div-item .prod-info .prod-preco
+{
+    margin: .5rem 0;
+}
+.div-item .prod-info .produto-indisponivel a
+{
+    font-size: 1.2rem;
+
+    display: inline-block;
+
+    padding: .2rem 4rem;
+
+    text-transform: uppercase;
+
+    color: #fff;
+    border-radius: 4px;
+    background-color: #666;
+}
+
+.div-item .prod-info .prod-preco a {
+	color: <!--###PREF_22###-->;
+	display: block;
+	font-size: 18px;
+	font-weight: 500;
+	height: 20px;
+}
+.div-item .prod-info .prod-preco .tarja-indisponivel
+{
+    display: inline-block;
+
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+.div-item .prod-info .prod-preco a strike
+{
+    font-size: 1.4rem;
+
+    margin-right: 1rem;
+
+    color: #999;
+}
+.div-item .prod-botao-comprar
+{
+    margin: .5rem 0;
+
+    text-align: center;
+}
+
+.div-item .prod-botao-comprar span a {
+	background-color: <!--###PREF_41###-->;
+	color: <!--###PREF_40###-->;
+	border-radius: 4px;
+	display: inline-block;
+	padding: 0.8rem 3rem;
+	text-align: center;
+	text-transform: uppercase;
+	width: 100%;
+}
+.div-item .prod-botao-comprar span a i
+{
+    padding-right: .5rem;
+}
+.div-item .prod-fabricante a
+{
+    font-size: 1.2rem;
+
+    color: #999;
+}
+.div-item .prod-mais
+{
+    height: 20px;
+}
+.div-item .prod-mais a
+{
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 20px;
+
+    display: inline-block;
+
+    height: 20px;
+
+    color: #333;
+}
+.div-item .prod-mais a:hover,
+.div-item .prod-fabricante a:hover
+{
+    text-decoration: underline;
+}
+.div-item .prod-mais a:before
+{
+    content: '+ ';
+}
+.div-item .add
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+}
+
+.div-item .add span{
+	background-color: <!--###PREF_48###-->;
+	color: white;
+	box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
+	border: 1px solid white;
+	font-size: 10px;
+	font-weight: 600;
+	padding: 0.2rem 1.3rem;
+	text-transform: uppercase;
+	display: inline-block;
+	float: right;
+	margin-top: 1rem;
+	margin-right: 1rem;
+}
+.div-item .add span.prod-lancamento{
+	float: left;
+	margin-left: 1rem;
+}
+#produtos hr {
+	border-top: 1px solid #d7d7d7;
+}
+.produto-indisponivel .prod-img, .produto-indisponivel .prod-nome {
+	opacity: 0.5;
+}
+
+@media screen and (max-width: 767px)
+{
+    #produtos .div-grupo .slick-arrow
+    {
+        width: 5rem;
+        height: 5rem;
+        margin-right: 0;
+        margin-left: 1rem;
+        padding: 1rem;
+    }
+    .titulo-grupo h3
+    {
+        font-size: 2.4rem;
+    }
+    .div-item .prod-botao-comprar span a
+    {
+        font-size: 2rem;
+        line-height: 3rem;
+
+        height: 5rem;
+        padding: 1rem;
+    }
+    .div-item .prod-info .prod-nome a
+    {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,167 @@
+/*NAVBAR*/
+nav#float-menu, nav.menu-topo{
+	background-color: <!--###PREF_12###-->;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	width: 100%;
+}
+.todo-departamento {
+	display: none;
+}
+.departamentos-nav li{
+	position: relative;
+	text-align: left;
+}
+.departamentos-nav ul{
+	background-color: <!--###PREF_13###-->;
+	display: none;
+	transition: 150ms ease;
+}
+.departamentos-nav ul li {
+    padding: 0.5rem;
+}
+.departamentos-nav ul li:hover > ul{
+	left: 100%;
+	opacity: 1;
+	transition: 150ms ease;
+	visibility: visible;
+	top: 0;
+}
+.departamentos-nav > li > ul {
+	color: <!--###PREF_8###-->;
+	position: absolute;
+	min-width: 20rem;
+	width: 100%;
+	z-index: 99;
+}
+.departamentos-nav ul li ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	left: 100%;
+	position: absolute;
+	width: 100%;
+}
+.departamentos-nav ul a {
+	display: inline-block;
+	line-height: 3rem;
+	padding: 0.2rem 1rem;
+	width: 100%;
+}
+.departamentos-nav ul li:hover > a {
+	background-color: <!--###PREF_12###-->;
+	color: <!--###PREF_7###-->;
+}
+.departamentos-nav > li:hover > ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	top: 100%;
+	transition: 150ms ease;
+}
+.departamentos-nav ul .com-sub:after {
+	content: "\f105";
+	font-family: FontAwesome;
+	position: absolute;
+	right: 1rem;
+}
+.departamentos-nav > li{
+	display: inline-block;
+	position: relative;
+	text-align: center;
+}
+.departamentos-nav{
+	text-align: left;
+	width: 100%;
+}
+.departamentos-nav > li > p, .departamentos-nav > li > a{
+	color: <!--###PREF_7###-->;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 2rem;
+	margin: 0;
+	padding: 1.5rem 2rem;
+	text-transform: uppercase;
+	transition: 300ms ease;
+}
+.departamentos-nav > li:hover > p, .departamentos-nav > li:hover > a {
+	background-color: <!--###PREF_13###-->;
+	color: <!--###PREF_8###-->;
+}
+
+
+
+/*MEGA MENU*/
+
+.dapart-nav-megamenu li.dpt-nivel-1 {
+    position:initial;
+}
+
+.dapart-nav-megamenu li div.dpt-div-nivel-2 {
+    background-color: <!--###PREF_13###-->;
+	display: none;
+	transition: 150ms ease;
+    position:absolute;
+    left:0px;
+    width:100%;
+}
+
+.dapart-nav-megamenu li:hover div.dpt-div-nivel-2 {
+     display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+}
+
+.dapart-nav-megamenu li:hover ul.dpt-ul-nivel-2{
+    visibility:visible;
+    display:block;
+    position:relative;
+    left:initial;
+    top:initial;
+    z-index:100;
+    -webkit-flex:1 1 auto;
+    flex:1 1 auto;
+}
+
+.dapart-nav-megamenu li.dpt-nivel-2 {
+	display:inline-block;
+    width:200px;
+    float:left;
+    /*border-right:1px solid <!--###PREF_7###-->;*/
+}
+
+.dapart-nav-megamenu li.dpt-nivel-2 ul {
+	box-shadow:none;
+}
+
+.dapart-nav-megamenu li.todo-departamento {
+	display:none;
+}
+
+.dapart-nav-megamenu li.dpt-nivel-2 .dpt-ul-nivel-3 {
+	display:block;
+    position:initial;
+    left:initial;
+    top:initial;
+}
+
+.dapart-nav-megamenu > li > p, .dapart-nav-megamenu > li > a {
+    position:relative;
+}
+
+.dapart-nav-megamenu li.dpt-nivel-3 ul, .dapart-nav-megamenu li.dpt-nivel-3:hover ul {
+    display: none !important;
+}
+
+.dapart-nav-megamenu ul li > a {
+	background-color: transparent;
+	color: <!--###PREF_7###-->;
+}
+
+.dapart-nav-megamenu ul li > a:after {
+	display:none !important;
+}
+
+.dapart-nav-megamenu ul li:hover > a {
+	background-color: transparent !important;
+	color: <!--###PREF_7###-->;
+}

@@ -1,0 +1,183 @@
+#carrinho-drawer {
+    background-color: <!--###PREF_1###-->;
+    color: <!--###PREF_4###-->;
+    height: 100%;
+    position: fixed;
+    right: -30rem;
+    top: 0;
+    transition: 0.3s ease;
+    width: 30rem;
+    z-index: 99;
+}
+#carrinho-drawer .carrinho-header {
+    background-color: <!--###PREF_1###-->;
+    color: <!--###PREF_4###-->;
+    cursor: pointer;
+}
+#carrinho-drawer .carrinho-header h3 {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 5rem;
+    margin: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+}
+#carrinho-drawer .carrinho-header span {
+    display: inline-block;
+    float: right;
+    font-size: 2rem;
+    line-height: 5rem;
+    padding: 0 2rem;
+}
+#cart-content {
+    padding: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+    
+    #carrinho-drawer {
+        background-color: white;
+        color: #333;
+        display: block;
+        height: 100%;
+        height: 100vh;
+        margin: 0;
+        max-width: 100%;
+        overflow: hidden;
+        padding: 0;
+        position: fixed;
+        right: -100%;
+        top: 0;
+        transition: 0.3s ease;
+        width: 30rem;
+        z-index: 99;
+    }
+    #carrinho-drawer > span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5rem;
+        height: 10rem;
+        text-align: center;
+        color: white;
+        font-size: 3rem;
+        line-height: 10rem;
+        font-weight: 700;
+        background-color: <!--###PREF_12###-->;
+    }
+    .carrinho-header {
+        background-color: <!--###PREF_1###-->;
+        border-bottom: 2px solid <!--###PREF_12###-->;
+    }
+    .carrinho-header h3 {
+        color: <!--###PREF_4###-->;
+        font-size: 2.2rem;
+        line-height: 8rem;
+        margin: 0;
+        padding: 1rem 0 1rem 6rem;
+    }
+
+    .TrItemCarOnPage > td:first-child {
+        width: 65%;
+    }
+
+    .TrItemCarOnPage > td:first-child img {
+        display: table-cell;
+        padding: 5px;
+        width: 100%;
+    }
+
+    .TrItemCarOnPage > td:first-child span {
+        display: table-cell;
+        padding: 0 5px;
+        vertical-align: middle;
+        width: 65%;
+    }
+    .TrCarOnPage{
+        display: none;
+    }
+
+    .TrItemCarOnPage > td:nth-child(2):after {
+        content: "x";
+    }
+    .TrItemCarOnPage > td:nth-child(4){
+        display: none;
+    }
+
+    .DivDadosProdCarOnPage a {
+        display: table;
+        height: 100%;
+    }
+
+    .DivDadosProdCarOnPage {
+        display: table-cell;
+    }
+
+    .TrItemCarOnPage .CarOnPageCodigoProduto {
+        display: none!important;
+    }
+
+    .TrItemCarOnPage {
+        font-size: 12px;
+    }
+
+    .TrItemCarOnPage > td:nth-child(2) {
+        text-align: center;
+        width: 10%;
+    }
+
+    .TrItemCarOnPage > td:nth-child(3) {
+        text-align: center;
+        width: 25%;
+    }
+    .DivCarOnPageBotoes {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 5rem;
+        text-align: center;
+    }
+
+    .CarOnPageTotal {
+        position: absolute;
+        bottom: 5rem;
+        height: 4rem;
+        width: 100%;
+        text-align: right;
+        line-height: 4rem;
+        font-size: 12px;
+        background-color: #ececec;
+    }
+
+    .CarOnPageTotal span, .CarOnPageTotal label {
+        display: inline-block;
+        padding: 0 4px;
+    }
+    .CarOnPageTotal span {
+        font-weight: 700;
+    }
+    .DivCarOnPageBotoes a {
+        display: inline-block;
+        line-height: 4rem;
+        padding: 0 2rem;
+        margin: 0.5rem 0;
+        background-color: <!--###PREF_12###-->;
+        color: white;
+        text-transform: uppercase;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+    .DivCarOnPage {
+        height: calc(100vh - 10rem - 2px);
+        display: block;
+        position: relative;
+    }
+    .DivCarOnPage table {
+        height: calc(100% - 10rem);
+        overflow: scroll;
+        display: block;
+    }
+
+}

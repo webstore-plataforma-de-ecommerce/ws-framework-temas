@@ -1,0 +1,118 @@
+<!--##CLEAR_CSS##-->
+
+<header>
+    <div class="topo hidden-xs" data-pref-1>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-8">
+                    <div class="login-cadastro">Ol&aacute; <span id="user-nome">Visitante</span>! <div id="link-user"><a href="" id="link-login">Fa&ccedil;a seu login</a> ou <a href="" id="link-cadastro">cadastre-se</a></div></div>
+                    <div class="link-user"> 
+                        <a href="" id="link-cadastro">Minha conta</a>
+                        <a href="" id="link-meus-pedidos">Meus pedidos</a>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 text-right telefone-topo"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="header-content hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 logo-holder">
+                    <<!--##H1_DIV##--> class="logotipo"><!--##LOGOTIPO##--></<!--##H1_DIV##-->>
+                </div>
+                <div class="col-xs-9 nav-holder">
+                    <nav class="hidden-xs menu-topo" role="navigation">
+                        <ul class="departamentos-nav"></ul>
+                    </nav>
+                    <a href="" rel="Carrinho de compras" class="div-carrinho" id="link-carrinho">
+                        <span class="fa fa-shopping-basket"></span>
+                        <div id="LV_CARRINHO_ON_PAGE" class="CarrinhoExibeTopo hidden-xs hidden-sm hidden-md"></div>
+                    </a>
+                    <fieldset>
+                        <input type="text" class="input-busca" id="input-busca" placeholder='' value="">
+                        <button type="submit" class="botao-busca" id="botao-busca">
+                            <i class="fa fa-search"></i> Busca
+                        </button>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="mobile-placeholder"></div>
+<div id="header-mobile">
+    <div class="container">
+        <div class="row logo-container">
+            <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu">
+                <span class="fa fa-bars"></span>
+            </a>
+            <!--##LOGOTIPO##-->
+            <a href="/carrinho/<!--##CODIGO_LOJA##-->/carrinho" rel="Carrinho de compras" class="link-carrinho-mobile">
+                <span class="fa fa-shopping-basket"></span>
+            </a>
+        </div>
+        <div class="row nav-mobile">
+            <fieldset>
+                <input type="text" class="input-busca" id="input-busca-2" placeholder='' value="">
+                <button type="submit" class="botao-busca" id="botao-busca-2">
+                    <i class="fa fa-search"></i>
+                </button>
+            </fieldset>                
+        </div>
+    </div>
+</div>
+
+<div id="overlay"></div>
+<nav id="menu-drawer" role="navigation">
+    <span onclick="closeNav()">&times;</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 no-gutter">
+                <div class="menu-header">
+                    <span class="telefone-topo"></span>
+                    <a href="" id="link-entrar"><i class="fa fa-user"></i>Entrar</a>
+                    <a href="" id="link-pedidos">Meus pedidos</a>
+                </div>
+                <ul class="departamentos-nav"></ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="barra-flutuante" class="hidden-xs">
+    <div class="container">
+        <span rel="Menu de categorias" id="burguer-menu" class="hidden-xs">
+            <i class="fa fa-bars"></i>
+        </span>
+        <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu hidden-sm hidden-md hidden-lg">
+            <span class="fa fa-bars"></span>
+        </a>
+        <div class="logotipo"><!--##LOGOTIPO##--></div>
+        <fieldset>
+            <input type="text" class="input-busca" id="input-busca-3" placeholder='' value="">
+            <button type="submit" class="botao-busca" id="botao-busca-3">
+                <i class="fa fa-search"></i> Busca
+            </button>
+        </fieldset>
+        <a href="/carrinho/<!--##CODIGO_LOJA##-->/carrinho" rel="Carrinho de compras" class="div-carrinho">
+            <span class="fa fa-shopping-basket"></span>
+        </a>
+        <a href="" rel="Meus pedidos" class="link-meus-pedidos">
+            <span class="fa fa-user"></span>
+        </a>
+    </div>
+    <nav id="float-menu" class="" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="departamentos-nav"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

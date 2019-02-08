@@ -1,0 +1,38 @@
+.PageCheckout .link-meus-pedidos{
+	display: block;
+}
+.PageCheckout #barra-flutuante .div-carrinho{
+	display: none;
+}
+.PageCheckout #barra-flutuante{
+	display: block!important;
+	opacity: 1;
+	position: fixed;
+	top: 0;
+	visibility: visible;
+}
+.PageCheckout #barra-flutuante #burguer-menu, .PageCheckout #barra-flutuante fieldset {
+	margin: 3rem 1rem;
+}
+.PageCheckout #barra-flutuante .logotipo {
+	height: 10.2rem;
+	margin: 0;
+	width: 16rem;
+}
+.PageCheckout #barra-flutuante .logotipo img{
+	padding: 1rem;
+}
+.PageCheckout header {
+	height: 10.2rem;
+	opacity: 0;
+	overflow: hidden;
+}
+.PageCheckout nav.menu-topo {
+	display: none;
+}
+.PageCheckout #header-mobile{
+	display: none;
+}
+.PageCheckout #mobile-placeholder{
+	height: 8.7rem!important;
+}

@@ -1,0 +1,718 @@
+<!doctype html>
+<html>
+<head id="HeadPage">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Cache-control" content="public" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Webstore Lojas Virtuais</title>
+
+    <link rel="stylesheet" type="text/css" id="css01" href="/css/css.css">
+</head>
+
+
+<body id="BodyPage" class="homepage">
+
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript">
+    </script>
+    <script src="/js/jquery.maskMoney.0.2.js" type="text/javascript">
+    </script>
+    <script src="/js/jquery.maskedinput.js" type="text/javascript">
+    </script>
+    <script src="/js/funcoes_gerais.js?01072015" charset="iso-8859-1" type="text/javascript">
+    </script>
+
+    
+    <div id="DivResponse">
+
+<div id="search-box">
+    <div class="container">
+        <input type="text" class="input-busca" id="input-busca" placeholder='' value="">
+        <button class="botao-busca" id="botao-busca">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+        <a id="bt-close-search">X</a>
+    </div>
+</div>
+
+
+<div id="main">
+
+    <header>
+        <div class="header-content hidden-xs">
+
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-xs-3 logo-holder">
+                        <h1 class="logotipo"><a href="/" title="Ir para a home" class="LV_LogotipoImg"><img src="https://images.webstore.net.br/files/6618/logoEletro.png"></a></h1>
+                    </div>
+                    <div class="col-xs-9">
+
+                        <div class="cart-container">
+                            <a rel="Carrinho de compras" class="div-carrinho" onclick="toggleCart()">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="tooltip-carrinho">
+                                    <!--##ONLY_NUM_PRODUTOS_CARRINHO##-->
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="search-topo">
+                            <button id="seach-toggle">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+
+                        <div class="conta-lista">
+                            <span><i class="fa fa-user"></i>Minha conta</span>
+                            <ul id="lista-login" class="hidden-xs hidden-sm hidden-md">
+    <li><a href="" class="pre-login link-login">Fa�a seu login</a></li>
+    <li><a href="" class="pre-login link-login">Cadastre-se</a></li>
+    <li><a href="" class="pos-login link-pedidos">Meus Dados</a></li>
+    <li><a href="" class="pos-login link-pedidos">Meus Pedidos</a></li>
+    <li><a href="" class="pos-login link-sair">Sair</a></li>
+</ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div id="carrinho-drawer" class="">
+        <div class="carrinho-header" onclick="toggleCart()">
+            <h3>Carrinho</h3>
+            <span class="">
+                <svg class="lnr lnr-cross"><use xlink:href="#lnr-cross"></use></svg>
+            </span>
+        </div>
+        <div id="cart-content">
+            <div id="LV_CARRINHO_ON_PAGE" class="CarrinhoExibeTopo"></div>
+        </div>
+    </div>
+
+    <div id="mobile-placeholder"></div>
+    <div id="header-mobile">
+        <div class="container">
+            <div class="row logo-container">
+
+                <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu">
+                    <span class="fa fa-bars"></span>
+                </a>
+
+                <a href="/" title="Ir para a home" class="LV_LogotipoImg"><img src="https://images.webstore.net.br/files/6618/logoEletro.png"></a>
+
+                <button id="seach-toggle" onclick="funcOpenSearch()">
+                    <i class="fa fa-search"></i>
+                </button>
+
+                <a href="javascript:void(toggleCart())" rel="Carrinho de compras" class="link-carrinho-mobile">
+                    <span class="fa fa-shopping-cart"></span>
+                </a>
+            </div>
+            <div class="row nav-mobile">
+                <fieldset>
+                    <input type="text" class="input-busca" id="input-busca-2" placeholder='' value="">
+                    <button type="submit" class="botao-busca" id="botao-busca-2">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <!--#CATEGORIAS1.0#-->
+    <nav class="hidden-xs menu-topo-on-click" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 posInitial">
+                    <ul class="departamentos-nav-on-click"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div id="overlay"></div>
+<nav id="menu-drawer" role="navigation">
+    <span onclick="closeNav()">&times;</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 no-gutter">
+                <div class="menu-header">
+                    <span class="telefone-topo"></span>
+                    <a href="" id="link-entrar"><i class="fa fa-user"></i>Entrar</a>
+                    <a href="" id="link-pedidos">Meus pedidos</a>
+                </div>
+                <ul class="departamentos-nav"></ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="div-area-banners">
+
+    <section id="slider" class="hidden-xs">
+
+        <div class="container">
+
+            <div class="row banner-row">
+                <div class="col-xs-12">
+                    <div id="banner-8" class="index-topo"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <ul id="banner-topo" class="hidden"></ul>
+
+        <div class="container">
+            <div class="row">
+
+                <div id="banner-16" class="col-sm-8 hidden-xs"></div>
+                <div id="banner-17" class="col-sm-4 hidden-xs"></div>
+
+                <div class="col-xs-12 hidden-xs">
+                    <div id="banner-tarja" class="hidden"></div>
+                </div>
+                <div class="col-xs-12 no-gutter hidden-xs">
+                    <ul id="banner-mini" class="hidden"></ul>
+                </div>
+                <div class="col-xs-12 hidden hidden-sm hidden-md hidden-lg" id="banner-mobile">
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+<div id="holder-fabricantes" class="container">
+    <div class="titulo-grupo">
+        <h3>Escolha pela marca</h3>
+        <!--<span class="arrow">
+            <i class="fa fa-angle-left left-arrow"></i>
+            <i class="fa fa-angle-right right-arrow"></i>
+        </span>-->
+    </div>
+    <section id="fabricantes">
+        <div id="fabricante-holder" class="hidden row">
+    <div class="col-xs-12">
+        <ul id="fabricantes"></ul>
+    </div>
+</div>
+    </section>
+</div>
+
+<div class="box-mobile-margin">
+
+    <section id="produtos" class="produtos-index container">
+        <div class="row">
+
+            <div id="div-barra-esquerda" class="hidden col-xs-2"><ul id="filtros-lateral" class="hidden"><h3>Filtrar por</h3></ul>
+<ul id="menu-lateral">
+    <li class="menu-title"><h3>Categorias</h3></li>
+</ul>
+
+<div class="news-lateral">
+
+    <div class="col-xs-12 newsletter-titulo">
+        <p>Cadastre-se na nossa newsletter</p>
+    </div>
+
+    <fieldset>
+
+        <div class="campo-nome">
+            <span id="nome-news2-tooltip">nome</span>
+            <label for="nome-news2"><i class="fa fa-user-o" aria-hidden="true"></i></label>
+            <input type="text" class="input-news" id="nome-news2" placeholder='Digite seu nome' value="">
+        </div>
+
+        <div class="campo-email">
+            <span id="email-news2-tooltip">email</span>
+            <label for="email-news2"><i class="fa fa-envelope-o" aria-hidden="true"></i></label>
+            <input type="text" class="input-news" id="email-news2" placeholder='Digite seu e-mail' value="">
+        </div>
+
+        <button id="botao-news2">
+            <span id="news-tooltip2"></span>
+            <i class="fa fa-envelope"></i>Cadastrar
+        </button>
+
+    </fieldset>
+</div><div id="banner-lateralEsq"></div></div>
+
+            <div id="div-conteudo" class="col-xs-12">
+
+                <ul id="preloader" class="loading blink">
+
+    <li class="list-item col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="div-item">
+            <div class="prod-img">
+            </div>
+            <div class="prod-info-pre">
+                <p class="loading-line"></p>
+            </div>
+        </div>
+    </li>
+    <li class="list-item col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="div-item">
+            <div class="prod-img">
+            </div>
+            <div class="prod-info-pre">
+                <p class="loading-line"></p>
+            </div>
+        </div>
+    </li>
+    <li class="list-item col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="div-item">
+            <div class="prod-img">
+            </div>
+            <div class="prod-info-pre">
+                <p class="loading-line"></p>
+            </div>
+        </div>
+    </li>
+    <li class="list-item col-xs-6 col-sm-6 col-md-4 col-lg-3">
+        <div class="div-item">
+            <div class="prod-img">
+            </div>
+            <div class="prod-info-pre">
+                <p class="loading-line"></p>
+            </div>
+        </div>
+    </li>
+
+</ul>
+                <div class="row" id="produtos-grupos"></div>
+                <!--
+                                  <div id="produtos-vitrine">
+                                        <div class="row" ">
+                                            <div class="div-grupo col-xs-12 no-gutter">
+                                                <div class="titulo-grupo">
+                                                    <h3 id="tit-vitrine-produtos">Ofertas especiais</h3>
+                                                </div>
+
+                                                <ul id="prod-list"></ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                -->
+
+                <ul id="prod-list-2"></ul>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section id="destaque" class="container">
+        <div class="row">
+            <div id="banner-18" class="col-md-6 hidden-xs div-area-banners"></div>
+            <div class="col-md-6 col-xs-12 produtos-destaque-home">
+                <div id="prod-destaque" class="col-xs-12 no-gutter">
+    <div id="destaque-list-div">
+        <div class="titulo-grupo" id="tit-destaque-produtos">
+            <h3>Destaque</h3>
+        </div>
+        <ul id="destaque-list"></ul>
+    </div>
+    <ul id="destaque-indice-list"></ul>
+</div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div id="vitrine" class="container">
+        <div class="row">
+
+            <div class="newsletter-footer">
+                <div class="container">
+                    <div class="row">
+                        <fieldset class="col-xs-12 col-md-8 col-md-offset-2">
+                            <div class="col-xs-12 newsletter-titulo">
+                                <p>Cadastre-se na nossa news e</p>
+                                <p class="bigger">receba nossas promo��es por e-mail</p>
+                            </div>
+                            <div class="col-xs-12 newsletter-form">
+
+                                <div class="input-holder">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <input type="text" class="input-news" id="nome-news" placeholder="Insira seu nome" value="">
+                                </div>
+
+                                <div class="input-holder">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <input type="text" class="input-news" id="email-news" placeholder="Insira seu e-mail" value="">
+                                </div>
+
+                                <button id="botao-news">
+                                    <span id="news-tooltip"></span>
+                                    Receber ofertas
+                                </button>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row hidden" id="ultimos-vistos">
+    <div class="div-grupo col-xs-12 no-gutter">
+        <div class="titulo-grupo">
+            <h3>&Uacute;ltimos produtos vistos</h3>
+            <span class="arrow">
+                <i class="fa fa-angle-left left-arrow"></i>
+                <i class="fa fa-angle-right right-arrow"></i>
+            </span>
+        </div>
+
+        <ul id="ultimos-list"></ul>
+        
+    </div>
+</div>
+
+
+            <div id="banner-rodape" class="div-area-banners"></div>
+
+        </div>
+    </div>
+
+</div>
+
+<div id="banner-flutua" class="modal fade">
+    <div class="modal-dialog modal-newsletter">
+        <div class="modal-content" id="banner-popup">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+
+        </div>
+    </div>
+</div>
+
+<div id="template" class="hidden">
+    <li class="list-item <!--##CLASS##-->">
+    <div class="div-item">
+        <div class="prod-img">
+            <!--##FOTO##-->
+            
+            <!--##DESTAQUE##-->
+        </div>
+        <div class="prod-info">
+            <!--##ADD##-->
+
+            <!--##NOME##-->
+
+            <p class="prod-fabricante"><!--##FAB##--></p>
+
+            <div class="prod-avaliacao">
+                <!--##STARS##-->
+            </div>
+
+            <p class="prod-preco"><!--##PRECO##--></p>
+
+            <div class="variacao-preco">
+                <div class="holder">
+                    <!--##VEZES##-->
+                    <!--##UMA##-->
+                </div>
+            </div>
+
+            <div class="prod-botao-comprar"><!--##COMPRAR##--></div>
+
+            <p class="prod-mais"><!--##MAIS##--></p>
+            
+        </div>
+    </div>
+</li>
+</div>
+
+<footer>
+
+    <div class="container">
+        <div class="row footer-content">
+
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12 logotipo-footer">
+                        <a href="/" title="Ir para a home" class="LV_LogotipoImg"><img src="https://images.webstore.net.br/files/6618/logoEletro.png"></a>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 categoria">
+                        <h3>Sobre n�s</h3>
+                        <p>A ELETROHALEN � uma Empresa de e-commerce especializada em Produtos de Automa��o, �udio e Video. Nosso foco � oferecer a EXCEL�NCIA em Atendimento para nossos Clientes, proporcionando uma experi�ncia �nica na compra e consultoria das solu��es.</p>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 institucional">
+                        <h3>Informa��es</h3>
+                        <ul class="lista-footer" id="institucional-footer"></ul>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 seguranca">
+                        <h3>Atendimento</h3>
+                        <ul class="lista-footer" id="contato-footer"></ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div id="cnpj-footer" class="col-xs-12 col-md-9 text-left"></div>
+                <div class="col-xs-12 col-md-3 text-left">
+                    <ul class="lista-footer" id="social-footer"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-termos">
+        <div class="container">
+            <p>
+                Copyright 2018 www.eletrohalen.com.br - TODOS OS DIREITOS RESERVADOS.<br>
+                � vetada a reprodu��o total ou parcial das informa��es aqui veiculadas sem a expressa autoriza��o da administra��o do site. Os pre�os e condi��es de pagamento s�o <br>v�lidos exclusivamente para compras realizadas via internet e<br>
+                poder�o sofrer altera��o sem aviso pr�vio. Em caso de diverg�ncia, o pre�o v�lido � sempre o do carrinho de compras.
+            </p>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+<!--MODULO_AD[{"nome":"categorias_2","versao": "1.0","etapa":"*"}]-->
+
+<script src="https://cdn.webstore.net.br/clientes/eletrohalen/categorias_2.js" type="text/javascript"></script>
+
+<script>
+
+var destaqueQtdPage = 1;
+var tipoDescontoSet = 2;
+var qtdLinhas = 2;
+var megaMenuAtiva22 = true;
+
+$(document).ready(function(){
+
+    $(".search-topo #seach-toggle").click(function(){ funcOpenSearch(); });
+
+    $("#bt-close-search").click(function(){ funcCloseSearch(); });
+
+    $(".logotipo-footer a").attr("href","#");
+
+    window.setTimeout("ConteudoResponsivo()", 5000);
+    window.setTimeout("ConteudoResponsivo()", 7000);
+    window.setTimeout("ConteudoResponsivo()", 10000);
+
+    $("#overlay").click(function(){ toggleCart(); });
+
+});
+
+function funcOpenSearch(){
+    try{
+        $("#search-box").removeClass("aberto");
+        $("#search-box").addClass("aberto");
+    }catch(e){}
+};
+
+function funcCloseSearch(){
+    try{
+        $("#search-box").removeClass("aberto");
+    }catch(e){}
+};
+
+var call_after_destaque = "FuncAJustaDestaque()";
+
+function FuncAJustaDestaque(){
+    try{
+
+        $("#prod-destaque .prod-img img").each(
+            function(){
+
+            var IMG = $(this).attr("src");
+            $(this).attr("src", IMG.replace("PEQ_","MED_"));
+
+            }
+        );
+
+        funcLinhaNomeProdutos();
+
+    }catch(e){}
+}
+
+var carrinhoAberto = false;
+
+function toggleCart(){
+    if(!carrinhoAberto){
+
+        $('#carrinho-drawer .lnr-chevron-left').fadeOut('fast', function() {
+            $('#carrinho-drawer .lnr-chevron-right').fadeIn('fast');
+        });
+
+        $('#main').css({
+            left: 'unset',
+            right: '30rem'
+        });
+
+        $('#carrinho-drawer').css('right', '0');
+
+        $('#overlay').css({
+            width: '100%',
+            height: '100%',
+            opacity: '0.5'
+        });
+
+        carrinhoAberto = true;
+
+    }else{
+
+        $('#carrinho-drawer .lnr-chevron-right').fadeOut('fast', function() {
+            $('#carrinho-drawer .lnr-chevron-left').fadeIn('fast');
+        });
+
+        $('#carrinho-drawer').css({
+            right: '-50rem'
+        });
+
+        $('#main').css({
+            right: '0'
+        });
+
+        $('#overlay').css({
+            width: '0',
+            height: '0',
+            opacity: '0'
+        });
+
+        carrinhoAberto = false;
+
+    }
+}
+
+var call_after_bloco_produto = "funcAfterBlocos()";
+
+function funcAfterBlocos(){
+    try{
+
+        var html = blocoProdsTemplateAtual;
+
+        html = html.replace("%</span>", "% OFF</span>");
+
+        return html;
+
+    }catch(e){ return blocoProdsTemplateAtual; }
+}
+
+var call_after_produtos_grupos = "funcLinhaNomeProdutos()";
+function funcLinhaNomeProdutos(){
+    try{
+        nomeProd(".body", 1);
+    }catch(e){}
+}
+
+
+var modVitrineOn = true;
+
+
+$(document).ready(function () {
+	try{
+		/*if ($("#HdEtapaLoja").val() == "HOME") {
+			isReady("cfg['estrutura']", "ProdutosVitrine()");
+		}*/
+	} catch (e) { console.log(e.message); }
+});
+
+
+function ProdutosVitrine() {
+	ApiWS.ListaProdutosHome("ProdutosVitrineRetorno");
+}
+function ProdutosVitrineRetorno() {
+	try {
+		var template = $('#template').html();
+
+		var JSON = ApiWS.Json;
+		objetos.ProdutosHome = JSON;
+		var obj = jQuery.parseJSON(JSON);
+
+		$("#prod-list").html("").css('display', 'none');;
+		if (obj.totalitens != null && obj.totalitens != undefined) {
+			if (obj.totalitens > 0 && cfg['produtos_pagina'] < obj.totalitens) {
+
+				for (a = 0; a < cfg['produtos_pagina']; a++) {
+					var bloco = BlocoProduto(obj.produtos[a], template);
+					$('#prod-list').append(bloco);
+				}
+
+			}else if(obj.totalitens > 0){
+
+				for (a = 0; a < obj.totalitens; a++) {
+					var bloco = BlocoProduto(obj.produtos[a], template);
+					$('#prod-list').append(bloco);
+				}
+
+			}else{
+				empty('produto');
+			}
+			$('#prod-list').show('fast');
+		}else{
+			empty('produto');
+		}
+
+		if (typeof titVitrineProds !== 'undefined') {
+		    $("#tit-vitrine-produtos").html(titVitrineProds);
+		}
+
+		$('#preloader').fadeOut();
+
+		ConteudoResponsivo();
+
+		nomeProd("#prod-list");
+		blocoHeight('#prod-list');
+
+		if (typeof call_after_produtos_vitrine !== 'undefined') { try { eval(call_after_produtos_vitrine); } catch (e) { console.log("Falha call_after_produtos_vitrine" + e.message); } }
+
+	} catch (e) { console.log('ProdutosHomeRetorno: ' + e.message); }
+}
+
+</script>﻿</div>
+
+
+<!--LVLAYPRF_PADRAO:1-->
+<!--LAY_CODIGO:-->
+<input type='hidden' id='LV_HD_CONTROLE_ACESSO' value=''/>
+<input type='hidden' id='HD_LV_NOME' value='cintrashop'/>
+<input type='hidden' id='HD_LV_ID' value='4924'/>
+<input type='hidden' id='HD_LV_DOMINIO' value='cintrashop.com.br'/>
+<input type='hidden' value='(11) 4117-8421' id='DADOS_CONTATO_FONE_1' />
+<input type='hidden' value='' id='DADOS_CONTATO_FONE_2' />
+<input type='hidden' value='' id='DADOS_CONTATO_FONE_3' />
+<input type='hidden' value='vendas@cintrashop.com.br' id='DADOS_CONTATO_EMAIL_1' />
+<input type='hidden' value='atendimento@cintrashop.com.br' id='DADOS_CONTATO_EMAIL_2' />
+<input type='hidden' value='' id='DADOS_CONTATO_EMAIL_3' />
+<input type='hidden' value='seg a sex das 9h às 17h<br>sáb das 9h às 12h' id='DADOS_CONTATO_HORARIO' />
+<input type='hidden' value='04166-003' id='DADOS_CONTATO_CEP' />
+<input type='hidden' value='Avenida Padre Arlindo Vieira' id='DADOS_CONTATO_ENDERECO' />
+<input type='hidden' value='' id='DADOS_CONTATO_NUMERO' />
+<input type='hidden' value='*Obs: Não possuímos Loja Física' id='DADOS_CONTATO_COMPL' />
+<input type='hidden' value='' id='DADOS_CONTATO_REFERENCIA' />
+<input type='hidden' value='Jardim Vergueiro' id='DADOS_CONTATO_BAIRRO' />
+<input type='hidden' value='São Paulo' id='DADOS_CONTATO_CIDADE' />
+<input type='hidden' value='SP' id='DADOS_CONTATO_UF' />
+<input type='hidden' id='HdEtapaLoja' value='HOME' />
+<input type='hidden' id='VarsCategorias' value='_____False_' />
+<input type='hidden' id='HD_MenuCarregadoInicio' value='N' />
+<input type='hidden' id='HD_LVCLI_ID' value=''/>
+<input type='hidden' id='HD_LVCLI_NOME' value='Visitante'/>
+<input type='hidden' id='LV_USU_B2B' value='0'/>
+
+<script src="/js/script.js"></script>
+
+</body>
+
+
+</html><input type='hidden' id='LOJA' value='6618'/><input type='hidden' id='HdTokenLojaTemp' value='DEV12354654698798745646513218'/>

@@ -1,0 +1,24 @@
+Como instalar:
+
+Necessário ter o Node.js(https://nodejs.org/en/download/) e NPM(https://www.npmjs.com/get-npm) instalados na máquina
+
+
+- Descompacte a pasta do framework da Webstore
+- Navega até a pasta do framework pelo cmd (prompt)
+- Digite "npm install" e aguarde a instalação
+- Digite "npm install request --save" e aguarde a instalação
+- Dentro da pasta do framework, abra o arquivo LOJA.txt e cole o token que lhe foi fornecido pela equipe da Westore
+- Após isso pelo prompt, estando dentro da pasta digite "node download.js", com isso o sistema irá baixar para a máquina o tema atual da loja.
+- Após isso pelo prompt, estando dentro da pasta digite "node app.js", isso irá iniciar o servidor em sua máquina.
+- Após isso acesse a loja pelo seu navegador via http://localhost:3000
+
+************************************
+
+Para editar seu layout, altere apenas os arquivos que estiverem dentro da pasta webstore/layout
+
+A cada mudança nos arquivos, rode novamente o "node app.js" e em seguida atualize o navegador.
+
+************************************
+
+Dúvidas?
+developers@webstore.net.br

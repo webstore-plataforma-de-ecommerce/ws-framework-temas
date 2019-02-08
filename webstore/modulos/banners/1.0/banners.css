@@ -1,0 +1,56 @@
+/*SLIDER*/
+#slider{
+	margin-bottom: 2rem;
+}
+#slider img{
+	height: auto;
+	width: 100%;
+}
+#banner-flutua .close {
+	color: black;
+	display: block;
+	font-size: 3rem;
+	height: 3rem;
+	line-height: 3rem;
+	opacity: 1;
+	position: absolute;
+	right: 0;
+	top: 0;
+	transition: 0.3s ease;
+	width: 3rem;
+}
+#banner-flutua .close:hover {
+	color: white;
+}
+#banner-lateralEsq, #banner-lateral{
+	text-align: center;
+}
+#banner-lateralEsq img,
+#banner-lateral img{
+	height: auto;
+	margin-bottom: 1rem;
+	max-width: 100%;
+}
+#banner-mini, #banner-tarja, #banner-topo {
+	margin-bottom: 1rem;
+}
+#banner-mini{
+	text-align: center;
+}
+#banner-mini li {
+	display: inline-block;
+	padding: 0 1rem;
+}
+#BodyListagem #slider {
+    margin: 0;
+    height: 0;
+}
+#banner-rodape img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+#banner-rodape {
+    text-align: center;
+    margin-bottom: 2rem;
+}

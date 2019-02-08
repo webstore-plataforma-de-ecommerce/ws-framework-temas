@@ -1,0 +1,105 @@
+<!--##CLEAR_CSS##-->
+<div id="main">
+
+<header>
+    <div class="header-content hidden-xs">
+        <div class="topo">
+            <div class="container">
+                <div class="row no-gutter">
+                    <div class="col-xs-12">
+                        <p class="text-left login-cadastro">
+                            Ol&aacute; <span id="user-nome"></span>! <span id="link-user"><a href="" id="link-login">Fa&ccedil;a seu login</a> ou <a href="" id="link-login-2">cadastre-se</a></span>
+                        </p>
+                        <div class="text-right telefone-topo"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-3 logo-holder">
+                    <<!--##H1_DIV##--> class="logotipo"><!--##LOGOTIPO##--></<!--##H1_DIV##-->>
+                </div>
+                <div class="col-xs-9">
+                    <fieldset>
+                        <input type="text" class="input-busca" id="input-busca" placeholder='' value="">
+                        <button type="submit" class="botao-busca" id="botao-busca">
+                            Buscar
+                        </button>
+                        <i class="fa fa-search"></i>
+                    </fieldset>
+                    <div class="conta-lista">
+                        <span><i class="fa fa-user"></i>Minha conta</span>
+                        <!--##LOGIN1.0##-->
+                    </div>
+                    <a href="" rel="Carrinho de compras" class="div-carrinho" id="link-carrinho">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="carrinho-texto hidden-sm hidden-xs"></span>
+                        <div id="LV_CARRINHO_ON_PAGE" class="CarrinhoExibeTopo hidden-xs hidden-sm hidden-md"></div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div id="mobile-placeholder"></div>
+<div id="header-mobile">
+    <div class="container">
+        <div class="row logo-container">
+            <a href="javascript:void(openNav())" rel="Abrir menu" class="link-menu">
+                <span class="fa fa-bars"></span>
+            </a>
+            <!--##LOGOTIPO##-->
+            <a href="javascript:void(openCart())" rel="Carrinho de compras" class="link-carrinho-mobile">
+                <span class="fa fa-shopping-cart"></span>
+            </a>
+        </div>
+        <div class="row nav-mobile">
+            <fieldset>
+                <input type="text" class="input-busca" id="input-busca-2" placeholder='' value="">
+                <button type="submit" class="botao-busca" id="botao-busca-2">
+                    <i class="fa fa-search"></i>
+                </button>
+            </fieldset>                
+        </div>
+    </div>
+</div>
+
+<!--##CATEGORIAS1.0##-->
+
+<!--##MENU_MOBILE1.0##-->
+
+<div id="barra-flutuante" class="hidden-xs">
+    <div class="container">
+        <span rel="Menu de categorias" id="burguer-menu" class="hidden-xs">
+            <i class="fa fa-bars"></i>
+        </span>
+        <div class="logotipo"><!--##LOGOTIPO##--></div>
+        <fieldset>
+            <i class="fa fa-search"></i> 
+            <input type="text" class="input-busca" id="input-busca-3" placeholder='' value="">
+            <button type="submit" class="botao-busca" id="botao-busca-3">
+                Busca
+            </button>
+        </fieldset>
+        <a href="/carrinho/<!--##CODIGO_LOJA##-->/carrinho" rel="Carrinho de compras" class="div-carrinho">
+            <span class="fa fa-shopping-cart"></span>
+        </a>
+        <a href="" rel="Meus pedidos" class="link-meus-pedidos">
+            <span class="fa fa-user"></span>
+        </a>
+    </div>
+    <nav id="float-menu" class="" role="navigation">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="departamentos-nav"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

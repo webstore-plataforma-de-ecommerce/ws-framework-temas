@@ -1,0 +1,105 @@
+.posInitial{
+    position:initial;
+}
+nav#float-menu, nav.menu-topo-on-click {
+	background-color: <!--###PREF_12###-->;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	width: 100%;
+    position:relative;
+}
+.todo-departamento-onclick {
+	display: none;
+}
+.departamentos-nav-on-click{
+    position:initial;
+    text-align:center;
+}
+.departamentos-nav-on-click li {
+	text-align: left;
+    display:inline-block;
+}
+.departamentos-nav-on-click div {
+	background-color: <!--###PREF_13###-->;
+    display:none;
+	transition: 150ms ease;
+    position:absolute;
+    left:0px;
+    width:100%;
+    z-index:1000;
+}
+.departamentos-nav-on-click ul {
+	transition: 150ms ease;
+}
+.departamentos-nav-on-click ul li {
+    padding: 0.5rem;
+    display:inline-block;
+}
+.departamentos-nav-on-click ul li:hover > ul {
+	left: 100%;
+	opacity: 1;
+	transition: 150ms ease;
+	visibility: visible;
+	top: 0;
+}
+.departamentos-nav-on-click > li > ul {
+	color: <!--###PREF_8###-->;
+	position: absolute;
+	min-width: 20rem;
+	width: 100%;
+	z-index: 99;
+}
+.departamentos-nav-on-click ul li ul {
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	left: 100%;
+	position: absolute;
+	width: 100%;
+}
+.departamentos-nav-on-click ul a {
+	display: inline-block;
+	line-height: 3rem;
+	padding: 0.2rem 1rem;
+	width: 100%;
+}
+.departamentos-nav-on-click ul li a {
+	color: <!--###PREF_8###-->;
+}
+.departamentos-nav-on-click ul li:hover a {
+	background-color: <!--###PREF_12###-->;
+	color: <!--###PREF_7###-->;
+}
+.departamentos-nav-on-click > li > ul {
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	top: 100%;
+	transition: 150ms ease;
+}
+.departamentos-nav-on-click ul .com-sub:after {
+	content: "\f105";
+	font-family: FontAwesome;
+	position: absolute;
+	right: 1rem;
+}
+.departamentos-nav-on-click > li {
+	display: inline-block;
+	text-align: center;
+}
+.departamentos-nav{
+	text-align: left;
+	width: 100%;
+}
+.departamentos-nav-on-click > li > p, .departamentos-nav-on-click > li > a {
+	color: <!--###PREF_7###-->;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 2rem;
+	margin: 0;
+	padding: 1.5rem 2rem;
+	text-transform: uppercase;
+	transition: 300ms ease;
+}
+.departamentos-nav-on-click > li:hover > p, .departamentos-nav-on-click > li:hover > a, .departamentos-nav-on-click > li > a.opened {
+	background-color: <!--###PREF_13###-->;
+	color: <!--###PREF_8###-->;
+}

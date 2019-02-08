@@ -1,0 +1,22 @@
+{
+  "name": "webstore",
+  "version": "1.0.0",
+  "description": "site da casa do codigo",
+  "main": "index.js",
+  "dependencies": {
+    "edit-file": "^0.3.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-load": "^1.1.16",
+    "mysql": "^2.15.0",
+    "npm": "^6.0.1",
+    "request": "^2.88.0",
+    "uglify-js": "^3.3.25"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alefbarbeli",
+  "license": "ISC"
+}

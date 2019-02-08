@@ -1,0 +1,89 @@
+/*PRODUTOS DESTAQUE*/
+#prod-destaque {
+	background-color: white;
+	margin: 2rem 0;
+	padding: 1rem 0.5rem;
+}
+#destaque-list{
+	visibility: hidden;
+	opacity: 0;
+}
+#destaque-list .list-item {
+	padding: 0;
+}
+#prod-destaque .div-item {
+	margin: 0 0.5rem 1rem;
+	overflow: hidden;
+	padding: 1rem;
+}
+#prod-destaque .div-item .prod-img {
+	float: left;
+	height: 28rem;
+	width: 70%;
+}
+#prod-destaque .div-item .prod-info {
+	float: left;
+	padding: 1rem;
+	text-align: left;
+	width: 30%;
+}
+#prod-destaque .div-item .prod-info .prod-nome {
+	font-size: 14px;
+	text-align: left;
+}
+#prod-destaque .div-item .prod-info p {
+	text-align: right;
+}
+#prod-destaque .div-item .prod-botao-comprar {
+	bottom: 0;
+	position: relative;
+	right: auto;
+	text-align: left;
+	width: 100%;
+}
+#prod-destaque .div-item .add {
+	overflow: hidden;
+	position: relative;
+}
+#prod-destaque .div-item .add span {
+	background-color: #d7d7d7;
+	box-shadow: none;
+	color: #666;
+	float: none;
+	margin: 0;
+}
+#prod-destaque .prod-botao-comprar{
+	bottom: 2rem;
+	position: absolute;
+	right: 2rem;
+	width: 40%;
+	width: calc(50% - 2rem);
+}
+
+#prod-destaque .div-item > .prod-nome {
+	border-bottom: 1px solid #d7d7d7;
+	font-size: 2.4rem;
+	font-weight: 500;
+	margin: 0;
+}
+#prod-destaque .div-item .prod-botao-comprar span a {
+	font-size: 2rem;
+	font-weight: 600;
+	height: unset;
+	margin: 0;
+	overflow: hidden;
+	padding: 1.5rem 0;
+	position: relative;
+}
+#prod-destaque .div-item .prod-info .prod-preco a {
+	font-size: 2.4rem;
+	font-weight: 500;
+	height: 3rem;
+	line-height: 3rem;
+}
+#prod-destaque .div-item .prod-info .variacao-preco p {
+    font-size: 2rem;
+}
+#prod-destaque .div-item .prod-detalhes {
+    width: 100%;
+}

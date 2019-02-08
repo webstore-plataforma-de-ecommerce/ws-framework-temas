@@ -1,0 +1,883 @@
+#produtos .div-grupo .slick-arrow{
+	display: inline-block!important;
+}
+footer .input-news{
+	border-radius: 0;
+	height: 4rem;
+}
+footer #botao-news {
+	border: 0;
+	border-radius: 0;
+}
+.link-meus-pedidos{
+	width: 8rem;
+}
+.PageCheckout #barra-flutuante #burguer-menu, .PageCheckout #barra-flutuante fieldset {
+	margin: 3rem 0;
+}
+
+/*HEADER*/
+header{
+	background-color: <!--###PREF_1###-->;
+	color: <!--###PREF_4###-->;
+}
+header #tarja-topo{
+	background-color: <!--###PREF_2###-->;
+	color: <!--###PREF_5###-->;
+}
+header #tarja-topo i {
+	margin-right: .5rem;
+}
+header #tarja-topo .fale-conosco {
+	float: right;
+	font-size: 1.2rem;
+	line-height: 2rem;
+	margin: 0 2rem 0 0;
+}
+header #tarja-topo .fale-conosco a{
+	height: 4rem;
+	line-height: 4rem;
+	display: inline-block;
+}
+header #tarja-topo .telefone-topo {
+	margin: 0;
+	display: block;
+	float: right;
+}
+header #tarja-topo .telefone-topo a{
+	display: inline-block;
+	font-size: 1.5rem;
+	font-weight: 600;
+	height: 4rem;
+	line-height: 4rem;
+}
+header #tarja-topo .telefone-topo a:hover,
+header #tarja-topo .fale-conosco a:hover{
+	text-decoration: underline;
+}
+header #tarja-topo .append-social {
+    float: left;
+    display: block;
+}
+header #tarja-topo .append-social li {
+    display: inline-block;
+    padding: 0.5rem 0;
+}
+header #tarja-topo .append-social .fa-circle {
+    display: none;
+}
+header #tarja-topo .append-social .fa {
+    color: <!--###PREF_5###-->;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    transition: 0.2s ease;
+}
+header #tarja-topo .append-social li:hover .fa-circle {
+    color: <!--###PREF_5###-->;
+    display: block;
+    font-size: 3rem;
+}
+header #tarja-topo .append-social li:hover .fa-stack-1x {
+    color: <!--###PREF_2###-->;
+}
+header #tarja-topo .append-social li span {
+    height: 2rem;
+}
+header .topo a, header .topo p {
+	color: <!--###PREF_4###-->;
+	display: inline-block;
+	font-size: 1.2rem;
+	line-height: 3rem;
+	margin: 0;
+	padding: 0;
+	transition: 0.2s ease;
+}
+header .topo a:hover {
+	text-decoration: underline;
+}
+header .topo a i, header .topo p i {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	padding: 0 0.5rem;
+	position: relative;
+	bottom: -1px;
+}
+header .topo .login-cadastro {
+	font-size: 1.2rem;
+	float: left;
+	display: inline-block;
+	line-height: 3rem;
+	margin: 1rem 0 0;
+}
+header #link-user {
+	display: inline-block;
+	font-size: 1.2rem;
+	line-height: 3rem;
+}
+header .topo .conta-lista {
+	display: inline-block;
+	float: right;
+	margin: 1rem 0 0;
+	text-align: right;
+	width: 20rem;
+}
+header .topo .links-topo {
+	float: left;
+	display: block;
+	width: 50%;
+	width: calc(100% - 20rem);
+}
+header fieldset{
+	display: block;
+	float: left;
+	margin: 0 0 4rem 0;
+	padding: 0;
+	position: relative;
+	width: 50%;
+	width: calc(100% - 26rem);
+}
+header .input-busca {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	color: #666;
+	font-size: 1.2rem;
+	height: 4rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0 1rem;
+	width: 100%;
+}
+header .botao-busca {
+	background-color: <!--###PREF_3###-->;
+	border: 0;
+	color: <!--###PREF_6###-->;
+	display: block;
+	font-size: 0;
+	height: 4rem;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 4rem;
+}
+header .botao-busca i{
+	display: block;
+	float: left;
+	font-size: 1.5rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+header .logo-holder{
+	overflow: hidden;
+}
+header .logotipo {
+	height: 12.2rem;
+	margin: 0;
+}
+header .logotipo a {
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+header .logotipo a img{
+	bottom: 0;
+	display: block;
+	height: auto;
+	left: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 1rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: auto;
+}
+header .div-carrinho {
+	border: 0;
+	color: <!--###PREF_6###-->;
+	display: inline-block;
+	float: right;
+	margin: 0 0 2rem;
+	padding: 0;
+	position: relative;
+	width: 18rem;
+}
+header .div-carrinho .fa-shopping-cart {
+	background-color: <!--###PREF_3###-->;
+	color: <!--###PREF_6###-->;
+    float: left;
+    font-size: 1.5rem;
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0;
+    text-align: center;
+    width: 4rem;
+}
+header .div-carrinho p {
+	font-size: 1.2rem;
+	line-height: 3rem;
+	margin: 0;
+}
+header .div-carrinho .cart-total{
+	display: none;
+}
+header .div-carrinho .carrinho-texto {
+	font-weight: 600;
+}
+header .div-carrinho .cart-content {
+    background-color: <!--###PREF_3###-->;
+    float: left;
+    padding: 0.5rem 0;
+    width: calc(100% - 4rem);
+}
+header .topo .conta-lista a, #link-user a{
+	font-weight: 600;
+}
+#link-meus-pedidos, #link-cadastro{
+	margin: 0 0 0 1rem;
+}
+header #LV_CARRINHO_ON_PAGE {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	color: #666;
+	min-width: 28rem;
+	opacity: 0;
+	padding: 1rem;
+	position: absolute;
+	right: -1px;
+	top: 20rem;
+	transition: top 0.3s ease, opacity 0.2s ease, visibility 0.1s ease;
+	transition-delay: 0s, 0s, 0.1s;
+	visibility: hidden;
+	width: 100%;
+	z-index: 99;
+}
+header .div-carrinho:hover #LV_CARRINHO_ON_PAGE{
+	opacity: 1;
+	top: 100%;
+	visibility: visible;
+	transition: top 0.3s ease, opacity 0.2s ease;
+}
+
+header #LV_CARRINHO_ON_PAGE img {
+	display: none;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal {
+	background-color: #d2d2d2;
+	color: black;
+	display: inline-block;
+	float: left;
+	line-height: 3rem;
+	padding: 0 1rem;
+	text-align: right;
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .TabelaCarOnPage {
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes {
+	background-color: <!--###PREF_41###-->;
+	border-radius: 4px;
+	color: <!--###PREF_40###-->;
+	display: inline-block;
+	float: left;
+	margin: 0.5rem 0 0;
+	padding: 1rem;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 0.3s ease;
+	width: 100%;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes:hover {
+	opacity: 0.7;
+}
+header #LV_CARRINHO_ON_PAGE .DivCarOnPageBotoes a:hover{
+	text-decoration: none;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal label {
+	margin: 0;
+}
+header #LV_CARRINHO_ON_PAGE .CarOnPageTotal span {
+	font-weight: 600;
+	margin-right: 1rem;
+}
+tr.TrCarOnPage {
+	background-color: #d2d2d2;
+	color: black;
+	line-height: 3rem;
+}
+tr.TrCarOnPage td {
+	font-weight: 600;
+	padding: 0 1rem;
+	text-align: center;
+}
+span.CarOnPageCodigoProduto {
+	display: block;
+}
+.DivDadosProdCarOnPage {
+	font-size: 12px;
+}
+
+header #social-topo {
+    display: block;
+    float: left;
+}
+header #social-topo .fa-circle {
+    color: <!--###PREF_2###-->;
+}
+header #social-topo li {
+    display: inline-block;
+}
+
+#social-topo li .fa-circle{
+    color: <!--###PREF_2###-->;
+    transition: 0.2s ease;
+}
+#social-topo li .fa-inverse{
+    color: <!--###PREF_5###-->;
+    transition: 0.2s ease;	
+}
+
+#social-topo li:hover .fa-circle{
+    color: <!--###PREF_5###-->;
+}
+#social-topo li:hover .fa-inverse{
+    color: <!--###PREF_2###-->;
+}
+
+/*HEADER MOBILE*/
+#header-mobile {
+	background-color: <!--###PREF_1###-->;
+	padding: 1rem;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 97;
+}
+#mobile-placeholder {
+	display: block;
+	position: relative;
+	width: 100%;
+	clear: both;
+}
+#header-mobile .link-menu{
+	display: inline-block;
+	float: left;
+	height: 4rem;
+	text-align: center;
+	width: 4rem;
+    margin-top:20px;
+}
+#header-mobile .link-carrinho-mobile{
+	display: inline-block;
+	float: right;
+	height: 4rem;
+	text-align: center;
+	width: 4rem;
+    margin-top:20px;
+}
+.header-fixed .link-carrinho-mobile, .header-fixed .link-menu{
+    margin-top:0px !important;
+}
+#header-mobile .link-carrinho-mobile span,
+#header-mobile .link-menu span,
+#header-mobile .link-user span{
+	color: <!--###PREF_4###-->;
+	line-height: 4rem;
+	line-height: calc(4rem - 2px);
+	width: 100%;
+}
+#header-mobile .logo-container .LV_LogotipoImg, #header-mobile .logo-container .LV_LOGO_TOPO {
+	display: block;
+	float: left;
+	height: 10rem;
+	margin: 0 1rem 1rem;
+	position: relative;
+	transition: 0.2s ease;
+	width: 100%;
+	width: calc(100% - 10rem);
+}
+#header-mobile .logo-container .LV_LogotipoImg img, #header-mobile .logo-container .LV_LOGO_TOPO img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-height: 100%;
+	max-width: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#header-mobile fieldset {
+	display: block;
+	float: left;
+	position: relative;
+	width: 100%;
+}
+#header-mobile fieldset .input-busca {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	font-size: 1.2rem;
+	height: 4rem;
+	line-height: 4rem;
+	padding: 0 1rem;
+	width: 100%;
+}
+#header-mobile fieldset .botao-busca {
+	background-color: <!--###PREF_3###-->;
+	color: <!--###PREF_6###-->;
+	border: 1px solid <!--###PREF_3###-->;
+	height: 4rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 4rem;
+}
+#header-mobile.header-fixed .LV_LogotipoImg, #header-mobile.header-fixed .LV_LOGO_TOPO {
+	height: 4rem;
+	margin: 0;
+}
+#header-mobile.header-fixed .nav-mobile {
+	display: none;
+}
+/*NAVBAR*/
+nav#float-menu, nav.menu-topo{
+	background-color: <!--###PREF_12###-->;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	width: 100%;
+}
+.departamentos-nav{
+	border-bottom: 2px solid <!--###PREF_13###-->;
+	text-align: center;
+	width: 100%;
+}
+.departamentos-nav .fa-bars {
+    margin: 0 5px;
+}
+.departamentos-nav li{
+	position: relative;
+	text-align: left;
+}
+.departamentos-nav ul{
+	background-color: <!--###PREF_13###-->;
+	opacity: 0;
+	transition: 150ms ease;
+	visibility: hidden;
+}
+.departamentos-nav ul li:hover > ul{
+	left: 100%;
+	opacity: 1;
+	transition: 150ms ease;
+	visibility: visible;
+	top: 0;
+}
+.departamentos-nav > li > ul {
+	color: <!--###PREF_8###-->;
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 150%;
+	visibility: hidden;
+	min-width: 20rem;
+	width: 100%;
+	z-index: 99;
+}
+.departamentos-nav ul li ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	left: 100%;
+	position: absolute;
+	top: 20rem;
+	width: 100%;
+}
+.departamentos-nav ul a {
+	display: inline-block;
+	line-height: 3rem;
+	padding: 0 1rem;
+	width: 100%;
+}
+.departamentos-nav ul li:hover > a {
+	background-color: <!--###PREF_12###-->;
+	color: <!--###PREF_7###-->;
+}
+.departamentos-nav > li:hover > ul{
+	box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	opacity: 1;
+	top: 100%;
+	transition: 150ms ease;
+	visibility: visible;
+}
+.departamentos-nav ul .com-sub:after {
+	content: "\f105";
+	font-family: FontAwesome;
+	position: absolute;
+	right: 1rem;
+}
+.departamentos-nav > li{
+	display: inline-block;
+	position: relative;
+	text-align: center;
+}
+.departamentos-nav > li > a{
+	color: <!--###PREF_7###-->;
+	display: block;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 2rem;
+	padding: 1.5rem 2rem;
+	text-transform: uppercase;
+	transition: 0.3s ease;
+}
+.departamentos-nav > li:hover > a {
+	background-color: <!--###PREF_13###-->;
+	color: <!--###PREF_8###-->;
+}
+#menu-drawer {
+	background-color: white;
+	color: #333;
+	height: 100%;
+	height: 100vh;
+	left: -40rem;
+	margin: 0;
+	max-width: 100%;
+	opacity: 0;
+	overflow: hidden;
+	padding: 0;
+	position: fixed;
+	top: 0;
+	transition: 0.3s ease;
+	visibility: hidden;
+	width: 40rem;
+	z-index: 99;
+}
+#menu-drawer .menu-header{
+	background-color: <!--###PREF_1###-->;
+	border-bottom: 2px solid <!--###PREF_12###-->;
+	color: <!--###PREF_4###-->;
+	padding: 1rem 2rem 0.5rem;
+}
+#menu-drawer .menu-header a{
+	line-height: 4rem;
+}
+#menu-drawer .menu-header i {
+	margin-right: 0.5rem;
+	text-align: center;
+	width: 2rem;
+}
+#menu-drawer #link-pedidos{
+	float: right;
+}
+#menu-drawer .telefone-topo {
+	display: block;
+}
+#menu-drawer .conta-lista a {
+	display: block;
+	width: 50%;
+	float: left;
+	margin: 0;
+}
+#menu-drawer .conta-lista {
+	width: 100%;
+	display: block;
+	overflow: hidden;
+}
+#menu-drawer .login-cadastro {
+	padding: 1rem 0;
+}
+#menu-drawer .departamentos-nav{
+	padding-top: 1rem;
+}
+#menu-drawer .departamentos-nav li{
+	display: block;
+	padding: 0 1rem;
+	width: 100%;
+}
+#menu-drawer .departamentos-nav li a{
+	border-bottom: 1px solid #eee;
+	color: #333;
+	font-size: 1.6rem;
+	padding: 1rem;
+	text-align: left;
+}
+#menu-drawer .departamentos-nav > li > a.com-sub:after{
+	content: "+";
+	float: right;
+}
+#menu-drawer .departamentos-nav li a:last-child {
+	border-bottom: 0;
+}
+#menu-drawer > span {
+	color: <!--###PREF_7###-->;
+	cursor: pointer;
+	display: block;
+	font-size: 3rem;
+	font-weight: 600;
+	height: 4rem;
+	line-height: 4rem;
+	padding: 0 1rem;
+	position: absolute;
+	right: 1rem;
+	text-align: center;
+	top: 1rem;
+	width: 4rem;
+	z-index: 9;
+}
+#overlay {
+	z-index: 98;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	background-color: black;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+/*BARRA FLUTUANTE*/
+#barra-flutuante {
+	background-color: <!--###PREF_1###-->;
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.09);
+	opacity: 0;
+	padding: 0;
+	position: fixed;
+	top: -30%;
+	transition: 0.2s ease;
+	visibility: hidden;
+	width: 100%;
+	z-index: 999;
+}
+#barra-flutuante.active {
+	opacity: 1;
+	top: 0;
+	visibility: visible;
+}
+#barra-flutuante nav {
+	max-height: 0rem;
+	margin: 0;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	min-height: unset;
+	transition: 0.2s ease;
+}
+#barra-flutuante nav.active{
+	max-height: 10rem;
+	overflow: visible;
+}
+#barra-flutuante #burguer-menu{
+	cursor: pointer;
+	display: block;
+	float: left;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+}
+#barra-flutuante #burguer-menu i {
+	color: <!--###PREF_4###-->;
+	display: inline-block;
+	font-size: 2rem;
+	line-height: 4rem;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 4rem;
+}
+#barra-flutuante .logotipo {
+	display: block;
+	float: left;
+	height: 6.2rem;
+	margin: 0 4rem;
+	overflow: hidden;
+	padding: 0;
+	text-align: center;
+	width: 12rem;
+}
+#barra-flutuante .logotipo > a {
+	display: block;
+	height: 100%;
+	padding: 0;
+	position: relative;
+	width: 100%;
+}
+#barra-flutuante .logotipo img {
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 0.5rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#barra-flutuante .input-busca {
+	background-color: white;
+	border: 1px solid #d7d7d7;
+	font-size: 1.2rem;
+	height: 4rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0 1rem;
+	width: 100%;
+}
+#barra-flutuante .botao-busca {
+	background-color: <!--###PREF_3###-->;
+	border: 1px solid <!--###PREF_3###-->;
+	color: <!--###PREF_6###-->;
+	display: block;
+	font-size: 0;
+	height: 4rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 4rem;
+}
+#barra-flutuante .botao-busca i {
+	display: block;
+	float: left;
+	font-size: 1.5rem;
+	line-height: 4rem;
+	margin: 0;
+	padding: 0;
+	width: 4rem;
+}
+#barra-flutuante fieldset {
+	display: block;
+	float: left;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+	width: 70%;
+	width: calc(100% - 32rem - 4px);
+}
+#barra-flutuante .div-carrinho {
+	display: block;
+	float: right;
+	margin: 1rem 0;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 8rem;
+}
+#barra-flutuante .div-carrinho .fa-shopping-cart {
+	color: <!--###PREF_4###-->;
+	font-size: 2rem;
+	line-height: 4rem;
+	padding: 0;
+	position: relative;
+	text-align: center;
+	width: 4rem;
+}
+#barra-flutuante .link-menu{
+	cursor: pointer;
+	display: block;
+	float: left;
+	line-height: 4rem;
+	margin: 3rem 0;
+	padding: 0;
+	position: relative;
+}
+#barra-flutuante .link-menu span{
+	color: <!--###PREF_4###-->;
+	line-height: 4rem;
+    text-align: center;
+    width: 5rem;
+}
+.PageCheckout #barra-flutuante #burguer-menu{
+	text-align: center;
+	width: 8rem;
+}
+
+/*MEDIAS*/
+@media screen and (min-width: 768px){
+	#header-mobile, #mobile-placeholder{
+		display: none;
+	}
+	.dados-produto-mobile{
+		display: none;
+	}
+}
+@media screen and (max-width: 767px){
+	#barra-flutuante fieldset {
+		width: 48%;
+		width: calc(100% - 32rem - 4px);
+	}
+	footer .footer-bottom div{
+		margin-bottom: 2.5rem;
+	}
+	.paginacao-ordem{
+		font-size: 12px;
+	}
+	#preco-produto{
+		margin-bottom: 1rem;
+	}
+	#preco-produto > p{
+		margin-bottom: 1rem;
+	}
+	#breve-produto{
+		border-top: 1px solid #d7d7d7;
+		margin: 2rem 0;
+		padding: 2rem 0;
+	}
+}
+@media screen and (max-width: 480px){
+	.div-item .add span.prod-lancamento{
+		float: right;
+	}
+}
+@media screen and (max-width: 374px){
+	#barra-flutuante .logotipo {
+		display: none;
+	}
+	#barra-flutuante fieldset {
+		margin-left: 2rem;
+		width: calc(100% - 10rem - 4px);
+	}
+	.link-meus-pedidos{
+		width: 5rem;
+	}
+	.list-item.col-xs-6{
+		width: 100%;
+	}
+}
+@media screen and (max-width: 991px){
+	.newsletter-footer fieldset > div {
+		margin-bottom: 1rem;
+	}
+	header .topo .conta-lista{
+		width: 20rem;
+	}
+	header .topo .links-topo{
+		width: calc(100% - 20rem);
+	}
+	header .div-carrinho{
+		padding: 0;
+		width: 4rem;
+	}
+	header .div-carrinho .fa-shopping-cart{
+		border: 1px solid <!--###PREF_3###-->;
+		top: 0;
+	}
+	header .div-carrinho{
+		border: none;
+	}
+	header fieldset{
+		width: 70%;
+		width: calc(100% - 6rem);
+	}
+	footer .footer-content .contato{
+		clear: left;
+	}
+}
