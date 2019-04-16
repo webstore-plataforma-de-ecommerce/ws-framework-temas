@@ -15,7 +15,11 @@ function ProdutosGruposRetorno() {
 
         var OBJETO = ApiWS.Json;
 
+        var prodGroupDots = false;
+
         if (typeof over_produtos_grupos !== 'undefined') { try { eval(over_produtos_grupos); return; } catch (e) { console.log(e.message); } }
+
+        if (typeof varprodGroupDots !== 'undefined') { prodGroupDots = varprodGroupDots; }
 
         objetos.ProdutosGrupos = OBJETO;
 
@@ -79,6 +83,7 @@ function ProdutosGruposRetorno() {
                     autoplay: false,
                     prevArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .left-arrow'),
                     nextArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .right-arrow'),
+                    dots: prodGroupDots,
                     responsive: [
 					{
 					    breakpoint: 992,
