@@ -3,11 +3,15 @@ var uglify = require("uglify-js");
 var fs = require('fs');
 var LOJA = fs.readFileSync('./LOJA.txt').toString();
 
+var layoutBase = fs.readFileSync('./config/layoutBase.txt').toString();
+var QueryLayout = "";
+if (layoutBase != "") { QueryLayout = "&layout=" + layoutBase; }
+
 var request = require('request');
 
 try {
 
-    request.get('https://adminloja.webstore.net.br/lojas/dados/dadoslayout/?LV_ID=' + LOJA, function (error, response, body) {
+    request.get('https://adminloja.webstore.net.br/lojas/dados/dadoslayout/?LV_ID=' + LOJA + QueryLayout, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
 

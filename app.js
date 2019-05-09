@@ -14,6 +14,11 @@ var topo = fs.readFileSync('./webstore/layout/topo.html').toString();
 
 var LOJA = fs.readFileSync('./LOJA.txt').toString();
 
+var layoutBase = fs.readFileSync('./config/layoutBase.txt').toString();
+var QueryLayout = "";
+if (layoutBase != "") { QueryLayout = "&layout=" + layoutBase; }
+
+
 console.log("TOKEN:" + LOJA);
 
 var configJs;
@@ -21,7 +26,7 @@ var result;
 var objJ;
 
 var request = require('request');
-request.get('https://adminloja.webstore.net.br/lojas/dados/dadosloja/?LV_ID=' + LOJA, function (error, response, body) {
+request.get('https://adminloja.webstore.net.br/lojas/dados/dadosloja/?LV_ID=' + LOJA + QueryLayout, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 
         var retorno = body;
@@ -31,9 +36,10 @@ request.get('https://adminloja.webstore.net.br/lojas/dados/dadosloja/?LV_ID=' + 
 
         console.log("LOJA:" + LOJA);
 
-        logo = logo.replace("##CAMINHOLOGO##", "https://imageswscdn.webstore.net.br/files/" + LOJA + "/" + objJ.logotipo);
+        logo = logo.replace("##CAMINHOLOGO##", "https://images.webstore.net.br/files/" + LOJA + "/" + objJ.logotipo);
 
         LayInt = Number(objJ.layout);
+        if (layoutBase != "") { LayInt = Number(layoutBase); }
 
         //console.log(body);
 
@@ -56,7 +62,7 @@ request.get('https://adminloja.webstore.net.br/lojas/dados/dadosloja/?LV_ID=' + 
         result = head + index + bottom;
         
         find = ["<!--###IMAGENS_CLIENTE###-->"];
-        replace = ["https://imageswscdn.webstore.net.br/files/" + LOJA + "/" + objJ.layout + "/"];
+        replace = ["https://images.webstore.net.br/files/" + LOJA + "/" + LayInt + "/"];
         result = replaceStr(result, find, replace);
 
         var TOKEN = fs.readFileSync('./TOKEN.txt').toString();
@@ -116,7 +122,7 @@ function htmlModulos() {
     css = replaceStr(css, find, replace);
 
     find = ["<!--###IMAGENS_CLIENTE###-->"];
-    replace = ["https://imageswscdn.webstore.net.br/files/" + LOJA + "/" + objJ.layout + "/"];
+    replace = ["https://images.webstore.net.br/files/" + LOJA + "/" + LayInt + "/"];
     css = replaceStr(css, find, replace);
 
     result = result.replace("value='4924'", "value='" + LOJA + "'");
