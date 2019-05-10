@@ -1,3 +1,4 @@
+/*09-05-2019*/
 $(document).ready(function () {
     try {
         isReady("PAG", "CategoriasLista()");
