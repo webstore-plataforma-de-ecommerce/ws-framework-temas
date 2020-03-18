@@ -44,6 +44,8 @@ ApiWS.ApiStart = function () {
             }
         } catch (e) { }
 
+        WsParamAdds += "&randomCache=" + Math.floor(Math.random() * 1004);
+
         try {
             if (UrlNavegador.indexOf("?dashview") >= 0 || (UrlNavegador.indexOf("localhost") >= 0 && UrlNavegador.indexOf("localhost:3000") < 0)) {
                 UseCdn = false;
