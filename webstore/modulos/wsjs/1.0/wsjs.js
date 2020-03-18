@@ -4,6 +4,7 @@ var ApiWS = {}
 var UrlApi = "";
 var VersaoApi = "api-loja-v2";
 var WsParamAdds = "";
+var LimpaCache = "";
 
 
 ApiWS.Token = null;
@@ -44,7 +45,7 @@ ApiWS.ApiStart = function () {
             }
         } catch (e) { }
 
-        WsParamAdds += "&randomCache=" + Math.floor(Math.random() * 1004);
+        LimpaCache = "randomCache=" + Math.floor(Math.random() * 1004) + "&";
 
         try {
             if (UrlNavegador.indexOf("?dashview") >= 0 || (UrlNavegador.indexOf("localhost") >= 0 && UrlNavegador.indexOf("localhost:3000") < 0)) {
@@ -111,7 +112,7 @@ ApiWS.ListaProdutosHome = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log("Falha ao listar produtos da página inicial"); },
                 success: function (retorno) {
@@ -163,7 +164,7 @@ ApiWS.ListaProdutosUltimos = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log(e.message); console.log("Falha ao listar produtos vistos recentemente"); },
                 success: function (retorno) {
@@ -215,7 +216,7 @@ ApiWS.ListaProdutosRelacionados = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log(e.message); console.log("Falha ao listar produtos vistos recentemente"); },
                 success: function (retorno) {
@@ -271,7 +272,7 @@ ApiWS.ListaProdutosDestaque = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log(e.message); console.log("Falha ao listar produtos em destaque"); },
                 success: function (retorno) {
@@ -317,7 +318,7 @@ ApiWS.ListaProdutosGrupos = function (FuncaoAfter) {
         $.ajax({
             type: "GET",
             url: URLget,
-            data: Parametros,
+            data: LimpaCache + Parametros,
             beforeSend: function () { },
             error: function (e) { console.log(e.message); console.log("Falha ao listar grupos da página inicial"); },
             success: function (retorno) {
@@ -357,7 +358,7 @@ ApiWS.ProdutoDados = function (FuncaoAfter) {
         $.ajax({
             type: "GET",
             url: URLget,
-            data: Parametros,
+            data: LimpaCache + Parametros,
             beforeSend: function () { },
             error: function (e) { console.log(e.message); console.log("Falha ao listar grupos da página inicial"); },
             success: function (retorno) {
@@ -408,7 +409,7 @@ ApiWS.ListaCategorias = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log(e.message); console.log("Falha ao listar categorias"); },
                 success: function (retorno) {
@@ -457,7 +458,7 @@ ApiWS.ListaProdutosPags = function (FuncaoAfter) {
         $.ajax({
             type: "GET",
             url: URLget,
-            data: Parametros,
+            data: LimpaCache + Parametros,
             beforeSend: function () { },
             error: function (e) { console.log(e.message); console.log("Falha ao listar produtos subpáginas"); },
             success: function (retorno) {
@@ -506,7 +507,7 @@ ApiWS.ListaFabricantes = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log(e.message); console.log("Falha ao listar fabricantes"); },
                 success: function (retorno) {
@@ -573,7 +574,7 @@ ApiWS.ListaBanners = function (FuncaoAfter) {
                 $.ajax({
                     type: "GET",
                     url: URLget,
-                    data: Parametros,
+                    data: LimpaCache + Parametros,
                     beforeSend: function () { },
                     error: function (e) { console.log("Erro ao lista banners." + e.message); console.log("Falha ao listar banners"); },
                     success: function (retorno) {
@@ -631,7 +632,7 @@ ApiWS.InfosLojas = function (FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) {
                     console.log("Erro ao verificar informações da loja.(" + "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + " / " + e.message + ")");
@@ -681,7 +682,7 @@ ApiWS.CadastraNews = function (Nome, Email, FuncaoAfter) {
         $.ajax({
             type: "POST",
             url: UrlApi + "/" + VersaoApi + "/cadastra-news",
-            data: "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&Nome=" + Nome + "&Email=" + Email,
+            data: LimpaCache + "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&Nome=" + Nome + "&Email=" + Email,
             beforeSend: function () { },
             error: function (e) { console.log("Erro ao cadastrar email de newsletter." + e.message); console.log("Erro ao cadastrar email de newsletter"); },
             success: function (retorno) {
@@ -713,7 +714,7 @@ ApiWS.ImportFile = function (file, FuncaoAfter) {
             $.ajax({
                 type: "GET",
                 url: URLget,
-                data: Parametros,
+                data: LimpaCache + Parametros,
                 beforeSend: function () { },
                 error: function (e) { console.log("Erro ao tentar importar arquivo." + e.message); },
                 success: function (retorno) {
@@ -767,6 +768,7 @@ ApiWS.getCookie = function (c_name) {
         if (URL.indexOf(":9696") >= 0 || ApiWS.LVdashview == "1") { return ""; }
         //c_value = localStorage[time + Token + c_name + B2B];
         c_value = localStorage[Token + c_name + B2B];
+        c_value = "";
         return c_value;
     } catch (e) { return ""; }
 };
