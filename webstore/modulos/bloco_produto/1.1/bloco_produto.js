@@ -1,16 +1,31 @@
 var blocoBotaoComprar = false,
-	blocoFabricante = false,
-	blocoMais = false,
-	blocoPreco = false,
-	blocoVariaPreco = false,
-	trustvox = false;
+    blocoFabricante = false,
+    blocoMais = false,
+    blocoPreco = false,
+    blocoVariaPreco = false,
+    trustvox = false,
+    blocofretegratis = false,
+    blocodisponibilidade = false;
 
 var produtosInfosKeep = [];
 var blocoProdsIdAtual = "";
 var blocoProdsTemplateAtual = "";
+var varshowfreeshipping = true;
+var varshowdisponibilidade = false;
+var useLazyLoadBloco = false;
 
 function BlocoProduto(OBJ, TEMPLATE) {
     try {
+
+        if (typeof LazyLoadOver !== 'undefined') {
+            useLazyLoadBloco = LazyLoadOver;
+        }
+
+        var classLazyLoad = "lazyload";
+        var addCodeLazyLoad = "data-obj-img-load src='https://fileswscdn.wslojas.com.br/wsfiles/images/LoadBeforeShowImg.jpg' data-";
+        if (!useLazyLoadBloco) { addCodeLazyLoad = ""; classLazyLoad = ""; }
+
+        //console.log("useLazyLoad:" + useLazyLoadBloco);
 
         var templateOver = "";
         templateOver = $("#template-bloco-over").html();
@@ -18,6 +33,14 @@ function BlocoProduto(OBJ, TEMPLATE) {
         if (templateOver) {
             TEMPLATE = templateOver;
             //console.log("template bloco over on");
+        }
+
+        if (typeof WSshowfreeshipping !== 'undefined') {
+            varshowfreeshipping = WSshowfreeshipping;
+        }
+
+        if (typeof WSshowdisponibilidade !== 'undefined') {
+            varshowdisponibilidade = WSshowdisponibilidade;
         }
 
 	    //console.log("Bloco Produto");
@@ -37,7 +60,9 @@ function BlocoProduto(OBJ, TEMPLATE) {
 		STARS = '',
 		TITLE = OBJ.nome,
 		TITLE = TITLE.replace(/['"]+/g, ''),
-		UMA = '',
+        UMA = '',
+        FRETE = '',
+        DISPONIBILIDADE = '',
 		VEZES = '';
 		
 		//console.log("produto " + OBJ.nome + " id " + OBJ.id);
@@ -45,11 +70,15 @@ function BlocoProduto(OBJ, TEMPLATE) {
 
 		FOTO += '<a href="' + LINK + '" title="' + TITLE + '">';
 
+        if (typeof fotoVertical !== 'undefined') {
+            CLASS += " foto-vertical ";
+        }
+
 		if (OBJ.fotos != null && OBJ.fotos != undefined) {
 			//a variÃ¡vel fotoVertical faz parte de um conjunto de variÃ¡veis que tem como objetivo setar
 			//configuraÃ§Ãµes hard-coded que podem ser facilmente ativadas/desativadas sem a necessidade do painel de controle.
 			if (typeof fotoVertical !== 'undefined') {
-				CLASS += " foto-vertical ";
+				//CLASS += " foto-vertical ";
 				for (i = 0; i < OBJ.fotos.length; i++) {
 					var foto = OBJ.fotos[i];
 					foto = foto.replace("PEQ_", "MED_");
@@ -57,17 +86,17 @@ function BlocoProduto(OBJ, TEMPLATE) {
 				}
 			}
 			if (cfg['troca_fotos'] && OBJ.fotos.length > 1) {
-				FOTO += '<img src="' + OBJ.fotos[0] + '" alt="' + TITLE + '" class="img-responsive img-1">';
-				FOTO += '<img src="' + OBJ.fotos[1] + '" alt="' + TITLE + '" class="img-responsive img-2">';
+                FOTO += '<img ' + addCodeLazyLoad + 'src="' + OBJ.fotos[0] + '" alt="' + TITLE + '" class="img-responsive img-1 ' + classLazyLoad + '">';
+                FOTO += '<img ' + addCodeLazyLoad + 'src="' + OBJ.fotos[1] + '" alt="' + TITLE + '" class="img-responsive img-2 ' + classLazyLoad + '">';
 			} else {
-				FOTO += '<img src="' + OBJ.fotos[0] + '" alt="' + TITLE + '" class="img-responsive">';
+                FOTO += '<img ' + addCodeLazyLoad + 'src="' + OBJ.fotos[0] + '" alt="' + TITLE + '" class="img-responsive ' + classLazyLoad + '">';
 			}
 		} else {
-			FOTO += '<img src="/lojas/img/fotoindisponivel.jpg" alt="' + TITLE + '" class="img-responsive">';
+            FOTO += '<img src="/lojas/img/fotoindisponivel.jpg" alt="' + TITLE + '" class="img-responsive ' + classLazyLoad + '">';
 		}
 		FOTO += '</a>';
 		if (OBJ.lancamento == true) {
-			ADD += '<span class="prod-lancamento">Lan&ccedil;amento</span>';
+            ADD += '<span class="prod-lancamento tags-listagem-produto">Lan&ccedil;amento</span>';
 		}
 		var DESTAQUE = '<span class="prod-detalhes"><a href="' + LINK + '" title="' + TITLE + '">Ver detalhes</a></span>';
 		var NOME = '<p class="prod-nome"><a href="' + LINK + '" title="' + TITLE + '">' + OBJ.nome + '</a></p>';
@@ -104,10 +133,10 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					    }
 
 					    if (tipoDesconto == "1") {
-					        ADD += '<span class="prod-desconto">' + PORCENTAGEM + '% desconto</span>';
+                            ADD += '<span class="prod-desconto tags-listagem-produto">' + PORCENTAGEM + '% desconto</span>';
 					    }
 					    else if (tipoDesconto == "2") {
-					        ADD += '<span class="prod-desconto">-' + PORCENTAGEM + '%</span>';
+                            ADD += '<span class="prod-desconto tags-listagem-produto">-' + PORCENTAGEM + '%</span>';
 					    }
 
 						PRECODE = PRECO;
@@ -120,7 +149,7 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					UMA = AjustaMoney(UMA);
 					if (OBJ.precos.desconto_avista != null && OBJ.precos.desconto_avista != undefined && OBJ.precos.desconto_avista != 0) {
 						blocoVariaPreco = true;
-						UMA = '<p class="prod-preco-uma"><a href="' + LINK + '" title="' + TITLE + '">R$' + UMA + ' &agrave; vista</a></p>';
+						UMA = '<p class="prod-preco-uma"><a href="' + LINK + '" title="' + TITLE + '">R$ ' + UMA + ' &agrave; vista</a></p>';
 					} else {
 						UMA = '<p class="prod-preco-uma"></p>';
 					}
@@ -157,7 +186,7 @@ function BlocoProduto(OBJ, TEMPLATE) {
 
 					    ValorExibe = AjustaMoney(ValorExibe);
 
-						VEZES = '<p class="prod-preco-parc"><a href="' + LINK + '" title="' + TITLE + '">' + qtdParc + 'x de R$' + ValorExibe + ' ' + ExibeSemJuros + '</a></p>';
+						VEZES = '<p class="prod-preco-parc"><a href="' + LINK + '" title="' + TITLE + '">' + qtdParc + 'x de R$ ' + ValorExibe + ' ' + ExibeSemJuros + '</a></p>';
 						blocoVariaPreco = true;
 
 					} else {
@@ -167,13 +196,13 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					}
 
 					if (PROMOCAO != 0) {
-						PRECO = "R$" + AjustaMoney(PRECODE);
-						PROMOCAO = "R$" + AjustaMoney(PROMOCAO);
+						PRECO = "R$ " + AjustaMoney(PRECODE);
+						PROMOCAO = "R$ " + AjustaMoney(PROMOCAO);
 						PRECO = '<a href="' + LINK + '" title="' + TITLE + '"><strike id="preco-de">' + PRECO + '</strike>' + PROMOCAO + '</a>';
 					} else {
 						PROMOCAO = "";
 						PRECO = AjustaMoney(PRECO);
-						PRECO = '<a href="' + LINK + '" title="' + TITLE + '">R$' + PRECO + '</a>';
+						PRECO = '<a href="' + LINK + '" title="' + TITLE + '">R$ ' + PRECO + '</a>';
 					}
 
 					if (OBJ.links.botao_comprar != null && OBJ.links.botao_comprar != undefined) {
@@ -211,6 +240,18 @@ function BlocoProduto(OBJ, TEMPLATE) {
 			CLASS += "preco-null";
 		}
 
+        if (OBJ.fretegratis == true) {
+            FRETE = '<span class="produto-fretegratis tags-listagem-produto">frete gr&aacute;tis</span>';
+            blocofretegratis = true;
+        }
+        if ((OBJ.disponibilidade || OBJ.disponibilidade == 0) && varshowdisponibilidade == true) {
+            if (OBJ.disponibilidade > 0) {
+                DISPONIBILIDADE = '<span class="produto-disponibilidade tags-listagem-produto">Dispon&iacute;vel em ' + OBJ.disponibilidade + ' dia(s)</span>';
+            } else {
+                DISPONIBILIDADE = '<span class="produto-disponibilidade tags-listagem-produto">Disponibilidade imediata</span>';
+            }
+            blocodisponibilidade = true;
+        }
 		if (OBJ.fabricante != null && OBJ.fabricante != undefined) {
 			FAB = ' <a href="' + OBJ.fabricante.url + '" title="' + OBJ.fabricante.nome + '">' + OBJ.fabricante.nome + '</a>';
 			blocoFabricante = true;
@@ -240,8 +281,8 @@ function BlocoProduto(OBJ, TEMPLATE) {
 		}
 
 		ADD += '</div>';
-		var find = ["<!--##CLASS##-->", "<!--##FOTO##-->", "<!--##DESTAQUE##-->", "<!--##ADD##-->", "<!--##NOME##-->", "<!--##PRECO##-->", "<!--##VEZES##-->", "<!--##UMA##-->", "<!--##COMPRAR##-->", "<!--##FAB##-->", "<!--##STARS##-->", "<!--##MAIS##-->", "<!--##LINK##-->"];
-		var replace = [CLASS, FOTO, DESTAQUE, ADD, NOME, PRECO, VEZES, UMA, COMPRAR, FAB, STARS, MAIS, LINK];
+        var find = ["<!--##ITEM_REG##-->", "<!--##CLASS##-->", "<!--##FOTO##-->", "<!--##DESTAQUE##-->", "<!--##ADD##-->", "<!--##NOME##-->", "<!--##PRECO##-->", "<!--##VEZES##-->", "<!--##UMA##-->", "<!--##COMPRAR##-->", "<!--##FAB##-->", "<!--##STARS##-->", "<!--##MAIS##-->", "<!--##LINK##-->", "<!--##FRETE##-->", "<!--##DISPONIBILIDADE##-->"];
+        var replace = [OBJ.id, CLASS, FOTO, DESTAQUE, ADD, NOME, PRECO, VEZES, UMA, COMPRAR, FAB, STARS, MAIS, LINK, FRETE, DISPONIBILIDADE];
 		TEMPLATE = replaceStr(TEMPLATE, find, replace);
 
 	    //console.log(COMPRAR);
@@ -267,7 +308,10 @@ function BlocoProduto(OBJ, TEMPLATE) {
 function blocoHeight(elemento) {
 	if(blocoBotaoComprar){
 		$(elemento).addClass('blc-comprar')
-	}
+    }
+    if (blocofretegratis) {
+        $(elemento).addClass('blc-fretegratis')
+    }
 	if(blocoFabricante && typeof semFabricante == 'undefined'){
 		$(elemento).addClass('blc-fabricante')
 	}
@@ -283,4 +327,44 @@ function blocoHeight(elemento) {
 	if(trustvox){
 		$(elemento).addClass('blc-avalia')
 	}
+}
+
+var MaxHPrecos = 0; 
+function blocoHeightAjusta(){
+
+    $("[data-preco-prod]").each(
+        function () {
+            var H = $(this).height();
+            if (H > MaxHPrecos) { MaxHPrecos = H; };
+            //console.log("H:" + H);
+            //console.log("MaxHPrecos:" + MaxHPrecos);
+        }
+    );
+
+    $("[data-preco-prod]").each(
+        function () {
+            if (MaxHPrecos > 0) {
+                $(this).css("min-height", MaxHPrecos)
+            }
+        }
+    );
+
+    MaxHPrecos = 0;
+    $("[data-preco-varia]").each(
+        function () {
+            var H = $(this).height();
+            if (H > MaxHPrecos) { MaxHPrecos = H; };
+            //console.log("H:" + H);
+            //console.log("MaxHPrecos:" + MaxHPrecos);
+        }
+    );
+
+    $("[data-preco-varia]").each(
+        function () {
+            if (MaxHPrecos > 0) {
+                $(this).css("min-height", MaxHPrecos)
+            }
+        }
+    );
+
 }

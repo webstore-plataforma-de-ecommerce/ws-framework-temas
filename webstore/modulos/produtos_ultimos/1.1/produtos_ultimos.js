@@ -77,6 +77,8 @@ function ListaProdutosUltimosRetorno() {
 
 			nomeProd("#ultimos-vistos");
 
+            LazyLoadApply();
+
 			if (typeof call_after_produtos_ultimos !== 'undefined') { try { eval(call_after_produtos_ultimos); } catch (e) { console.log("Falha call_after_produtos_ultimos" + e.message); } }
 
 		} catch (e) { console.log('ListaProdutosUltimosRetorno: ' + e.message); }

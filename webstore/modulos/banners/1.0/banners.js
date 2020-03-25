@@ -1,4 +1,7 @@
-$(document).ready(function(){
+var useLazyLoadBanner = true;
+var banners_finished;
+
+$(document).ready(function () {
 	try{
 		var etapa = $("#HdEtapaLoja").val();
 		if (etapa == "HOME" || etapa == "LISTAGEM") {
@@ -10,13 +13,29 @@ $(document).ready(function(){
 function Banners() {
 	ApiWS.ListaBanners("BannersRetorno");
 }
-function BannersRetorno() {
+function BannersRetorno(getJson) {
 	try {
 
-		var OBJETO = ApiWS.Json;
+        if (typeof LazyLoadOver !== 'undefined') {
+            useLazyLoadBanner = LazyLoadOver;
+        }
+
+        var classLazyLoad = "lazyload";
+        var addCodeLazyLoad = "data-obj-img-load src='https://fileswscdn.wslojas.com.br/wsfiles/images/LoadBeforeShowImg.jpg' data-";
+        if (!useLazyLoadBanner) { addCodeLazyLoad = ""; classLazyLoad = ""; }
+
+        var OBJETO = "";
+
+        if (getJson) {
+            OBJETO = getJson;
+        } else {
+            OBJETO = ApiWS.Json;
+        }
+
+		//var OBJETO = ApiWS.Json;
 		objetos.Banners = OBJETO;
 
-		if (typeof over_banners !== 'undefined') { try { eval(over_banners); return; } catch (e) { console.log(e.message); } }
+		if (typeof over_banners !== 'undefined') { try { eval(over_banners); banners_finished = "ok"; return; } catch (e) { console.log(e.message); banners_finished = "ok"; } }
 
 		var obj = jQuery.parseJSON(OBJETO);
 
@@ -46,15 +65,15 @@ function BannersRetorno() {
 						if(banner.altura != '0' || banner.largura != '0'){
 
 							if(banner.altura != '0' && banner.largura != '0'){
-								var img = '<img src="'+banner.imagem+'" alt="'+banner.titulo+'" style="width: '+banner.largura+'px; height: '+banner.altura+'px">';
+                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: '+banner.largura+'px; height: '+banner.altura+'px">';
 							}else if(banner.altura != 0){
-								var img = '<img src="'+banner.imagem+'" alt="'+banner.titulo+'" style="height: '+banner.altura+'px; width: auto; max-width: 100%;">';
+                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="height: '+banner.altura+'px; width: auto; max-width: 100%;">';
 							}else if(banner.largura != 0){
-								var img = '<img src="'+banner.imagem+'" alt="'+banner.titulo+'" style="width: '+banner.largura+'px">';
+                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: '+banner.largura+'px">';
 							}
 
 						}else{
-							var img = '<img src="'+banner.imagem+'" alt="'+banner.titulo+'">';
+                            var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" class="' + classLazyLoad + '" alt="'+banner.titulo+'">';
 						}
 
 						if (banner.tipo == 'topo') {
@@ -173,7 +192,11 @@ function BannersRetorno() {
 				lateralEsq = true;
 				FrameworkResponsivo();
 			}
-		}
+        }
+
+		banners_finished = "ok";
+
+        LazyLoadApply();
 
 		if (typeof call_after_banners !== 'undefined') { try { eval(call_after_banners); } catch (e) { console.log("Falha call_after_banners" + e.message); } }
 

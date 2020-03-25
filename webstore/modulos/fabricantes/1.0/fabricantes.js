@@ -1,4 +1,6 @@
-$(document).ready(function(){
+var useLazyLoadFabr = false;
+
+$(document).ready(function () {
 	
 	if ($("#HdEtapaLoja").val() == "HOME") {
 		window.setTimeout("Fabricantes()", 0);
@@ -13,6 +15,14 @@ function FabricantesRetorno() {
 
 	try {
 
+        if (typeof LazyLoadOver !== 'undefined') {
+            useLazyLoadFabr = LazyLoadOver;
+        }
+
+        var classLazyLoad = "lazyload";
+        var addCodeLazyLoad = "data-obj-img-load src='https://fileswscdn.wslojas.com.br/wsfiles/images/LoadBeforeShowImg.jpg' data-";
+        if (!useLazyLoadFabr) { addCodeLazyLoad = ""; classLazyLoad = ""; }
+
 		var OBJETO = ApiWS.Json;
 		objetos.Fabricantes = OBJETO;
 		
@@ -26,7 +36,7 @@ function FabricantesRetorno() {
 					li += '<li id="fabricante-'+fabricante.id+'"><a href="'+fabricante.url+'">';
 
 					if(fabricante.logotipo != null && fabricante.logotipo != undefined){
-						li += '<img src="'+fabricante.logotipo+'" alt="'+fabricante.nome+'" title="'+fabricante.nome+'">';
+                        li += '<img ' + addCodeLazyLoad + 'src="' + fabricante.logotipo + '" class="' + classLazyLoad + '" alt="' + fabricante.nome + '" title="' + fabricante.nome + '">';
 					}else{
 						li += fabricante.nome;
 					}

@@ -1,4 +1,4 @@
-<section id="produto" class="container">
+<section id="produto" class="container" itemscope="" itemtype="http://schema.org/Product">
 
     <div class="row">
 
@@ -9,16 +9,16 @@
         </div>
 
         <div id="div-conteudo" class="col-xs-12">
-            
+
             <div class="row">
-                
+
                 <div class="dados-produto-mobile">
-                    
-                    <h2><!--##NOME_PRODUTO##--></h2>
 
-                    <p class="codigo-produto">C&oacute;d.: <!--##REF_PRODUTO##--></p>
+                    <h2 itemprop="name"><!--##NOME_PRODUTO##--></h2>
 
-                    <p class="fabricante-produto"><!--##FABR_LINK##--></p>
+                    <p class="codigo-produto" itemprop="sku">C&oacute;d.: <!--##REF_PRODUTO##--></p>
+
+                    <p class="fabricante-produto" itemprop="brand"><!--##FABR_LINK##--></p>
 
                 </div>
 
@@ -29,22 +29,22 @@
                         <span data-wbstr-fotos></span>
 
                         <div id="clockdiv">
-                          <div>
-                            <span class="days"></span>
-                            <div class="smalltext">Dias</div>
-                          </div>
-                          <div>
-                            <span class="hours"></span>
-                            <div class="smalltext">Horas</div>
-                          </div>
-                          <div>
-                            <span class="minutes"></span>
-                            <div class="smalltext">Minutos</div>
-                          </div>
-                          <div>
-                            <span class="seconds"></span>
-                            <div class="smalltext">Segundos</div>
-                          </div>
+                            <div>
+                                <span class="days"></span>
+                                <div class="smalltext">Dias</div>
+                            </div>
+                            <div>
+                                <span class="hours"></span>
+                                <div class="smalltext">Horas</div>
+                            </div>
+                            <div>
+                                <span class="minutes"></span>
+                                <div class="smalltext">Minutos</div>
+                            </div>
+                            <div>
+                                <span class="seconds"></span>
+                                <div class="smalltext">Segundos</div>
+                            </div>
                         </div>
 
                     </div>
@@ -54,8 +54,8 @@
                 <div class="col-md-6 col-sm-7 col-xs-12">
 
                     <div class="dados-produto">
-                        
-                        <h1 class="hidden-xs"><!--##NOME_PRODUTO##--></h1>
+
+                        <h1 class="hidden-xs" itemprop="name"><!--##NOME_PRODUTO##--></h1>
 
                         <div class="share-produto">
                             <i class="fa fa-share-alt"></i>
@@ -74,12 +74,12 @@
                                     <a id="share-gplus" href="#" title="Google Plus" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
-                                </li> 
+                                </li>
                                 <li class="Whats">
                                     <a id="share-whats" href="#" title="Whatsapp" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                                         <i class="fa fa-whatsapp"></i>
                                     </a>
-                                </li>                   
+                                </li>
                                 <li class="Mail">
                                     <a id="share-mail" href="#" title="Compartilhar via e-mail" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                                         <i class="fa fa-envelope"></i>
@@ -99,22 +99,23 @@
                         <p id="fabricante-produto" class="hidden-xs"><!--##FABR_LINK##--></p>
                     </div>
 
-                    <div class="add-produto hidden">
+                    <div class="add-produto">
                         <span data-wbstr-add></span>
                     </div>
-                    
+
                     <div class="descricao-breve">
                         <span data-wbstr-breve></span>
-                        <div class="avaliacao-produto">
-                            <!--##TRUSTVOX_STAR##-->                            
+                        <div class="avaliacao-produto" itemprop="aggregateRating">
+                            <!--##TRUSTVOX_STAR##-->
                         </div>
                     </div>
 
-                    
+
                     <div class="row info-produto">
-                        
-                        <div id="preco-produto" class="no-gutter col-md-5 col-xs-12">
+
+                        <div id="preco-produto" class="no-gutter col-md-5 col-xs-12" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                             <span data-wbstr-preco></span>
+                            <meta itemprop='priceCurrency' content='BRL' />
                         </div>
 
                         <div id="botao-comprar-produto" class="no-gutter col-md-7 col-xs-12">
@@ -129,7 +130,7 @@
                             <span data-wbstr-infos></span>
 
                         </div>
-                        
+
                     </div>
 
                     <span data-wbstr-parcelas></span>
@@ -144,7 +145,7 @@
                         <fieldset>
                             <input type="text" id="input-frete" placeholder="Insira seu CEP">
                             <input type="button" id="submit-frete" value="Calcular frete">
-                        </fieldset>                                
+                        </fieldset>
                     </div>
 
                     <div id="DivShowCalculoFrete"></div>
@@ -178,17 +179,15 @@
             </div>
 
             <ul id="lista-relacionados">
-                
+
                 <li class="list-item <!--##CLASS##-->">
                     <div class="div-item">
                         <div class="prod-img">
                             <!--##FOTO##-->
-                            
                             <!--##DESTAQUE##-->
                         </div>
                         <div class="prod-info">
                             <!--##ADD##-->
-
                             <!--##NOME##-->
 
                             <p class="prod-fabricante"><!--##FAB##--></p>
@@ -205,17 +204,17 @@
                             <!--##COMPRAR##-->
 
                             <p class="prod-mais"><!--##MAIS##--></p>
-                            
+
                         </div>
                     </div>
                 </li>
-                
+
             </ul>
-            
+
         </div>
 
-        <div id="descricoes" class="col-xs-12 descricoes-produto">
-            
+        <div id="descricoes" class="col-xs-12 descricoes-produto" itemprop="description">
+
             <ul class="nav nav-tabs hidden-xs" role="tablist">
                 <span data-wbstr-tablist></span>
             </ul>
@@ -228,14 +227,20 @@
 
             <span data-wbstr-outro></span>
 
-            <div id="div-trustvox" class="col-xs-12">
+            <div id="div-trustvox" class="col-xs-12" itemprop="reviewRating">
                 <!--##TRUSTVOX##-->
                 <!--##SELO_TRUSTVOX##-->
             </div>
 
         </div>
 
-        <div id="preco-flutua">
+        <div id="produtos-compre-junto" class="div-grupo col-xs-12 no-gutter">
+
+            <!--##COMPRE_JUNTO_V2##-->
+
+        </div>
+
+        <div id="preco-flutua" class="hidden">
 
             <span onclick="toggleFlutua()" class=""></span>
 
@@ -246,18 +251,20 @@
                 </div>
 
                 <div class="prod-info">
-                    
+
                     <div class="variacao-preco">
                         <span data-wbstr-preco></span>
                     </div>
 
                     <!--##BOTAO_COMPRAR##-->
-                    
+
                 </div>
 
             </div>
-        
+
         </div>
 
-    </div>        
+    </div>
+
 </section>
+

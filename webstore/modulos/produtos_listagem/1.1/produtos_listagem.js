@@ -18,6 +18,15 @@ function ProdutosListagemRetorno() {
 			var template = $('#prod-list').html();
 		}
 
+
+        $('#LV_COMBO_ORDEM').html('' +
+            '<option value="5">Mais Relevantes</option>' +
+            '<option value="1">A - Z</option>' +
+            '<option value="2">Z - A</option>' +
+            '<option value="3">Menor Pre&ccedil;o</option>' +
+            '<option value="4">Maior Pre&ccedil;o</option>' +
+            '');
+
 		var OBJETO = ApiWS.Json;
 		objetos.ProdutosListagem = OBJETO;
 		var obj = jQuery.parseJSON(OBJETO);
@@ -39,9 +48,10 @@ function ProdutosListagemRetorno() {
 					$('.resultado-paginacao').html(obj.paginacao.total_itens + ' itens');
 					
 					if (pgAtual != 1){
-						$('.lista-paginacao').append('<li><a href="?pagina=1"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
-						// $('.lista-paginacao').append('<li><a href="?pagina=' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
-					}
+                        $('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+                        $('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+                    }
+
 					for (c = 0; c < qtdPaginas; c++){
 						var d = c + 1;
 						if(
@@ -49,27 +59,27 @@ function ProdutosListagemRetorno() {
 							d <= (pgAtual + 2)
 						){
 							if (d == pgAtual) {
-								$('.lista-paginacao').append('<li class="active"><a href="?pagina=' + d + '">' + d + '</a></li>');
+                                $('.lista-paginacao').append('<li class="active"><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
 							}else{
 								if(
 									d == (pgAtual - 2) &&
 									(pgAtual - 2) > 1
 								){
-									$('.lista-paginacao').append('<li><a>...</a></li>');
+									//$('.lista-paginacao').append('<li><a>...</a></li>');
 								}
-								$('.lista-paginacao').append('<li><a href="?pagina=' + d + '">' + d + '</a></li>');
+                                $('.lista-paginacao').append('<li><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
 								if(
 									d == (pgAtual + 2) &&
 									(pgAtual + 2) < qtdPaginas
 								){
-									$('.lista-paginacao').append('<li><a>...</a></li>');
+									//$('.lista-paginacao').append('<li><a>...</a></li>');
 								}
 							}
 						}
 					}
 					if (pgAtual != qtdPaginas) {
-						// $('.lista-paginacao').append('<li><a href="?pagina=' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
-						$('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+                        $('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+                        $('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
 					}
 				}else{
 					if (obj.totalitens == 1) {
@@ -83,7 +93,7 @@ function ProdutosListagemRetorno() {
 					var qtd = 0;
 					for (b = 0; b < obj.migalha.length; b++){
 						qtd++;
-						if (obj.migalha[b].nome == "Página inicial") {
+						if (obj.migalha[b].nome == "P&aacute;gina inicial") {
 							obj.migalha[b].nome = '<i class="fa fa-home"></i>';
 						}
 
@@ -132,8 +142,10 @@ function ProdutosListagemRetorno() {
 		}
 
 		FrameworkResponsivo();
-		ConteudoResponsivo();
-		nomeProd("#prod-list");
+        ConteudoResponsivo();
+        window.setTimeout("blocoHeightAjusta()", 2000);
+        nomeProd("#prod-list");
+        LazyLoadApply();
 		
 	} catch (e) { console.log('ProdutosListagemRetorno: '+e.message); }
 }

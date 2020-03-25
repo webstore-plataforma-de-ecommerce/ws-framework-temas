@@ -1,10 +1,15 @@
 $(document).ready(function () {
 	try{
 		if ($("#HdEtapaLoja").val() == "HOME") {
-			window.setTimeout("ProdutosDestaque()", 0);
+			//window.setTimeout("ProdutosDestaque()", 0);
+			isReady("banners_finished", "ProdutosDestaqueStart()");
 		}
 	} catch (e) { console.log(e.message); }
 });
+
+function ProdutosDestaqueStart() {
+	isReady("cfg['estrutura']", "ProdutosDestaque()");
+}
 
 function ProdutosDestaque() {
 	ApiWS.ListaProdutosDestaque("ProdutosDestaqueRetorno");
@@ -95,7 +100,9 @@ function ProdutosDestaqueRetorno() {
 		}else{
 			$('#prod-destaque').hide();
 			empty('destaque');
-		}
+        }
+
+        LazyLoadApply();
 
 		if (typeof call_after_destaque !== 'undefined') { try { eval(call_after_destaque); } catch (e) { console.log("Falha call_after_destaque" + e.message); } }
 

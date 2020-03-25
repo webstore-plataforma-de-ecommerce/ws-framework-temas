@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('https://cdnws001.wslojas.com.br/icons/fonts/icomoon.eot?1cn96r');
-  src:  url('https://cdnws001.wslojas.com.br/icons/fonts/icomoon.eot?1cn96r#iefix') format('embedded-opentype'),
-    url('https://cdnws001.wslojas.com.br/icons/fonts/icomoon.ttf?1cn96r') format('truetype'),
-    url('https://cdnws001.wslojas.com.br/icons/fonts/icomoon.woff?1cn96r') format('woff'),
-    url('https://cdnws001.wslojas.com.br/icons/fonts/icomoon.svg?1cn96r#icomoon') format('svg');
+  src:  url('https://fileswscdn.wslojas.com.br/fonts/icomoon.eot?1cn96r');
+  src:  url('https://fileswscdn.wslojas.com.br/fonts/icomoon.eot?1cn96r#iefix') format('embedded-opentype'),
+    url('https://fileswscdn.wslojas.com.br/fonts/icomoon.ttf?1cn96r') format('truetype'),
+    url('https://fileswscdn.wslojas.com.br/fonts/icomoon.woff?1cn96r') format('woff'),
+    url('https://fileswscdn.wslojas.com.br/fonts/icomoon.svg?1cn96r#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }

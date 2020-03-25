@@ -2,6 +2,11 @@
 #slider{
 	margin-bottom: 2rem;
 }
+
+#slider {
+	display: inline
+}
+
 #slider img{
 	height: auto;
 	width: 100%;

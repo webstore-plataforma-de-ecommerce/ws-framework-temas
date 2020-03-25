@@ -1,6 +1,9 @@
 var bannerEmpty = false;
 var produtoEmpty = false;
 var destaqueEmpty = false;
+
+var fotoVertical = null;
+
 function empty(TIPO){	
 
 	if (TIPO == 'banner') {
@@ -18,12 +21,43 @@ function empty(TIPO){
 	if (bannerEmpty == true && produtoEmpty == true && destaqueEmpty == true){
 		console.log('empty');
 		$('#div-conteudo').css('minHeight', '40rem');
-
 		lojaVazia();
-	}
+    }
+
 }
 
-function lojaVazia(){
+var JsonProdsVazio = '{"totalitens":6,"produtos":[{"id":1742395,"codigo":"PLA2506552","nome":"Moletom","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":115.00,"preco_promocao":99.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#moletom"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_393721.jpg"],"integracoes":[]},{"id":1742394,"codigo":"PLA5008634","nome":"Cinto","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":50.00,"preco_promocao":42.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#cinto"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_272687.jpg"],"integracoes":[]},{"id":1742392,"codigo":"PLA6597883","nome":"Boné","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":25.00,"preco_promocao":12.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#bone"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_766268.jpg"],"integracoes":[]},{"id":1742393,"codigo":"PLA6365585","nome":"Camiseta","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":99.00,"preco_promocao":65.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#camiseta"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_137428.jpg"],"integracoes":[]},{"id":1742396,"codigo":"PLA6930909","nome":"Óculos de Sol","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":199.00,"preco_promocao":85.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#oculos-de-sol"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_905085.jpg"],"integracoes":[]},{"id":1742397,"codigo":"PLA1722033","nome":"Touca","modo":"1","disponivel":true,"lancamento":false,"subprodutos":false,"fretegratis":false,"qtdminima":0,"datalimite":"\/Date(1567652400000)\/","fabricante":null,"precos":{"preco":45.00,"preco_promocao":40.00,"desconto_avista":10.00,"max_parcelas":12,"valor_min_parcelas":5.00,"juros_inicia":1,"juros":2.99},"links":{"botao_comprar":null,"ver_produto":"#touca"},"maisprodutos":null,"fotos":["https://imageswscdn.webstore.net.br/files/20270/PEQ_340803.jpg"],"integracoes":[]}],"infoadd":" / TEMPO SEARCH:0","paginacao":null,"tipo_exibicao":null,"ordem_atual":"","scripts":"","titulo_pagina":null,"migalha":null,"wssource":"ws-db-1"}';
+var JsonBannersVazio = '{"banners":[{"id":17729,"titulo":"Topo 1","tipo":"topo","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/BANNER-MOLETOM.png","target":"_self","url":"","largura":0,"altura":0},{"id":17730,"titulo":"Topo 2","tipo":"topo","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/BANNER-ACESSORIOS.png","target":"_self","url":"","largura":0,"altura":0},{"id":17731,"titulo":"Topo 3","tipo":"topo","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/BANNER-TSHIRTS.png","target":"_self","url":"","largura":0,"altura":0},{"id":17732,"titulo":"Mini 1","tipo":"mini","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/mini-banner-acessorios.png","target":"_self","url":"","largura":0,"altura":0},{"id":17733,"titulo":"Mini 2","tipo":"mini","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/mini-banner-camisetas.png","target":"_self","url":"","largura":0,"altura":0},{"id":17734,"titulo":"Mini 3","tipo":"mini","conteudo":"","imagem":"https://imageswscdn.webstore.net.br/files/20270/mini-banner-moletom-ok.png","target":"_self","url":"","largura":0,"altura":0}],"wssource":"ws-db-1"}';
+
+function lojaVazia() {
+
+    try {
+
+        fotoVertical = true;
+
+        BannersRetorno(JsonBannersVazio);
+
+        //cfg['produtos_pagina'] = 0;
+        cfg['produtos_linha'] = 3;
+        prodsLinha = 3;
+        ProdutosHomeRetorno(JsonProdsVazio);
+
+        menuFake();
+
+        InstitucionalFake();
+
+        AtendimentoFake();
+
+        CategoriasRodapeFake();
+
+    } catch (e)
+    {
+        console.log("Fail Loja Vazia " + e.message);
+    }
+
+}
+
+function lojaVaziaBK(){
 
 	var institucional = "";
 
@@ -194,4 +228,61 @@ function BlocoProdutoFake(OBJ, TEMPLATE){
 
 	TEMPLATE = replaceStr(TEMPLATE, find, replace);                            
 	return TEMPLATE;
+}
+
+function InstitucionalFake() {
+
+    console.log("institucional:" + objInstitucional.length);
+
+    if (objInstitucional.length < 1) {
+
+        var li = '';
+
+        var JSON = '{"institucional":[{"id":293,"titulo":"Sobre n&oacute;s","tipo":"EXT","url":"#"},{"id":294,"titulo":"Pol&iacute;tica de entrega","tipo":"EXT","url":"#"},{"id":295,"titulo":"Pol&iacute;tica de trocas e devolu&ccedil;&atilde;o","tipo":"EXT","url":"#"},{"id":297,"titulo":"Formas de pagamento","tipo":"INT","url":"#"},{"id":298,"titulo":"Compre no atacado","tipo":"INT","url":"#"}]}';
+        var obj = jQuery.parseJSON(JSON);
+        obj = obj.institucional;
+        console.log(obj.length);
+
+        for (i = 0; i < obj.length; i++) {
+            PAG[obj[i].id] = [obj[i]];
+            li += '<li><a href="' + obj[i].url + '" rel="' + obj[i].titulo + '">' + obj[i].titulo + '</a></li>';
+        }
+
+        $('#institucional-footer').append(li);
+        li = '';
+
+    }
+
+}
+
+function AtendimentoFake() {
+
+    if ($('#contato-footer li').length <= 1) {
+
+        $('#contato-footer').prepend('' +
+            '<li><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>seg a sex das 0h às 0h</li> ' +
+            '<li class="footer-fones"><a href="tel:+551100000000"><i class="fa fa-fw fa-phone" aria-hidden="true"></i>00 0000-0000</a></li> ' +
+            '<li class="footer-fones"><a href="http://api.whatsapp.com/send?1=pt_BR&amp;phone=551100000000" target="_blank" rel="noopener"><i class="fa fa-fw fa-whatsapp" aria-hidden="true"></i>00 0000-0000</a></li> ' +
+            '<li class="footer-mails"><a href="mailto:contato@seudominio.com.br?subject=Contato Loja Virtual"><i class="fa fa-fw fa-envelope-o" aria-hidden="true"></i>contato@seudominio.com.br</a></li> ' +
+            //'<li class="footer-contact-link"><a href="/contato/678/contato" id="link-faleconosco"><i class="fa fa-fw fa-address-book-o" aria-hidden="true"></i>Fale Conosco</a></li>' +
+            '');
+
+    }
+
+}
+
+function CategoriasRodapeFake() {
+
+    if ($('#categoria-footer li').length <= 0) {
+
+        var li = '<li class="dpt-nivel-0" id="departamento-38118" atual="false"><a href="#" class="com-sub">Exemplo 1</a></li>' +
+            '<li class="dpt-nivel-0" id="departamento-38118" atual="false"><a href="#" class="com-sub">Exemplo 2</a></li>' +
+            '<li class="dpt-nivel-0" id="departamento-38118" atual="false"><a href="#" class="com-sub">Exemplo 3</a></li>' +
+            '<li class="dpt-nivel-0" id="departamento-38118" atual="false"><a href="#" class="com-sub">Exemplo 4</a></li>' +
+            '<li class="dpt-nivel-0" id="departamento-38118" atual="false"><a href="#" class="com-sub">Exemplo 5</a></li>';
+
+        $("#categoria-footer").html(li);
+
+    }
+
 }

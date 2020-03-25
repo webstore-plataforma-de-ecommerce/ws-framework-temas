@@ -181,3 +181,73 @@
     }
 
 }
+
+@media screen {
+
+    a.LinkCarOnPageIrCarrinho {
+        padding: 10px 25px;
+        background-color: <!-- ###PREF_41###-->;
+        color: #FFF;
+        display: table;
+        margin: 10px auto;
+        border-radius: 6px;
+    }
+
+    table.TabelaCarOnPage td {
+        padding-bottom: 5px;
+        font-size: 11px;
+        min-width: 60px;
+        text-align: left;
+    }
+
+    .CarOnPageTotal {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 20px 0px;
+    }
+
+    .prod-botao-comprar.prod-in-kart a {
+        background-color: #999 !important;
+        opacity: .5;
+    }
+
+    span.CarOnPageNomeProduto {
+        display: block;
+        max-height: 13px;
+        overflow: hidden;
+    }
+
+    tr.TrItemCarOnPage td:nth-child(3) {
+        display: none;
+    }
+
+    td.TdCarOnPage3 {
+        display: none;
+    }
+
+    .DivDadosProdCarOnPage img {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width:800px) {
+
+    .DivCarOnPage table {
+        height: initial;
+        max-height: calc(60% - 20px);
+        overflow: auto;
+        margin-bottom: 20px;
+    }
+
+    .CarOnPageTotal {
+        position: initial;
+        bottom: initial;
+        height: initial;
+    }
+
+    .DivCarOnPageBotoes {
+        position: initial;
+        bottom: initial;
+    }
+}

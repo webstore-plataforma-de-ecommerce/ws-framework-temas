@@ -1,7 +1,7 @@
 /*09-05-2019*/
 $(document).ready(function () {
     try {
-        isReady("PAG", "CategoriasLista()");
+        isReady("info_lojas_finish", "CategoriasLista()");
     } catch (e) { console.log(e.message); }
     try {
 
@@ -55,49 +55,63 @@ function CategoriasManage(obj, ShowStartSub) {
 
         if (typeof megaMenuAtiva !== 'undefined') { try { megaMenu = megaMenuAtiva; } catch (e) { megaMenu = false; } }
 
+        var WindowWidth = $(window).width();
+        if (WindowWidth < 760) { megaMenu = false; }
+
         var LOG = [];
-        var categorias = Departamentos(obj.Categorias, 1, LOG),
-            filtro = "",
-            menu = "";
+        var categorias = Departamentos(obj.Categorias, 1, LOG, false);
+        var LOGlateral = [];
+        var categoriasLateral = Departamentos(obj.Categorias, 1, LOGlateral, true);
+        var filtro = "";
+        var menu = "";
 
         WsSetObjetos("todas_categorias", "<ul class='ul-dpts-ws' id='ul-dpts-ws'>" + categorias + "</ul>");
 
         categoria = obj.Categorias;
         if (obj.MenuPersonalizado != null && obj.MenuPersonalizado != undefined && obj.MenuPersonalizado.length > 0) {
             var item = obj.MenuPersonalizado;
+
             for (a = 0; a < item.length; a++) {
                 try {
+                    var menuTemp = "";
                     var registro = PAG[item[a].registro];
                     //todos os departamentos
                     if (item[a].tipo == 'dpt' && item[a].registro == 0) {
-                        menu += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
-                        menu += '<a class="com-sub">' + item[a].nome + '</a><ul class="dpt-ul-nivel-0">';
-                        menu += categorias;
-                        menu += '</ul>';
+                        menuTemp += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
+                        menuTemp += '<a class="com-sub">' + item[a].nome + '</a><ul class="dpt-ul-nivel-0">';
+                        menuTemp += categorias;
+                        menuTemp += '</ul>';
                     } else if (item[a].tipo == 'dpt' && item[a].registro != 0) {
                         if (LOG[item[a].registro] != null && LOG[item[a].registro] != undefined) {
-                            menu += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
-                            menu += MenuPersonal(LOG[item[a].registro], 0, item[a].nome);
-                            menu += '</li>';
+                            menuTemp += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
+                            menuTemp += MenuPersonal(LOG[item[a].registro], 0, item[a].nome);
+                            menuTemp += '</li>';
                         } else {
-                            menu += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
-                            menu += '<a href="">' + item[a].nome + '</a>';
-                            menu += '</li>';
+                            menuTemp += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
+                            menuTemp += '<a href="">' + item[a].nome + '</a>';
+                            menuTemp += '</li>';
                         }
                     } else if (item[a].tipo == 'inst') {
                         if (registro != null && registro != undefined) {
-                            menu += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
-                            menu += '<a href="' + registro[0].url + '">' + item[a].nome + '</a>';
-                            menu += '</li>';
+                            menuTemp += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
+                            menuTemp += '<a href="' + registro[0].url + '">' + item[a].nome + '</a>';
+                            menuTemp += '</li>';
                         }
                     } else if (item[a].tipo == 'sistema') {
-                        menu += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
-                        menu += '<a href="' + item[a].url + '">' + item[a].nome + '</a>';
-                        menu += '</li>';
+                        menuTemp += '<li class="dpt-nivel-0" id="departamento-' + item[a].id + '">';
+                        menuTemp += '<a href="' + item[a].url + '">' + item[a].nome + '</a>';
+                        menuTemp += '</li>';
                     }
+                    /*if (item[a].atual) {
+                        menu = menuTemp + menu;
+                    } else {
+                        menu += menuTemp;
+                    }*/
+                    menu += menuTemp;
                 } catch (e) { console.log('Item do menu: ' + e.message); }
             }
-            if ((ShowStartSub && startSub) || !startSub) { $('.departamentos-nav').append(SubstMegaMenu(menu)); };
+
+            if (((ShowStartSub && startSub) || !startSub)) { $('.departamentos-nav').append(SubstMegaMenu(menu)); };
             dropDownMenu();
             $('#categoria-footer').append(categorias);
         } else if (obj.Categorias != null && obj.Categorias != undefined && obj.Categorias.length > 0) {
@@ -115,7 +129,7 @@ function CategoriasManage(obj, ShowStartSub) {
         }
         if (etapa == "LISTAGEM") {
             if (cfg['menu_lateral'] == true) {
-                $('#menu-lateral').append(categorias);
+                $('#menu-lateral').append(categoriasLateral);
             } else {
                 $('#menu-lateral').remove();
             }
@@ -184,19 +198,26 @@ function CategoriasManage(obj, ShowStartSub) {
         }
 
         $('#menu-lateral .dpt-nivel-1 > .com-sub').on('click', function () {
+            console.log("menu clicado");
             event.preventDefault();
+            console.log("...1");
             $(this).toggleClass('hover');
+            console.log("...2");
             var ul = $(this).siblings('ul');
+            console.log("...3");
             var span = $(this).siblings('span');
+            console.log("...4");
             span.toggleClass('fa-angle-down fa-angle-up');
+            console.log("...5");
             ul.toggleClass("open");
+            console.log("...6");
         });
 
         $('.menu-toggle').on('click', function () {
             var ul = $(this).siblings('ul');
             $(this).toggleClass('fa-angle-down fa-angle-up');
             ul.toggleClass("open");
-        })
+        });
 
         ajustaSubMenu();
 
@@ -303,36 +324,54 @@ function ajustaNav2() {
     }
 
 }
-function Departamentos(OBJ, NIVEL, LOG) {
+function Departamentos(OBJ, NIVEL, LOG, LATERAL) {
     try {
         var a = 0;
         var li = "";
         for (a = 0; a < OBJ.length; a++) {
+            var liTemp = "";
             if (LOG != null) {
                 LOG[OBJ[a].id] = [OBJ[a]];
             }
-            li += '<li class="dpt-nivel-' + NIVEL + '" id="departamento-' + OBJ[a].id + '">';
+            var ClassMenuToggle = "fa-angle-down";
+            var ClassUlOpen = "";
+
+            var possuiCatAtual = JSON.stringify(OBJ[a].subcategorias);
+            var isAtual = false;
+            if ((OBJ[a].atual || possuiCatAtual.indexOf(":true") >= 0) && LATERAL) {
+                ClassMenuToggle = "fa-angle-up";
+                ClassUlOpen = "open";
+                isAtual = true;
+            }
+            liTemp += '<li class="dpt-nivel-' + NIVEL + '" id="departamento-' + OBJ[a].id + '" atual="' + OBJ[a].atual + '">';
             if (OBJ[a].subcategorias != null && OBJ[a].subcategorias != undefined && OBJ[a].subcategorias.length > 0) {
-                li += '<a href="' + OBJ[a].url + '" class="com-sub">' + OBJ[a].nome + '</a>';
+                liTemp += '<a href="' + OBJ[a].url + '" class="com-sub">' + OBJ[a].nome + '</a>';
                 if (NIVEL == 1) {
-                    li += '<span class="fa fa-angle-down menu-toggle" aria-hidden="true"></span>';
+                    liTemp += '<span class="fa ' + ClassMenuToggle+' menu-toggle" aria-hidden="true" id="linkOpenMenuLateral' + OBJ[a].id+'"></span>';
                 }
             } else {
-                li += '<a href="' + OBJ[a].url + '">' + OBJ[a].nome + '</a>';
+                liTemp += '<a href="' + OBJ[a].url + '">' + OBJ[a].nome + '</a>';
             }
             if (OBJ[a].subcategorias != null && OBJ[a].subcategorias != undefined && OBJ[a].subcategorias.length > 0) {
-                if (megaMenu) { li += '<!--megamenuinfo1' + (NIVEL + 1) + 'megamenuinfo2-->'; }
-                li += '<ul class="dpt-ul-nivel-' + (NIVEL + 1) + '">';
+                if (megaMenu) { liTemp += '<!--megamenuinfo1' + (NIVEL + 1) + 'megamenuinfo2-->'; }
+                liTemp += '<ul class="dpt-ul-nivel-' + (NIVEL + 1) + ' ' + ClassUlOpen + '">';
                 var subcat = OBJ[a].subcategorias;
                 var nivel = NIVEL + 1;
-                li += '<li class="dpt-nivel-' + nivel + ' todo-departamento">';
-                li += '<a href="' + OBJ[a].url + '">Todo o departamento</a>';
-                li += '</li>';
-                li += Departamentos(subcat, nivel, LOG);
-                li += '</ul>';
-                if (megaMenu) { li += "<!--megamenuinfo3-->"; }
+                liTemp += '<li class="dpt-nivel-' + nivel + ' todo-departamento">';
+                liTemp += '<a href="' + OBJ[a].url + '">Todo o departamento</a>';
+                liTemp += '</li>';
+                liTemp += Departamentos(subcat, nivel, LOG);
+                liTemp += '</ul>';
+                if (megaMenu) { liTemp += "<!--megamenuinfo3-->"; }
             }
-            li += '</li>';
+            liTemp += '</li>';
+
+            if (isAtual) {
+                li = liTemp + li;
+            } else {
+                li += liTemp;
+            }
+
         }
         return (li);
     } catch (e) { console.log('Departamentos: ' + e.message); }

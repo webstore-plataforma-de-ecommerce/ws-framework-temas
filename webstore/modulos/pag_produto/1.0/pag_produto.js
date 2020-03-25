@@ -5,14 +5,22 @@ var overAssuntoMensagem = "";
 var precoCanShow = true;
 var overTituloContato = "";
 var avistaKeep = 0;
+var zoomModalObj = "";
+var varshowfreeshipping = true;
+var varshowdisponibilidade = false;
+var varshowPriceFlutua = false;
 
 $(document).ready(function () {
 	try{
 
+        zoomModalObj = "zoomModal";
+        if (typeof over_NotShowModalZoom !== 'undefined') { try { zoomModalObj = "zoomModal-notshow"; } catch (e) { } }
+        if (typeof over_ShowPriceFlutua !== 'undefined') { try { varshowPriceFlutua = over_ShowPriceFlutua; } catch (e) { } }
+
 		var Etapa = $("#HdEtapaLoja").val();
 		if (Etapa == "PRODUTO") {
 			window.setTimeout("ProdutoDados()", 1);
-		}
+        }
 
 		precoFlutua();
 		
@@ -57,6 +65,12 @@ $(document).ready(function () {
 		$("#share-gplus").attr("href", "https://plus.google.com/share?url=" + LinkProdutoVar);
 		$("#share-whats").attr("href", "https://api.whatsapp.com/send?text=" + LinkProdutoVar);
 
+        try {
+            var UrlProduct = window.location.href;
+            var UrlProductOk = UrlProduct.split("?");
+            $("#produto").prepend("<meta itemprop='url' content='" + UrlProductOk[0] + "' />");
+        } catch (e) { }
+
 	} catch (e) { console.log(e.message)}
 
 	try{
@@ -85,6 +99,14 @@ function ProdutoDadosRetorno() {
 
     if (typeof over_pag_produto !== 'undefined') { try { eval(over_pag_produto); return; } catch (e) { console.log(e.message); } }
 
+    if (typeof WSshowfreeshipping !== 'undefined') {
+        varshowfreeshipping = WSshowfreeshipping;
+    }
+
+    if (typeof WSshowdisponibilidade !== 'undefined') {
+        varshowdisponibilidade = WSshowdisponibilidade;
+    }
+
     try {
         if (estrutura.produtos_linha == 0) {
             ColunasResponsivo('#produtos-relacionados .list-item', 12, 6, 4);
@@ -109,6 +131,12 @@ function ProdutoDadosRetorno() {
         var template3 = $('#preco-flutua').html();
         // $('#preco-flutua').html("");
 
+        if (varshowPriceFlutua != true) {
+            $('#preco-flutua').remove();
+        } else {
+            $('#preco-flutua').removeClass("hidden");
+        }
+
         var ACCORDION = "",
 			ADD = "",
 			BREVE = "",
@@ -128,6 +156,10 @@ function ProdutoDadosRetorno() {
         // var dataNome = $('[data-wbstr-nome]');
         // $(dataNome).after(NOME);
         // dataNome.remove();
+
+        if (obj.entrega == false) {
+            $("#calcula-frete").hide();
+        }
 
         if (obj.migalha != null && obj.migalha != undefined) {
             var qtd = 0;
@@ -176,8 +208,8 @@ function ProdutoDadosRetorno() {
 
             //obj.garantia_meses = 0;
 
-            
-            if (obj.precos != null && obj.precos != undefined && obj.precos.preco != 0 && (cfg['preco_apos_login'] == false || cliente)) {
+
+            if (obj.precos != null && obj.precos != undefined && obj.precos.preco != 0 && (!cfg['preco_apos_login'] == true || cliente || cfg['preco_apos_login'] == undefined || cfg['preco_apos_login'] == null)) {
 
                 var PRECO = Number(obj.precos.preco),
 					AVISTA = Number(obj.precos.desconto_avista),
@@ -193,12 +225,16 @@ function ProdutoDadosRetorno() {
                 if (PROMOCAO != 0) {
 
                     PORCENTAGEM = ((PRECO - PROMOCAO) / PRECO * 100).toFixed(0);
-                    ADD += '<span class="tarja-produto">' + PORCENTAGEM + '% desconto</span>';
+                    ADD += '<span class="tarja-produto tarja-produto-desconto">' + PORCENTAGEM + '% desconto</span>';
 
                     DESCONTO = PROMOCAO / 100 * AVISTA;
 
                     retornoPreco = '<p class="preco-promocao">de R$' + AjustaMoney(PRECO) + '</p>';
-                    retornoPreco += '<p class="preco-produto">por R$' + AjustaMoney(PROMOCAO) + '</p>';
+                    try { retornoPreco += '<p class="preco-produto" itemprop="price" content="' + AjustaMoney(PROMOCAO).replace(",", ".") + '">por R$' + AjustaMoney(PROMOCAO) + '</p>'; }
+                    catch (e) { }
+
+                    retornoPreco += "<meta itemprop='availability' content='https://schema.org/InStock' />";
+
                     if (VEZES > 1 || 1==1) {
 
                         // valores[0] = preço de venda do produto
@@ -212,14 +248,15 @@ function ProdutoDadosRetorno() {
                         retornoPreco += precos[0];
                         retornoPreco += precos[1];
                         PARCELAS = precos[2];
-                        ADD += '<span class="tarja-produto">% desconto</span>';
+                        //ADD += '<span class="tarja-produto">% desconto</span>';
                     }
 
                 } else {
 
                     DESCONTO = PRECO / 100 * AVISTA;
 
-                    retornoPreco = '<p class="preco-produto">R$' + AjustaMoney(PRECO) + '</p>';
+                    retornoPreco = '<p class="preco-produto" itemprop="price" content="' + AjustaMoney(PRECO).replace(",", ".") + '">R$' + AjustaMoney(PRECO) + '</p>';
+                    retornoPreco += "<meta itemprop='availability' content='https://schema.org/InStock' />";
                     if (VEZES > 1 || 1 == 1) {
 
                         valores = [PRECO, DESCONTO, VEZES, MIN_PARCELA, Number(obj.precos.juros_inicia), Number(obj.precos.juros)];
@@ -255,11 +292,20 @@ function ProdutoDadosRetorno() {
             }
 
             if (obj.lancamento == true) {
-                ADD += '<span class="tarja-produto">Lan&ccedil;amento</span>';
+                ADD += '<span class="tarja-produto tarja-produto-lancamento">Lan&ccedil;amento</span>';
             }
             if (obj.fretegratis == true) {
-                ADD += '<span class="tarja-produto">Frete gr&aacute;tis</span>';
+                ADD += '<span class="tarja-produto tarja-produto-frete">Frete gr&aacute;tis</span>';
             }
+
+            /*if ((obj.disponibilidade || obj.disponibilidade == 0) && varshowdisponibilidade == true) {
+                if (obj.disponibilidade > 0) {
+                    ADD += '<span class="tarja-produto tarja-produto-disp">Dispon&iacute;vel em ' + obj.disponibilidade + ' dia(s)</span>';
+                } else {
+                    ADD += '<span class="tarja-produto tarja-produto-disp">Disponibilidade imediata</span>';
+                }
+            }*/
+
 
         } else if (obj.modo != "3") {
 
@@ -438,8 +484,8 @@ function fotosProduto(OBJ, NOME){
 		                fotoShow = OBJ[i].zoom;
 		            }
 
-		            FOTOS += '<li data-toggle="modal" data-target="#zoomModal"><img src="' + fotoShow + '" data-image-thumb="' + OBJ[i].thumb + '" alt="' + NOME + '" class="img-responsive" data-zoom-image="' + OBJ[i].zoom + '"></li>';
-		            ZOOM += '<li><div class="zoom-modal-holder"><img src="' + OBJ[i].zoom + '" alt="' + NOME + '" class="img-responsive"></div></li>';
+                    FOTOS += '<li data-toggle="modal" data-target="#' + zoomModalObj + '"><img itemprop="image" src="' + fotoShow + '" data-image-thumb="' + OBJ[i].thumb + '" alt="' + NOME + '" class="img-responsive" data-zoom-image="' + OBJ[i].zoom + '"></li>';
+                    ZOOM += '<li><div class="zoom-modal-holder"><img itemprop="image" src="' + OBJ[i].zoom + '" alt="' + NOME + '" class="img-responsive"></div></li>';
 
 		        }
 
@@ -449,10 +495,10 @@ function fotosProduto(OBJ, NOME){
 		    } else {
 
 		        var ZOOM = '<ul id="fotos-zoom">';
-		        ZOOM += '<li><img src="' + OBJ[0].zoom + '" alt="' + NOME + '" class="img-responsive"></li>';
+                ZOOM += '<li><img itemprop="image" src="' + OBJ[0].zoom + '" alt="' + NOME + '" class="img-responsive"></li>';
 		        ZOOM += '</ul>';
 
-		        FOTOS += '<div data-toggle="modal" data-target="#zoomModal"><img src="' + OBJ[0].normal + '" alt="' + NOME + '" class="imagem-unica img-responsive" data-zoom-image="' + OBJ[0].zoom + '"></div>';
+                FOTOS += '<div data-toggle="modal" data-target="#' + zoomModalObj + '"><img src="' + OBJ[0].normal + '" alt="' + NOME + '" class="imagem-unica img-responsive" data-zoom-image="' + OBJ[0].zoom + '"></div>';
 		    }
 		} else {
 		    FOTO_FLUTUA += '<img src="/lojas/img/fotoindisponivel.jpg" alt="' + NOME + '" class="img-responsive">';
@@ -522,6 +568,8 @@ function fotosProduto(OBJ, NOME){
 	} catch (e) { console.log('fotosProduto: '+e.message)}
 }
 
+
+
 function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
 
     //console.log("PRECO:" + PRECO);
@@ -573,7 +621,10 @@ function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
         VEZES = '<p class="prod-preco-parc"><strong><i class="fa fa-credit-card fa-fw"></i> ' + semJuros + 'x de R$' + VEZES + ' sem juros</strong></p>';
     }
     else if (PARCELA_b > 1) {
-        VEZES = ValorJurosComposto(JUROS, PARCELA_b, INICIA, PRECO); //PRECO / PARCELA_b;
+
+        var JUROSuse = FuncJurosPersonalizado(PARCELA_b, JUROS);
+
+        VEZES = ValorJurosComposto(JUROSuse, PARCELA_b, INICIA, PRECO); //PRECO / PARCELA_b;
         VEZES = AjustaMoney(VEZES);
         VEZES = '<p class="prod-preco-parc"><strong><i class="fa fa-credit-card fa-fw"></i> ' + PARCELA_b + 'x de R$' + VEZES + '</strong></p>';
     }
@@ -581,13 +632,16 @@ function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
     if (PARCELAS > 1) {
         for (i = 0; i < PARCELAS; i++) {
             var vezes = i + 1;
-            if (vezes <= semJuros) {
+
+            var JUROSuse = FuncJurosPersonalizado(vezes, JUROS);
+
+            if (vezes <= semJuros || JUROSuse == 0) {
                 parcela = PRECO / vezes;
                 parcela = AjustaMoney(parcela);
                 tabela += '<li class=""><b>' + vezes + 'x de R$' + parcela + ' sem juros</b></li>';
             } else {
                 // var cf = PRECO * Math.pow((1 + (JUROS/100)), vezes);
-                parcela = ValorJurosComposto(JUROS, vezes, INICIA, PRECO);
+                parcela = ValorJurosComposto(JUROSuse, vezes, INICIA, PRECO);
                 parcela = AjustaMoney(parcela);
                 tabela += '<li class="">' + vezes + 'x de R$' + parcela + '</li>';
             }
@@ -674,6 +728,11 @@ function FuncaoRecebeJsonSubProdutos(json) {
 		console.log("teste");
 		console.log(obj);
 
+        if (obj.entrega == false) {
+            $("#calcula-frete").hide();
+        } else {
+            $("#calcula-frete").show();
+        }
 
 		if(obj.codigo != null && obj.codigo != undefined){
 			$('#codigo-produto').html('C&oacute;d.: '+obj.codigo);
@@ -699,81 +758,7 @@ function FuncaoRecebeJsonSubProdutos(json) {
 
 		    fotosProduto(obj.fotos, $(".dados-produto h1").html());
 
-		    /*
-		    $('#foto-principal').slick('unslick');
-		    $('#foto-principal').html('');
-		    $('#fotos-zoom').slick('unslick');
-		    $('#fotos-zoom').html('');
-		    $('.zoomWrapper img.zoomed').unwrap();
-		    $('.zoomContainer').remove();
-
-		    var FOTOS = '';
-		    var ZOOM = '';
-
-		    for (i = 0; i < obj.fotos.length; i++) {
-
-		        var fotoShow = obj.fotos[i].normal;
-		        if (typeof fotoMaiorPagProduto !== 'undefined') {
-		            fotoShow = obj.fotos[i].zoom;
-		        }
-
-		        if (i == 0) { $("#fotos-produto img").attr("src", fotoShow); }
-
-		        FOTOS += '<li data-toggle="modal" data-target="#zoomModal"><img src="' + fotoShow + '" data-image-thumb="' + obj.fotos[i].thumb + '" alt="' + obj.nome + '" class="img-responsive" data-zoom-image="' + obj.fotos[i].zoom + '"></li>';
-		        ZOOM += '<li><div class="zoom-modal-holder"><img src="' + obj.fotos[i].zoom + '" alt="' + obj.nome + '" class="img-responsive"></div></li>';
-
-		    }
-
-		    $('#foto-principal').html(FOTOS);
-		    $('#fotos-zoom').html(ZOOM);
-
-		    $('#foto-principal').slick({
-		        slidesToShow: 1,
-		        slidesToScroll: 1,
-		        arrows: false,
-		        fade: true,
-		        dots: true,
-		        asNavFor: '#fotos-zoom',
-		        customPaging: function (slider, i) {
-		            var slide = slider.$slides[i].firstChild;
-		            var thumb = $(slide).attr('data-image-thumb');
-		            return '<a><img src="' + thumb + '"></a>';
-		        },
-		    });
-
-		    $('#fotos-zoom').slick({
-		        slidesToShow: 1,
-		        slidesToScroll: 1,
-		        arrows: true,
-		        prevArrow: '<i class="fa fa-angle-left slick-prev"></i>',
-		        nextArrow: '<i class="fa fa-angle-right slick-next"></i>',
-		        fade: true,
-		        asNavFor: '#foto-principal'
-		    });
-
-		    $('#zoomModal').on('shown.bs.modal', function () {
-		        $('#fotos-zoom').resize();
-		        $('#fotos-zoom').slick("setPosition");
-		    });
-
-		    if (cfg['tipo_zoom'] != null && cfg['tipo_zoom'] != undefined && cfg['tipo_zoom'] == 1) {
-
-		        $('#foto-principal').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-		            $('#slick-slide0' + currentSlide + ' > img').removeData('elevateZoom');
-		            $('.zoomWrapper img.zoomed').unwrap();
-		            $('.zoomContainer').remove();
-		        });
-
-		        $('#foto-principal').on('afterChange', function (event, slick, currentSlide) {
-		            $('#slick-slide0' + currentSlide + ' > img').elevateZoom();
-		        });
-
-		        var zoomItem = $('#foto-principal .slick-slide.slick-active img');
-		        zoomItem.elevateZoom();
-
-		    }*/
-
-		}
+        }
 
 		if (obj.precos != null && obj.precos != undefined && precoCanShow) {
 			if (obj.precos.preco != 0) {
@@ -784,7 +769,8 @@ function FuncaoRecebeJsonSubProdutos(json) {
 				var DESCONTO = valores[1];
 				var MIN_PARCELA = valores[3];
 				var PARCELAS = "";
-				var AVISTA = avistaKeep;
+				//var AVISTA = avistaKeep;
+                var AVISTA = Number(obj.precos.desconto_avista);
 				
 				if (PROMOCAO != 0){
 
@@ -876,7 +862,7 @@ function initializeClock(id, endtime) {
 }
 
 function precoFlutua(){
-	if(flutuaAtivo){
+    if (flutuaAtivo && varshowPriceFlutua){
 	    var T = getScrollTop();
 
 	    if (T >= 300) {
@@ -918,4 +904,24 @@ function FuncCloseModalSobConsulta() {
     $("#form-sob-consulta").css("visibility", "hidden");
     $("#form-sob-consulta").css("top", "-1000px");
     $("#form-sob-consulta").css("opacity", "0");
+}
+
+function FuncJurosPersonalizado(Parcela, JUROS) {
+
+    var JUROSuse = JUROS;
+
+    if (typeof over_JurosParcelas !== 'undefined') {
+
+        try {
+
+            if (over_JurosParcelas[Parcela] >= 0) {
+                JUROSuse = over_JurosParcelas[Parcela];
+            }
+
+        } catch (e) { console.log("over_JurosParcelas Erro:" + e.message); }
+
+    }
+
+    return JUROSuse;
+
 }

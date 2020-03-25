@@ -206,6 +206,7 @@
     margin: .5rem 0;
     overflow: hidden;
 }
+    
 .div-item .prod-info .prod-avaliacao{
     display: none;
     height: 3rem;
@@ -276,8 +277,36 @@
 	display: block;
 	font-size: 18px;
 	font-weight: 500;
-	height: 20px;
+	min-height: 20px;
 }
+.div-item .prod-botao-comprar span.prod-no-qty a {
+    width: 100%;
+    padding: 0.8rem 3rem;
+}
+@media screen and (max-width:600px) {
+
+    .div-item .prod-info .prod-preco a {
+        height: initial !important;
+    }
+
+        .div-item .prod-info .prod-preco a strike {
+            display: block !important;
+        }
+
+    .div-item .prod-botao-comprar span.prod-no-qty a {
+        padding: 1rem 3rem;
+        font-size: 14px;
+    }
+
+}
+@media screen and (max-width:400px) {
+
+    .div-item .prod-botao-comprar span.prod-no-qty a {
+        padding: 1rem 1rem;
+        font-size: 13px;
+    }
+}
+
 .div-item .prod-info .prod-preco .tarja-indisponivel
 {
     display: inline-block;
@@ -308,10 +337,6 @@
 	text-align: center;
 	text-transform: uppercase;
 	width: 70%;
-}
-.div-item .prod-botao-comprar span.prod-no-qty a {
-	width: 100%;
-   	padding: 0.8rem 3rem;
 }
 .div-item .prod-botao-comprar span a i
 {
@@ -374,20 +399,28 @@
     width: 100%;
 }
 
-.div-item .add span{
-	background-color: <!--###PREF_48###-->;
-	color: white;
-	box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
-	border: 1px solid white;
-	font-size: 10px;
-	font-weight: 600;
-	padding: 0.2rem 1.3rem;
-	text-transform: uppercase;
-	display: inline-block;
-	float: right;
-	margin-top: 1rem;
-	margin-right: 1rem;
-}
+    .tags-listagem-produto {
+        background-color: <!-- ###PREF_48###-->;
+        color: white;
+        box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
+        border: 1px solid white;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 0.2rem 1.3rem;
+        text-transform: uppercase;
+        display: block;
+        border-radius:10px;
+        margin:0 auto;
+        clear:both;
+        text-align:center;
+    }
+
+    .div-item .add span {
+        display: inline-block;
+        float: right;
+        margin-top: 1rem;
+        margin-right: 1rem;
+    }
 .div-item .add span.prod-lancamento{
 	float: left;
 	margin-left: 1rem;
@@ -446,4 +479,7 @@
 }
 .blc-varia .div-item .prod-info .variacao-preco{
     display: table;
+}
+.produto-fretegratis {
+    display: none;
 }
