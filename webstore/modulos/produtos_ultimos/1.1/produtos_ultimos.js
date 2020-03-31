@@ -17,6 +17,8 @@ function ListaProdutosUltimosRetorno() {
 
 			var obj = jQuery.parseJSON(OBJETO);
 
+			if (typeof over_ProdutosUltimos !== 'undefined') { try { eval(over_ProdutosUltimos); return; } catch (e) { console.log(e.message); } }
+
 			$("#ultimos-list").html("");
 			if (obj != null && obj != undefined) {
 				if (obj.length > 0) {
@@ -73,6 +75,9 @@ function ListaProdutosUltimosRetorno() {
 					});
 
 				}
+
+				if (typeof call_after_ProdutosUltimos !== 'undefined') { try { eval(call_after_ProdutosUltimos); } catch (e) { console.log("Falha call_after_ProdutosUltimos" + e.message); } }
+
 			}
 
 			nomeProd("#ultimos-vistos");
