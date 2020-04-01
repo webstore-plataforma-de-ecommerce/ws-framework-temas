@@ -2,6 +2,9 @@ var BreakPoint_3 = 992;
 var BreakPoint_2 = 768;
 var BreakPoint_1 = 375;
 
+var prods_linha_grupo_1 = 1
+/*var prods_slick_grupo_1 = false;*/
+
 $(document).ready(function () {
 	try{
 		if ($("#HdEtapaLoja").val() == "HOME") {
@@ -98,33 +101,59 @@ function ProdutosGruposRetorno() {
                         }
                     });
 
-                    $('#lista-grupo-' + obj.grupos[a].codigo).slick({
-                        infinite: true,
-                        slidesToShow: prods_linha,
-                        autoplay: false,
-                        prevArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .left-arrow'),
-                        nextArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .right-arrow'),
-                        responsive: [
-                            {
-                                breakpoint: BreakPoint_3,
-                                settings: {
-                                    slidesToShow: 3,
-                                    infinite: true
-                                }
-                            },
-                            {
-                                breakpoint: BreakPoint_2,
-                                settings: {
-                                    slidesToShow: 2
-                                }
-                            },
-                            {
-                                breakpoint: BreakPoint_1,
-                                settings: {
-                                    slidesToShow: 1
-                                }
-                            }],
-                    });
+                    var prods_linha_now = prods_linha;
+
+                    var prods_linha_breakpoint_1 = 1;
+                    var prods_linha_breakpoint_2 = 2;
+                    var prods_linha_breakpoint_3 = 3;
+
+                    var slickOver = true;
+
+                    //DESKTOP
+                    try { if (typeof eval("prods_linha_grupo_" + a) !== 'undefined') { prods_linha_now = eval("prods_linha_grupo_" + a); } } catch (e) { }
+                    //992
+                    try { if (typeof eval("prods_linha_grupo_bp_1_" + a) !== 'undefined') { prods_linha_breakpoint_1 = eval("prods_linha_grupo_bp_1_" + a); } } catch (e) { }
+                    //768
+                    try { if (typeof eval("prods_linha_grupo_bp_2_" + a) !== 'undefined') { prods_linha_breakpoint_2 = eval("prods_linha_grupo_bp_2_" + a); } } catch (e) { }
+                    //375
+                    try { if (typeof eval("prods_linha_grupo_bp_3_" + a) !== 'undefined') { prods_linha_breakpoint_3 = eval("prods_linha_grupo_bp_3_" + a); } } catch (e) { }
+
+                    try { if (typeof eval("prods_linha_grupo_bp_3_" + a) !== 'undefined') { prods_linha_breakpoint_3 = eval("prods_linha_grupo_bp_3_" + a); } } catch (e) { }
+
+                    try { if (typeof eval("prods_slick_grupo_" + a) !== 'undefined') { slickOver = eval("prods_slick_grupo_" + a); } } catch (e) { }
+
+                    if (slickOver) {
+
+                        $('#lista-grupo-' + obj.grupos[a].codigo).slick({
+                            infinite: true,
+                            slidesToShow: prods_linha_now,
+                            autoplay: false,
+                            prevArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .left-arrow'),
+                            nextArrow: $('#cod-grupo-' + obj.grupos[a].codigo + ' .right-arrow'),
+                            responsive: [
+                                {
+                                    breakpoint: BreakPoint_3,
+                                    settings: {
+                                        slidesToShow: prods_linha_breakpoint_3,
+                                        infinite: true
+                                    }
+                                },
+                                {
+                                    breakpoint: BreakPoint_2,
+                                    settings: {
+                                        slidesToShow: prods_linha_breakpoint_2
+                                    }
+                                },
+                                {
+                                    breakpoint: BreakPoint_1,
+                                    settings: {
+                                        slidesToShow: prods_linha_breakpoint_1
+                                    }
+                                }],
+                        });
+
+                    }
+
                 }
             }
 
