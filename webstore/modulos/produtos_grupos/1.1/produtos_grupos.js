@@ -2,9 +2,6 @@ var BreakPoint_3 = 992;
 var BreakPoint_2 = 768;
 var BreakPoint_1 = 375;
 
-var prods_linha_grupo_1 = 1
-/*var prods_slick_grupo_1 = false;*/
-
 $(document).ready(function () {
 	try{
 		if ($("#HdEtapaLoja").val() == "HOME") {
