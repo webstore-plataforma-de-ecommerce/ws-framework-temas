@@ -115,8 +115,6 @@ function ProdutosGruposRetorno() {
                     //375
                     try { if (typeof eval("prods_linha_grupo_bp_3_" + a) !== 'undefined') { prods_linha_breakpoint_3 = eval("prods_linha_grupo_bp_3_" + a); } } catch (e) { }
 
-                    try { if (typeof eval("prods_linha_grupo_bp_3_" + a) !== 'undefined') { prods_linha_breakpoint_3 = eval("prods_linha_grupo_bp_3_" + a); } } catch (e) { }
-
                     try { if (typeof eval("prods_slick_grupo_" + a) !== 'undefined') { slickOver = eval("prods_slick_grupo_" + a); } } catch (e) { }
 
                     if (slickOver) {
