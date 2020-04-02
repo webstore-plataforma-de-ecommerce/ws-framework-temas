@@ -127,13 +127,19 @@ function BannersRetorno(getJson) {
 				    speedBann = speedBanners;
 				}
 
+				var dotsBann = false;
+				if (typeof dotsBanner !== 'undefined') {
+					dotsBann = dotsBanner;
+				}
+
 				for(b = 0; b < tipo.length; b++){
-					if(tipo[b] == "topo" || tipo[b] == "mobile"){
+					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape"){
 						$('#banner-' + tipo[b])
 							.removeClass('hidden')
 							.css('visibility', 'hidden')
 							.slick({
 								infinite: true,
+								dots: dotsBann,
 								slidesToShow: 1,
 								slidesToScroll: 1,
 								autoplaySpeed: speedBann,
