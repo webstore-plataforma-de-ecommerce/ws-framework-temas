@@ -227,6 +227,7 @@ function BlocoProduto(OBJ, TEMPLATE) {
 
 					}
 
+
 				} else {
 					// PRODUTO COM PREÇO ZERO
 					UMA = '<p class="prod-preco-uma"></p>';
@@ -278,6 +279,36 @@ function BlocoProduto(OBJ, TEMPLATE) {
 		            blocoBotaoComprar = true;
 		        }
 		    }
+		}
+
+		if (typeof WsFavoritos !== 'undefined') {
+
+			var TipoFavorito = "1";
+
+			if (typeof WsFavoritosType !== 'undefined') {
+				TipoFavorito = WsFavoritosType;
+			}
+
+			if (WsFavoritos) {
+
+				var ObjFavorit = "<a href=\"javascript:void(funcAddFavoriteWs(" + OBJ.id + "))\" title='Adicionar aos favoritos' class=\"prod-favorite-link prod-favorite-type-" + TipoFavorito + "\" id=\"prod-favorite-link-" + OBJ.id + "\" data=\"prod-favorite-link-" + OBJ.id + "\"></a>";
+
+				if (TEMPLATE.indexOf("<!--##FAVORITO##-->") < 0) {
+					if (TipoFavorito == "1") {
+						ADD += ObjFavorit;
+					}
+					else if (TipoFavorito == "2") {
+						COMPRAR += ObjFavorit;
+					}
+					else if (TipoFavorito == "3") {
+						FOTO += ObjFavorit;
+					}
+				} else {
+					TEMPLATE = TEMPLATE.replace("<!--##FAVORITO##-->", ObjFavorit);
+				}
+
+			}
+
 		}
 
 		ADD += '</div>';

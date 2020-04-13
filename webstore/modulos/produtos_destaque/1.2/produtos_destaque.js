@@ -12,11 +12,14 @@ function ProdutosDestaqueStart() {
 }
 
 function ProdutosDestaque() {
+	modulos_to_complete++;
 	ApiWS.ListaProdutosDestaque("ProdutosDestaqueRetorno");
 }
 function ProdutosDestaqueRetorno() {
 	try {
-		
+
+		modulos_completed++;
+
         var OBJETO = ApiWS.Json;
 
         if (typeof over_produtos_destaque !== 'undefined') { try { eval(over_produtos_destaque); return; } catch (e) { console.log(e.message); } }

@@ -453,6 +453,14 @@ function ProdutoDadosRetorno() {
 
         if (typeof call_after_pag_produto !== 'undefined') { try { eval(call_after_pag_produto); } catch (e) { console.log("Falha call_after_pag_produto" + e.message); } }
 
+        if (typeof WsFavoritos !== 'undefined') {
+            if (WsFavoritos) {
+                var ID = $("#LV_HD_PROD_ID").val();
+                var ObjFavorit = "<a href=\"javascript:void(funcAddFavoriteWs(" + ID + "))\" title='Adicionar aos favoritos' class=\"prod-favorite-link prod-favorite-page-prod\" id=\"prod-favorite-link-" + ID + "\" data=\"prod-favorite-link-" + ID + "\"></a>";
+                $("[data-favorites-icone]").after(ObjFavorit).remove();
+            }
+        }
+
         ListaProdutosRelacionados();
 
     } catch (e) { console.log('ProdutoDadosRetorno: ' + e.message); console.log(ApiWS.Json); }

@@ -11,6 +11,10 @@ var buySamePageFull = true;
 
 $(document).ready(function () {
 
+
+    window.setTimeout("FuncVerifModulosComplete()", 1000);
+
+
     if (typeof LazyLoadOver !== 'undefined') {
         useLazyLoadMain = LazyLoadOver;
     }
@@ -61,7 +65,9 @@ var cfg = [],
 	PAG = [],
 	prodsLinha = "",
     valores = [],
-    info_lojas_finish;
+    info_lojas_finish,
+    modulos_to_complete = 0,
+    modulos_completed = 0;
 
 
 function InfosLojas() {
@@ -588,6 +594,22 @@ function nomeProd(obj, linhas) {
         }
 
     } catch (e) { }
+
+}
+
+var allModulosOk = null;
+function FuncVerifModulosComplete() {
+    if (modulos_to_complete > 0) {
+        if (modulos_to_complete <= modulos_completed) {
+            allModulosOk = true;
+            console.log("All modulos ok (" + modulos_to_complete + "/" + modulos_completed + ")");
+        } else {
+            //console.log("Not all modulos complete");
+            window.setTimeout("FuncVerifModulosComplete()", 500);
+        }
+    } else {
+        window.setTimeout("FuncVerifModulosComplete()", 1000);
+    }
 
 }
 

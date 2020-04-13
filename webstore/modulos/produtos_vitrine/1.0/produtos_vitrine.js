@@ -9,10 +9,14 @@ $(document).ready(function () {
 
 
 function ProdutosVitrine() {
+	modulos_to_complete++;
 	ApiWS.ListaProdutosHome("ProdutosVitrineRetorno");
 }
 function ProdutosVitrineRetorno() {
 	try {
+
+		modulos_completed++;
+
 		var template = $('#template').html();
 
 		var JSON = ApiWS.Json;

@@ -15,11 +15,14 @@ function ProdutosStart() {
     isReady("cfg['estrutura']", "ProdutosGrupos()");
 }
 function ProdutosGrupos() {
+    modulos_to_complete++;
 	ApiWS.ListaProdutosGrupos("ProdutosGruposRetorno");
 }
 function ProdutosGruposRetorno() {
 
     try {
+
+        modulos_completed++;
 
         var OBJETO = ApiWS.Json;
 

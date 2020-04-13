@@ -5,9 +5,13 @@ $(document).ready(function(){
 });
 
 function ListaProdutosUltimos() {
+	modulos_to_complete++;
 	ApiWS.ListaProdutosUltimos("ListaProdutosUltimosRetorno");
 }
 function ListaProdutosUltimosRetorno() {
+
+	modulos_completed++;
+
 	if (cfg['ultimos_vistos']){
 		try {
 			var template = $('#template').html();

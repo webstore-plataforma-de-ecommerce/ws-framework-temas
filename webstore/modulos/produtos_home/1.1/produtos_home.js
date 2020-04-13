@@ -1,8 +1,17 @@
+
 function ProdutosHome() {
+    isReady("banners_finished", "ProdutosHomeGoOn()");
+}
+
+function ProdutosHomeGoOn() {
+    modulos_to_complete++;
 	ApiWS.ListaProdutosHome("ProdutosHomeRetorno");
 }
+
 function ProdutosHomeRetorno(getJson) {
     try {
+
+        modulos_completed++;
 
         var template = $('#template').html();
         var conteudo = '<ul id="prod-list" class="produtos-home">';

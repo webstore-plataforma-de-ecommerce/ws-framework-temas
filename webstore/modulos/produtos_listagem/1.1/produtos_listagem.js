@@ -7,10 +7,13 @@ $(document).ready(function(){
 });
 
 function ProdutosListagem() {
+	modulos_to_complete++;
 	ApiWS.ListaProdutosPags("ProdutosListagemRetorno");
 }
 function ProdutosListagemRetorno() {
 	try {
+
+		modulos_completed++;
 
 		if($('#template').length){
 			var template = $('#template').html();
