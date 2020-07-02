@@ -127,12 +127,17 @@ function CategoriasManage(obj, ShowStartSub) {
                 $('#menu-lateral').remove();
             }
         }
+
+
         if (etapa == "LISTAGEM") {
+
             if (cfg['menu_lateral'] == true) {
                 $('#menu-lateral').append(categoriasLateral);
             } else {
                 $('#menu-lateral').remove();
             }
+
+
             var filtroAtivo = [];
             if (obj.Filtros != null && obj.Filtros != undefined) {
                 if (obj.Filtros.length > 0) {
@@ -195,6 +200,8 @@ function CategoriasManage(obj, ShowStartSub) {
                     })
                 }
             }
+
+
         }
 
         $('#menu-lateral .dpt-nivel-1 > .com-sub').on('click', function () {

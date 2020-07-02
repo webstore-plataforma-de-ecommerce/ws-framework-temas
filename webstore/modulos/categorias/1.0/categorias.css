@@ -165,3 +165,9 @@ nav#float-menu, nav.menu-topo{
 	background-color: transparent !important;
 	color: <!--###PREF_7###-->;
 }
+
+#menu-drawer .departamentos-nav li:hover ul.dpt-ul-nivel-2 {
+	position: absolute !important;
+	left: -12000px !important;
+	display:none !important;
+}

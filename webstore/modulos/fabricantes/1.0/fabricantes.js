@@ -25,7 +25,9 @@ function FabricantesRetorno() {
 
 		var OBJETO = ApiWS.Json;
 		objetos.Fabricantes = OBJETO;
-		
+
+		if (typeof over_fabricantes !== 'undefined') { try { eval(over_fabricantes); return; } catch (e) { console.log(e.message); } }
+
 		var obj = jQuery.parseJSON(OBJETO);
 		var li = "";
 
@@ -75,6 +77,8 @@ function FabricantesRetorno() {
 				});
 			}
 		}
+
+		if (typeof call_after_fabricantes !== 'undefined') { try { eval(call_after_fabricantes); } catch (e) { console.log("Falha call_after_fabricantes" + e.message); } }
 
 	} catch (e) { console.log(e.message); }
 }

@@ -1,8 +1,18 @@
 var carrinhoAberto = false;
+var refreshCartAble = false;
+
 function openCart(){
+
 	$('#cart-content').html("");
+
 	var content = $('#LV_CARRINHO_ON_PAGE').html();
+
+	refreshCartAble = true;
+
+	window.setInterval("refreshCartDrawer()", 3000);
+
 	$('#cart-content').html(content);
+
 	$('#carrinho-drawer').css('right', '0');
 
 	$('#main').css({
@@ -17,7 +27,10 @@ function openCart(){
 
 	carrinhoAberto = true;
 }
-function closeCart(){
+function closeCart() {
+
+	refreshCartAble = false;
+
 	$('#carrinho-drawer').css({
 		right: '-100%'
 	});
@@ -32,4 +45,11 @@ function closeCart(){
 	});
 
 	carrinhoAberto = false;
+}
+
+function refreshCartDrawer() {
+	if (refreshCartAble) {
+		var content = $('#LV_CARRINHO_ON_PAGE').html();
+		$('#cart-content').html(content);
+	}
 }

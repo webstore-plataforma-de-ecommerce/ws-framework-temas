@@ -106,13 +106,14 @@ function BlocoProduto(OBJ, TEMPLATE) {
 
 				    blocoPreco = true;
 
-				    var PRECO = Number(OBJ.precos.preco),
-					PROMOCAO = Number(OBJ.precos.preco_promocao),
-					VEZES = Number(OBJ.precos.max_parcelas),
-					DESCONTO = PRECO / 100 * Number(OBJ.precos.desconto_avista),
-					MIN_PARCELA = Number(OBJ.precos.valor_min_parcelas),
-					INICIA = Number(OBJ.precos.juros_inicia),
-					JUROS = Number(OBJ.precos.juros);
+					var PRECO = Number(OBJ.precos.preco),
+						PROMOCAO = Number(OBJ.precos.preco_promocao),
+						VEZES = Number(OBJ.precos.max_parcelas),
+						DESCONTO = PRECO / 100 * Number(OBJ.precos.desconto_avista),
+						MIN_PARCELA = Number(OBJ.precos.valor_min_parcelas),
+						INICIA = Number(OBJ.precos.juros_inicia),
+						JUROS = Number(OBJ.precos.juros),
+						PROMOCAO_LIMITE = (OBJ.precos.preco_promocao_validade);
 
 				    if (MIN_PARCELA < 3) { MIN_PARCELA = 3; }
 
@@ -198,7 +199,13 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					if (PROMOCAO != 0) {
 						PRECO = "R$ " + AjustaMoney(PRECODE);
 						PROMOCAO = "R$ " + AjustaMoney(PROMOCAO);
-						PRECO = '<a href="' + LINK + '" title="' + TITLE + '"><strike id="preco-de">' + PRECO + '</strike>' + PROMOCAO + '</a>';
+						var PromLimitInfo = "";
+						if (PROMOCAO_LIMITE != "" && PROMOCAO_LIMITE != null && PROMOCAO_LIMITE) {
+							CLASS += " prod-prom-relampago ";
+							ADD += "<meta data-promocao-limite='' content='" + PROMOCAO_LIMITE + "' />";
+							PromLimitInfo = ' data-promocao-limite="' + PROMOCAO_LIMITE + '" ';
+						}
+						PRECO = '<a href="' + LINK + '" title="' + TITLE + '" ' + PromLimitInfo + '><strike id="preco-de">' + PRECO + '</strike>' + PROMOCAO + '</a>';
 					} else {
 						PROMOCAO = "";
 						PRECO = AjustaMoney(PRECO);
@@ -398,4 +405,135 @@ function blocoHeightAjusta(){
         }
     );
 
+}
+
+
+
+$(document).ready(
+	function () {
+		try {
+
+			isReady("allModulosOk", "funcaoPromRelampagoListagemStart()");
+
+		} catch (e) { }
+	}
+);
+
+function funcaoPromRelampagoListagemStart() {
+	window.setTimeout("funcaoPromRelampagoListagem()", 1000);
+}
+
+function funcaoPromRelampagoListagem() {
+
+	try {
+
+		var contItensPromo = 0;
+		$(".prod-prom-relampago").each(
+			function () {
+
+				try {
+
+					var setadoProm = $(this).find("meta[data-prom-relampago='ok']").length;
+					var dataLimite = $(this).find("meta[data-promocao-limite]").attr("content");
+					var overPromRelampago = $(this).find(".prom-relampago-over").length;
+					var idProd = $(this).attr("item-reg");
+
+					if (!setadoProm > 0) {
+
+						$(this).append("<meta data-prom-relampago='ok' content='" + dataLimite + "' />");
+
+						var ObjetosDataLimite = "";
+
+						if (overPromRelampago > 0) {
+							$(this).find(".prom-relampago-over").append("<div class='prom-relampago-limite' id='prod-prom-" + idProd + "'>" + ObjetosDataLimite + "</div>");
+						} else {
+							$(this).find("[data-preco-prod]").append("<div class='prom-relampago-limite' id='prod-prom-" + idProd + "'>" + ObjetosDataLimite + "</div>");
+						}
+						//console.log("dataLimite:" + dataLimite);
+						clockLimitStart("prod-prom-" + idProd + "", dataLimite);
+
+					}
+
+				} catch (e) {
+					console.log("falha prom relampago X1:" + e.message);
+				}
+
+			}
+		);
+
+		window.setTimeout("funcaoPromRelampagoListagem()", 3000);
+
+	} catch (e) {
+		console.log("falha prom relampago X2:" + e.message);
+	}
+
+}
+
+function clockLimitStart(id, endtime) {
+
+	try {
+
+		var clock = document.getElementById(id);
+
+		function updateClock() {
+
+			var t = getTimeRemaining2(endtime);
+
+			/*daysSpan.innerHTML = t.days;
+			hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+			minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+			secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);*/
+
+			//Só mais 11 horas por este preço!
+			var valorLimit = "";
+
+			if (t.days > 1) { valorLimit = t.days + " dias "; }
+			else if (t.days > 0) { valorLimit = t.days + " dia "; }
+
+			if (t.days == 0) {
+				if (t.hours > 1) { valorLimit = t.hours + " horas "; }
+				else if (t.hours > 0) { valorLimit = t.hours + " hora "; }
+			}
+
+			if (t.hours == 0) {
+				if (t.minutes > 1) { valorLimit = t.minutes + " minutos "; }
+				else if (t.minutes > 0) { valorLimit = t.minutes + " minuto "; }
+			}
+
+			if (t.minutes == 0) {
+				if (t.seconds > 1) { valorLimit = t.seconds + " segundos "; }
+				else if (t.seconds > 0) { valorLimit = t.seconds + " segundo "; }
+			}
+
+			clock.innerHTML = "S&oacute; mais " + valorLimit + "por este pre&ccedil;o!";
+
+			if (t.total <= 0) {
+				//clearInterval(timeinterval);
+			}
+
+		}
+
+		updateClock();
+
+		var timeinterval = setInterval(updateClock, 1000);
+
+	} catch (e) {
+		console.log("falha limite promocao:" + e.message);
+	}
+
+}
+
+function getTimeRemaining2(endtime) {
+	var t = Date.parse(endtime) - Date.parse(new Date());
+	var seconds = Math.floor((t / 1000) % 60);
+	var minutes = Math.floor((t / 1000 / 60) % 60);
+	var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+	var days = Math.floor(t / (1000 * 60 * 60 * 24));
+	return {
+		'total': t,
+		'days': days,
+		'hours': hours,
+		'minutes': minutes,
+		'seconds': seconds
+	};
 }

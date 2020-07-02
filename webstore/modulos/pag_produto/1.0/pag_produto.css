@@ -655,9 +655,11 @@
     display: none;
     font-family: sans-serif;
     font-weight: 100;
-    text-align: center;
+    text-align: left;
     margin-bottom: 2rem;
     width: 100%;
+    clear:both;
+    margin:0px;
 }
 
     #clockdiv > div {
@@ -668,7 +670,19 @@
         padding: 0.5rem;
     }
 
-    #clockdiv div > span {
+    #clockdiv > div > span {
+        display:block;
+        text-align:center;
+        font-weight:bold;
+        font-size:12px;
+    }
+
+        #clockdiv > div > div {
+            display: inline-block;
+            padding: 0.5rem;
+        }
+
+    #clockdiv div > div > span {
         background: #fff;
         border-radius: 3px;
         display: inline-block;
@@ -1620,4 +1634,18 @@ span.LVCampoAddTit {
     .compre-junto-genero {
         max-width: 200px;
     }
+}
+
+.FreteGrratisFaltaX {
+    display: table;
+    border-radius: 3px;
+    border: 1px solid #f3d8d6;
+    color: #bb4545;
+    clear: both;
+    background-color: #ffefef;
+    padding: 10px;
+    max-width: 100%;
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
 }

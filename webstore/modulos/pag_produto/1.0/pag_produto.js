@@ -213,10 +213,11 @@ function ProdutoDadosRetorno() {
 
                 var PRECO = Number(obj.precos.preco),
 					AVISTA = Number(obj.precos.desconto_avista),
-					PROMOCAO = Number(obj.precos.preco_promocao),
+                    PROMOCAO = Number(obj.precos.preco_promocao),
 					VEZES = Number(obj.precos.max_parcelas),
 					MIN_PARCELA = Number(obj.precos.valor_min_parcelas),
-					PARCELAS = "";
+                    PARCELAS = "",
+                    PROMOCAO_LIMITE = (obj.precos.preco_promocao_validade);
 
                 avistaKeep = AVISTA;
 
@@ -234,6 +235,8 @@ function ProdutoDadosRetorno() {
                     catch (e) { }
 
                     retornoPreco += "<meta itemprop='availability' content='https://schema.org/InStock' />";
+
+                    if (PROMOCAO_LIMITE != "") { retornoPreco += "<meta itemprop='price_limit_date' content='" + PROMOCAO_LIMITE + "' />"; }
 
                     if (VEZES > 1 || 1==1) {
 
@@ -438,16 +441,19 @@ function ProdutoDadosRetorno() {
         }
 
         // função que gera a contagem regressiva
-        if (obj.disponivel_ate != null && obj.disponivel_ate != undefined) {
-            var str = obj.disponivel_ate;
-            var sub = Number(str.substr(6, str.length - 8));
+        if (typeof ws_promrelampago !== 'undefined') {
+            if (obj.precos.preco_promocao_validade != null && obj.precos.preco_promocao_validade != undefined) {
+                var str = obj.precos.preco_promocao_validade;
+                //var sub = Number(str.substr(6, str.length - 8));
 
-            var deadline = new Date(sub);
-            var d = new Date();
+                var deadline = new Date(str);
+                var d = new Date();
 
-            if ((deadline - d) > 0) {
-                initializeClock('clockdiv', deadline);
-                $('#clockdiv').css('display', 'inline-block');
+                if ((deadline - d) > 0) {
+                    initializeClock('clockdiv', deadline);
+                    //$('#clockdiv').css('display', 'inline-block');
+                    $('#clockdiv').show();
+                }
             }
         }
 
@@ -855,10 +861,17 @@ function initializeClock(id, endtime) {
 	function updateClock() {
 		var t = getTimeRemaining(endtime);
 
-		daysSpan.innerHTML = t.days;
-		hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-		minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-		secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+        if (t.days > 0) { daysSpan.innerHTML = t.days; } else {
+            $("#clockday").hide();
+        }
+
+        if (t.hours > 0) { hoursSpan.innerHTML = ('0' + t.hours).slice(-2); } else {
+            $("#clockhour").hide();
+        }
+
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
 		if (t.total <= 0) {
 			clearInterval(timeinterval);

@@ -16,6 +16,12 @@ function Banners() {
 function BannersRetorno(getJson) {
 	try {
 
+		var dispositivousing = "D";
+		//console.log("Tamanho da tela " + $(window).width());
+		if ($(window).width() < 720) {
+			dispositivousing = "M";
+		}
+
         if (typeof LazyLoadOver !== 'undefined') {
             useLazyLoadBanner = LazyLoadOver;
         }
@@ -48,70 +54,81 @@ function BannersRetorno(getJson) {
 					var li = "";
 					var img = "";
 
-					if (banner.conteudo) {
-						li = '<div class="banner-video">';
+					var bannerDispositivo = "D";
+					try { bannerDispositivo = banner.dispositivos; } catch (e) { }
 
-						li += banner.conteudo;
+					if (bannerDispositivo != "D" && bannerDispositivo != "M" && bannerDispositivo != "T") { bannerDispositivo = "D"; }
 
-						li += '</div>';
-					}else{
+					//console.log("banner - " + bannerDispositivo + " - " + dispositivousing);
 
-						if(banner.url != null && banner.url != undefined && banner.url.length > 0){
-							var href = 'href="'+banner.url+'"';
-						}else{
-							var href = "";
-						}
+					if (dispositivousing == bannerDispositivo || bannerDispositivo == "T") {
 
-						if(banner.altura != '0' || banner.largura != '0'){
+						if (banner.conteudo) {
+							li = '<div class="banner-video">';
 
-							if(banner.altura != '0' && banner.largura != '0'){
-                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: '+banner.largura+'px; height: '+banner.altura+'px">';
-							}else if(banner.altura != 0){
-                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="height: '+banner.altura+'px; width: auto; max-width: 100%;">';
-							}else if(banner.largura != 0){
-                                var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: '+banner.largura+'px">';
+							li += banner.conteudo;
+
+							li += '</div>';
+						} else {
+
+							if (banner.url != null && banner.url != undefined && banner.url.length > 0) {
+								var href = 'href="' + banner.url + '"';
+							} else {
+								var href = "";
 							}
 
-						}else{
-                            var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" class="' + classLazyLoad + '" alt="'+banner.titulo+'">';
+							if (banner.altura != '0' || banner.largura != '0') {
+
+								if (banner.altura != '0' && banner.largura != '0') {
+									var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: ' + banner.largura + 'px; height: ' + banner.altura + 'px">';
+								} else if (banner.altura != 0) {
+									var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="height: ' + banner.altura + 'px; width: auto; max-width: 100%;">';
+								} else if (banner.largura != 0) {
+									var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" alt="' + banner.titulo + '" class="' + classLazyLoad + '" style="width: ' + banner.largura + 'px">';
+								}
+
+							} else {
+								var img = '<img ' + addCodeLazyLoad + 'src="' + banner.imagem + '" class="' + classLazyLoad + '" alt="' + banner.titulo + '">';
+							}
+
+							if (banner.tipo == 'topo') {
+
+								li += '<li id="slide-' + banner.id + '">';
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a></li>';
+
+							} else if (banner.tipo == 'mini') {
+
+								li += '<li id="slide-' + banner.id + '">';
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a></li>';
+
+							} else if (banner.tipo == 'lateral') {
+								lateralDir = true;
+								FrameworkResponsivo();
+
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a>';
+
+							} else if (banner.tipo == 'lateralEsq') {
+								lateralEsq = true;
+								FrameworkResponsivo();
+
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a>';
+
+							} else {
+
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a>';
+
+							}
+
 						}
 
-						if (banner.tipo == 'topo') {
 
-							li += '<li id="slide-'+banner.id+'">';
-							li += '<a '+href+' target="'+banner.target+'">'+img+'</a></li>';
+						if ($('#banner-' + banner.tipo).length) {
 
-						}else if(banner.tipo == 'mini'){
+							$('#banner-' + banner.tipo).append(li);
+							if (tipo.indexOf(banner.tipo) == -1) {
+								tipo.push(banner.tipo);
+							}
 
-							li += '<li id="slide-'+banner.id+'">';
-							li += '<a '+href+' target="'+banner.target+'">'+img+'</a></li>';
-
-						}else if(banner.tipo == 'lateral'){
-							lateralDir = true;
-							FrameworkResponsivo();
-
-							li += '<a '+href+' target="'+banner.target+'">'+img+'</a>';
-
-						}else if(banner.tipo == 'lateralEsq'){
-							lateralEsq = true;
-							FrameworkResponsivo();
-
-							li += '<a '+href+' target="'+banner.target+'">'+img+'</a>';
-
-						}else{
-
-							li += '<a '+href+' target="'+banner.target+'">'+img+'</a>';
-
-						}
-
-					}
-
-
-					if( $('#banner-'+banner.tipo).length){
-
-						$('#banner-'+banner.tipo).append(li);
-						if (tipo.indexOf(banner.tipo) == -1){
-							tipo.push(banner.tipo);
 						}
 
 					}
@@ -132,7 +149,14 @@ function BannersRetorno(getJson) {
 					dotsBann = dotsBanner;
 				}
 
-				for(b = 0; b < tipo.length; b++){
+				for (b = 0; b < tipo.length; b++){
+
+					try { $('#banner-' + tipo[b]).removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
+					try { $('#banner-' + tipo[b]).parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
+					try { $('#banner-' + tipo[b]).parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
+					try { $('#banner-' + tipo[b]).parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
+					try { $('#banner-' + tipo[b]).parent().parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
+
 					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape"){
 						$('#banner-' + tipo[b])
 							.removeClass('hidden')
@@ -154,13 +178,13 @@ function BannersRetorno(getJson) {
 						$("#banner-flutua").modal('show');
 					}
 					if(tipo[b] == "mini"){
-						$("#banner-mini").removeClass('hidden');
+						$("#banner-mini").removeClass('hidden').removeClass('hidden-xs');
 					}
 					if(tipo[b] == "tarja"){
-						$("#banner-tarja").removeClass('hidden');
+						$("#banner-tarja").removeClass('hidden').removeClass('hidden-xs');
 					}
 					if(tipo[b] == "rodape"){
-						$("#banner-section").removeClass('hidden');
+						$("#banner-section").removeClass('hidden').removeClass('hidden-xs');
 					}
 				}
 
