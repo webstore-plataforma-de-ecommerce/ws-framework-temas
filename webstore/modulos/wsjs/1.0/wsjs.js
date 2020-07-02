@@ -78,6 +78,7 @@ ApiWS.ApiStart = function () {
 
         if (UrlNavegador.indexOf(":3000") > 0) {
             GetTypeCdn = "wslojas.com.br";
+            ApiWS.LVdashview = "1";
         }
 
         //UseCdn = true;
