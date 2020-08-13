@@ -880,6 +880,71 @@ ApiWS.InfosLojas = function (FuncaoAfter) {
 }
 
 
+ApiWS.FuncAfter_PaginasAdd = null;
+ApiWS.PaginasAdd_Tentativas = 0;
+ApiWS.PaginasAdd = function (FuncaoAfter, PaginaSearch) {
+
+    ApiWS.LV = $("#HD_LV_ID").val();
+
+    console.log("Iniciando PaginasAdd");
+    ApiWS.StartTime();
+    if (FuncaoAfter != null && FuncaoAfter != "") {
+        ApiWS.FuncAfter_PaginasAdd = FuncaoAfter;
+    } else {
+        FuncaoAfter = ApiWS.FuncAfter_PaginasAdd;
+    }
+    var cacheAdjust = "&cachetype=" + ApiWS.cacheTime("H");
+    try {
+        ApiWS.PaginasAdd_Tentativas++;
+        var Token = $("#HdTokenLojaTemp").val();
+        var NomeCookie = "paginasadd" + ApiWS.LV;
+        while (NomeCookie.indexOf("|") >= 0 || NomeCookie.indexOf("_") >= 0) {
+            NomeCookie = NomeCookie.replace("|", "").replace("_", "");
+        }
+        var Cookie = ApiWS.getCookie(NomeCookie, "", "H")
+        if (Cookie != "" && Cookie != null && Cookie != undefined) {
+            ApiWS.Json = Cookie;
+            console.log("PaginasAdd Keep");
+            try { eval(FuncaoAfter + "()"); } catch (e) { }
+        } else {
+            var URLget = UrlApi + "/" + VersaoApi + "/PaginasAdd";
+            var Parametros = "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&LvPage=" + PaginaSearch;
+            ApiWS.addApiCalls(URLget + "?" + Parametros + cacheAdjust);
+            $.ajax({
+                type: "GET",
+                url: URLget,
+                data: Parametros + cacheAdjust,
+                beforeSend: function () { },
+                error: function (e) {
+                    console.log("Erro ao verificar paginas add da loja.(" + "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&LvPage=" + PaginaSearch + " / " + e.message + ")");
+                    //window.open(URLget + "?" + Parametros + cacheAdjust);
+                },
+                success: function (retorno) {
+                    //console.log("retorno info loja:" + retorno);
+                    console.log("PaginasAdd new");
+                    //window.open(URLget + "?" + Parametros + cacheAdjust);
+                    retorno = ApiWS.LimpaJson(retorno);
+                    try {
+                        JSON.parse(retorno);
+                        ApiWS.Json = retorno;
+                        if (retorno.indexOf("erro") < 0) {
+                            try {
+                                ApiWS.setCookie(NomeCookie, retorno, "H");
+                            } catch (e) { }
+                        }
+                        try { eval(FuncaoAfter + "()"); } catch (e) { }
+                    } catch (e) {
+                        console.log("Falha PaginasAdd " + e.message + " - " + retorno);
+                    }
+                }
+            });
+        }
+        ApiWS.EndTime("PaginasAdd");
+    } catch (e) { console.log(e.message); console.log("Erro ao verificar informações da loja(PaginasAdd):" + e.message); }
+}
+
+
+
 ApiWS.CadastraNews = function (Nome, Email, FuncaoAfter) {
     try {
         var Token = $("#HdTokenLojaTemp").val();
@@ -904,6 +969,44 @@ ApiWS.CadastraNews = function (Nome, Email, FuncaoAfter) {
                 try { eval(FuncaoAfter + "()"); } catch (e) { }
             }
         });
+    } catch (e) { console.log(e.message); console.log("Erro ao cadastrar email de newsletter:" + e.message); }
+}
+
+
+ApiWS.Confirm301 = function (domain) {
+    try {
+
+        var URL = window.location.href;
+        URL = URL.replace(domain, "");
+        URL = URL.replace(domain.replace("www.", ""), "");
+
+        console.log("starting 301:" + URL);
+
+        if (URL.indexOf("logoff") < 0) {
+
+            if (URL.length > 10) {
+
+                console.log("Analisando 301");
+
+                $.ajax({
+                    type: "GET",
+                    url: UrlApi + "/" + VersaoApi + "/InfosLojas",
+                    data: "LOJA=" + ApiWS.LV + "&analisa301=" + URL,
+                    beforeSend: function () { },
+                    error: function (e) { console.log("Falha analisando 301"); },
+                    success: function (retorno) {
+
+                        console.log("301:" + retorno);
+                        if (retorno.indexOf("REDIRECT:") >= 0) {
+                            window.location.href = domain + retorno.replace("REDIRECT:", "");
+                        }
+
+                    }
+                });
+
+            }
+        }
+
     } catch (e) { console.log(e.message); console.log("Erro ao cadastrar email de newsletter:" + e.message); }
 }
 
