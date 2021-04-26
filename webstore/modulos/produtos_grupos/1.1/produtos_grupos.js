@@ -62,7 +62,14 @@ function ProdutosGruposRetorno() {
                 qtdGrupos++;
                 content += '<div class="div-grupo grupo-' + qtdGrupos + ' col-xs-12 no-gutter" id="cod-grupo-' + obj.grupos[a].codigo + '" data-grupo-loja>';
                 content += '<div class="titulo-grupo">';
-                content += '<h3>' + obj.grupos[a].nome + '</h3>';
+                var titulo = obj.grupos[a].nome;
+                try {
+                    var url = obj.grupos[a].url;
+                    if (url != "") {
+                        titulo = '<a href="' + url + '" class="grupos-pg-inicial-link-titulo">' + titulo + '</a>';
+                    }
+                } catch (e) { }
+                content += '<h3 class="grupos-pg-inicial-titulo">' + titulo + '</h3>';
                 if (useSlickgroups) {
                     content += '<span class="arrow">';
                     content += '<i class="fa fa-angle-left left-arrow"></i>';

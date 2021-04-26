@@ -38,38 +38,43 @@
 
                         <h1 class="hidden-xs" itemprop="name"><!--##NOME_PRODUTO##--></h1>
 
-                        <span data-favorites-icone></span>
+                        <div class="options-product" id="options-product">
 
-                        <div class="share-produto">
+                            <span data-favorites-icone></span>
 
-                            <i class="fa fa-share-alt"></i>
-                            <ul class="share-lista">
-                                <li class="Face">
-                                    <a id="share-facebook" href="#" title="Facebook" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="Twitter">
-                                    <a id="share-twitter" href="#" title="Twitter" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="Gplus">
-                                    <a id="share-gplus" href="#" title="Google Plus" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
-                                <li class="Whats">
-                                    <a id="share-whats" href="#" title="Whatsapp" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        <i class="fa fa-whatsapp"></i>
-                                    </a>
-                                </li>
-                                <li class="Mail">
-                                    <a id="share-mail" href="#" title="Compartilhar via e-mail" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
-                                        <i class="fa fa-envelope"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <div class="share-produto" id="share-produto">
+
+                                <a href="javascript:void(showShareLista())" class="link-share-lista"><i class="fa fa-share-alt"></i></a>
+                                <ul class="share-lista" id="share-lista">
+                                    <li class="Face">
+                                        <a id="share-facebook" href="#" title="Facebook" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="Twitter">
+                                        <a id="share-twitter" href="#" title="Twitter" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="Gplus">
+                                        <a id="share-gplus" href="#" title="Google Plus" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="Whats">
+                                        <a id="share-whats" href="#" title="Whatsapp" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                            <i class="fa fa-whatsapp"></i>
+                                        </a>
+                                    </li>
+                                    <li class="Mail">
+                                        <a id="share-mail" href="#" title="Compartilhar via e-mail" onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                                            <i class="fa fa-envelope"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
                         </div>
 
                         <span class="lista-de-desejo hidden hidden-xs">
@@ -123,6 +128,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div id="kits-produto" class="kits-produto" data-kit-produto></div>
 
                         <div id="botao-comprar-produto" class="no-gutter col-md-7 col-xs-12">
                             <div class="sub-produtos"><!--##PRECO_GENERO##--></div>

@@ -264,7 +264,9 @@
     font-size: 1.0rem;
     height: 2.5rem;
     line-height: 2.5rem;
-    padding: 0 4rem;
+    padding: 0 3px;
+    width:100%;
+    text-align:center;
     text-transform: uppercase;
 }
 .list-item.produto-indisponivel .prod-preco{
@@ -475,7 +477,8 @@
 .blc-comprar .div-item .prod-info .prod-botao-comprar,
 .blc-fabricante .div-item .prod-info .prod-fabricante,
 .blc-mais .div-item .prod-info .prod-mais,
-.blc-preco .div-item .prod-info .prod-preco{
+.blc-preco .div-item .prod-info .prod-preco,
+.produto-indisponivel .prod-info .prod-preco {
     display: block;
 }
 .blc-varia .div-item .prod-info .variacao-preco{

@@ -151,7 +151,11 @@ function ProdutoDadosRetorno() {
 			retornoPreco = "",
 			TABCONTENT = "",
 			tabelaParcelas = "",
-			TABLIST = "";
+            TABLIST = "",
+            priceValidUntil = null;
+
+        ADD += '<meta itemprop="name" content="' + obj.nome + '">' +
+               '<meta itemprop="productID" content="' + obj.codigo + '">';
 
         // var dataNome = $('[data-wbstr-nome]');
         // $(dataNome).after(NOME);
@@ -185,7 +189,7 @@ function ProdutoDadosRetorno() {
         fotosProduto(obj.fotos, obj.nome);
 
         if (obj.fabricante != null && obj.fabricante != undefined) {
-            var FABRICANTE = '<p id="fabricante-produto"><a href="' + obj.fabricante.url + '">' + obj.fabricante.nome + '</a></p>';
+            var FABRICANTE = '<p id="fabricante-produto"><a href="' + obj.fabricante.url + '" itemprop="brand" content="' + obj.fabricante.nome+'">' + obj.fabricante.nome + '</a></p>';
         }
 
         if (obj.breve != null && obj.breve != undefined && obj.breve.length > 0) {
@@ -440,6 +444,21 @@ function ProdutoDadosRetorno() {
             $("#calcula-frete").hide();
         }
 
+
+        if (obj.kit.length > 0) {
+
+            FuncExibeKit(obj);
+            console.log("KIT");
+
+        } else {
+
+            console.log("NOT KIT");
+            $("#kits-produto").remove();
+            $("[data-kit-produto]").remove();
+
+        }
+
+
         // função que gera a contagem regressiva
         if (typeof ws_promrelampago !== 'undefined') {
             if (obj.precos.preco_promocao_validade != null && obj.precos.preco_promocao_validade != undefined) {
@@ -447,6 +466,7 @@ function ProdutoDadosRetorno() {
                 //var sub = Number(str.substr(6, str.length - 8));
 
                 var deadline = new Date(str);
+                priceValidUntil = deadline;
                 var d = new Date();
 
                 if ((deadline - d) > 0) {
@@ -456,6 +476,12 @@ function ProdutoDadosRetorno() {
                 }
             }
         }
+
+        const date = new Date();
+        priceValidUntil = date.setDate(date.getDate() + 7);
+
+        //console.log("priceValidUntil:" + date);
+        $("#produto").prepend("<meta itemprop='priceValidUntil' content='" + date + "'/>");
 
         if (typeof call_after_pag_produto !== 'undefined') { try { eval(call_after_pag_produto); } catch (e) { console.log("Falha call_after_pag_produto" + e.message); } }
 
@@ -634,7 +660,7 @@ function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
         VEZES = AjustaMoney(VEZES);
         VEZES = '<p class="prod-preco-parc"><strong><i class="fa fa-credit-card fa-fw"></i> ' + semJuros + 'x de R$' + VEZES + ' sem juros</strong></p>';
     }
-    else if (PARCELA_b > 1) {
+    else if (PARCELA_b >= 1) {
 
         var JUROSuse = FuncJurosPersonalizado(PARCELA_b, JUROS);
 
@@ -643,7 +669,9 @@ function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
         VEZES = '<p class="prod-preco-parc"><strong><i class="fa fa-credit-card fa-fw"></i> ' + PARCELA_b + 'x de R$' + VEZES + '</strong></p>';
     }
 
-    if (PARCELAS > 1) {
+    //console.log("Parcelas:" + PARCELAS);
+
+    if (PARCELAS >= 1) {
         for (i = 0; i < PARCELAS; i++) {
             var vezes = i + 1;
 
@@ -659,6 +687,10 @@ function PrecosProduto(PRECO, DESCONTO, PARCELAS, MIN, INICIA, JUROS) {
                 parcela = AjustaMoney(parcela);
                 tabela += '<li class="">' + vezes + 'x de R$' + parcela + '</li>';
             }
+
+            //console.log("parcela:" + parcela);
+            //console.log("tabela:" + tabela);
+
         }
     }
 
@@ -945,4 +977,54 @@ function FuncJurosPersonalizado(Parcela, JUROS) {
 
     return JUROSuse;
 
+}
+
+function FuncExibeKit(obj) {
+    try {
+
+        var kits = obj.kit;
+        var conteudoKit = "";
+
+        conteudoKit += "<p class='kit-titulo'>Produtos do Kit</p>";
+
+        for (k = 0; k < kits.length; k++) {
+
+            conteudoKit += "<p data-rel-kit-item>" +
+                "   <div class='kit-sku'>Cod.:" + kits[k].codigo + "</div>" +
+                "   <div class='kit-nome'><span>" + kits[k].qtd + "x - </span>" + kits[k].nome + "</div>" +
+                "</p>";
+
+        }
+
+        if (!($("[data-kit-produto]").length > 0)) {
+            $("#botao-comprar-produto").before('<div id="kits-produto" data-kit-produto></div>');
+        }
+
+        $("[data-kit-produto]").append(conteudoKit);
+
+
+    } catch (e) {
+
+        console.alert("Falha ao exibir KIT:" + e.message);
+
+    }
+}
+
+var shareOptionStatus = false;
+function showShareLista() {
+
+    if (shareOptionStatus == false) {
+        $("#share-lista").fadeIn("fast");
+        shareOptionStatus = true;
+        $("body").click(function () { window.setTimeout("hideShareLista()", 500); });
+    } else {
+        $("#share-lista").fadeOut("fast");
+        shareOptionStatus = false;
+        $("body").unbind("click");
+    }
+
+}
+
+function hideShareLista() {
+    $("#share-lista").fadeOut("fast");
 }

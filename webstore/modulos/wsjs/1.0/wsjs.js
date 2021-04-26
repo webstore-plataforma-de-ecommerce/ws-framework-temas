@@ -91,13 +91,13 @@ ApiWS.ApiStart = function () {
                     console.log("XCDNTRUE001");
 
                     if (GetTypeCdn.indexOf("wslojas.com.br") >= 0) {
-                        UrlApi = "https://apiloja_ws.wslojas.com.br";
+                        UrlApi = "https://apilojaws.wslojas.com.br";
                     } else if (GetTypeCdn.indexOf("plataformawebstore.com.br") >= 0) {
-                        UrlApi = "https://apiloja_ws.plataformawebstore.com.br";
+                        UrlApi = "https://apilojaws.plataformawebstore.com.br";
                     }
                     else {
                         //UrlApi = "https://apiloja.wscache.webstore.net.br";
-                        UrlApi = "https://apiloja_ws.wslojas.com.br";
+                        UrlApi = "https://apilojaws.wslojas.com.br";
                     }
                     //UrlApi = "https://apiloja.wscache.webstore.net.br";
 
@@ -644,12 +644,18 @@ ApiWS.ListaFiltros = function (FuncaoAfter, Categoria, FiltroSearch, Fabricante,
 
 ApiWS.FuncAfter_ListaProdutosPags = null;
 ApiWS.ListaProdutosPags_Tentativas = 0;
-ApiWS.ListaProdutosPags = function (FuncaoAfter) {
+ApiWS.ListaProdutosPags = function (FuncaoAfter, PageNum) {
     ApiWS.StartTime();
     if (FuncaoAfter != null && FuncaoAfter != "") {
         ApiWS.FuncAfter_ListaProdutosPags = FuncaoAfter;
     } else {
         FuncaoAfter = ApiWS.FuncAfter_ListaProdutosPags;
+    }
+    var pagina = "";
+    console.log("PageNum : " + PageNum);
+    if (PageNum) {
+        pagina = "&num_pagina=" + PageNum;
+        console.log("buscando produtos " + pagina);
     }
     var cacheAdjust = "&cachetype=" + ApiWS.cacheTime("M10");
     var VarsFiltrosListagem = "";
@@ -658,11 +664,11 @@ ApiWS.ListaProdutosPags = function (FuncaoAfter) {
     try { VarsFiltrosListagemJson = $("#HdFiltrosListagemJson").val(); } catch (e) { }
     try {
         ApiWS.ListaProdutosPags_Tentativas++;
-        var Token = $("#HdTokenLojaTemp").val();
+        var Token = $("#HdTokenLojaTemp").val() + pagina.replace("_", "");
         var InfoListagem = $("#HdVarInfoListagem").val();
         var SubEtapaWs = $("#HdSubEtapa").val();
         var URLget = UrlApi + "/" + VersaoApi + "/produtos/listagem";
-        var Parametros = "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&SubEtapaWs=" + SubEtapaWs + "&InfoListagem=" + InfoListagem + "&VarsFiltrosListagem=" + VarsFiltrosListagem + "&VarsFiltrosListagemJson=" + VarsFiltrosListagemJson;
+        var Parametros = "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + "&SubEtapaWs=" + SubEtapaWs + "&InfoListagem=" + InfoListagem + "&VarsFiltrosListagem=" + VarsFiltrosListagem + "&VarsFiltrosListagemJson=" + VarsFiltrosListagemJson + pagina;
         ApiWS.addApiCalls(URLget + "?" + Parametros + cacheAdjust);
         $.ajax({
             type: "GET",
@@ -671,6 +677,7 @@ ApiWS.ListaProdutosPags = function (FuncaoAfter) {
             beforeSend: function () { },
             error: function (e) { console.log(e.message); console.log("Falha ao listar produtos subpáginas"); },
             success: function (retorno) {
+                //console.log("retorno produtos listagem:" + retorno);
                 retorno = ApiWS.LimpaJson(retorno);
                 try {
                     var objverif = JSON.parse(retorno);
@@ -927,6 +934,7 @@ ApiWS.PaginasAdd = function (FuncaoAfter, PaginaSearch) {
                     try {
                         JSON.parse(retorno);
                         ApiWS.Json = retorno;
+                        objetos.PaginasAdd = retorno;
                         if (retorno.indexOf("erro") < 0) {
                             try {
                                 ApiWS.setCookie(NomeCookie, retorno, "H");
@@ -1205,7 +1213,7 @@ function keepWsBrand() {
 function funcaoWsToken() {
     try {
 
-        window.setTimeout("funcaoWsTokenStart()", 2000);
+        //window.setTimeout("funcaoWsTokenStart()", 2000);
 
     } catch (e) { }
 }
@@ -1230,13 +1238,17 @@ function funcaoWsTokenStart() {
 
         ObjAtualWsToken = rnd + "_" + rnd2;
 
-        var print = "<divwstag id='" + ObjAtualWsToken + "' class='random1'><divwstag id='random1'><divwstag><spanwstag>T<!--random1-->e<!--random1-->c<!--random1-->n<!--random1-->o<!--random1-->l<!--random1-->o<!--random1-->g<!--random1-->i<!--random1-->a<!--random1--></spanwstag><a href='http://www.webstore.net.br' target='_blank' title='Webstore | Plataforma de E-commerce para criar ou montar loja virtual'>W<!--random1-->e<!--random1-->b<!--random1-->s<!--random1-->t<!--random1-->o<!--random1-->r<!--random1-->e<!--random1--> - P<!--random1-->l<!--random1-->a<!--random1-->t<!--random1-->a<!--random1-->f<!--random1-->o<!--random1-->r<!--random1-->m<!--random1-->a<!--random1--> <!--random1-->d<!--random1-->e<!--random1--> l<!--random1-->o<!--random1-->j<!--random1-->a<!--random1--> v<!--random1-->i<!--random1-->r<!--random1-->t<!--random1-->u<!--random1-->a<!--random1-->l<!--random1--></a></divwstag></divwstag></divwstag>" +
+        var print =""+
+            //"<divwstag id='" + ObjAtualWsToken + "' class='random1'><divwstag id='random1'><divwstag><spanwstag>T<!--random1-->e<!--random1-->c<!--random1-->n<!--random1-->o<!--random1-->l<!--random1-->o<!--random1-->g<!--random1-->i<!--random1-->a<!--random1--></spanwstag><a href='http://www.webstore.com.br' target='_blank' title='Webstore | Plataforma de E-commerce para criar ou montar loja virtual'>W<!--random1-->e<!--random1-->b<!--random1-->s<!--random1-->t<!--random1-->o<!--random1-->r<!--random1-->e<!--random1--> - P<!--random1-->l<!--random1-->a<!--random1-->t<!--random1-->a<!--random1-->f<!--random1-->o<!--random1-->r<!--random1-->m<!--random1-->a<!--random1--> <!--random1-->d<!--random1-->e<!--random1--> l<!--random1-->o<!--random1-->j<!--random1-->a<!--random1--> v<!--random1-->i<!--random1-->r<!--random1-->t<!--random1-->u<!--random1-->a<!--random1-->l<!--random1--></a></divwstag></divwstag></divwstag>" +
+            "<divwstag id='" + ObjAtualWsToken + "' class='random1'><divwstag id='random1'><divwstag><spanwstag>T<!--random1-->e<!--random1-->c<!--random1-->n<!--random1-->o<!--random1-->l<!--random1-->o<!--random1-->g<!--random1-->i<!--random1-->a<!--random1--></spanwstag><a href='http://www.webstore.com.br' target='_blank' title='Webstore | Plataforma de E-commerce para criar ou montar loja virtual'><svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 499.6 73.16'><defs><style>.cls-1{fill:#232323;}.cls-2{fill:url(#linear-gradient);}.cls-3{fill:url(#linear-gradient-2);}.cls-4{fill:url(#linear-gradient-3);}</style><linearGradient id='linear-gradient' x1='-4.59' y1='-11.59' x2='96.62' y2='138.27' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#ff8723'/><stop offset='1' stop-color='#f8175d'/></linearGradient><linearGradient id='linear-gradient-2' x1='8149.55' y1='-5072.5' x2='8155.53' y2='-5072.5' gradientTransform='matrix(-5.06, 5.91, 5.91, 5.06, 71307.31, -22504.71)' gradientUnits='userSpaceOnUse'><stop offset='0' stop-color='#ff8723'/><stop offset='1' stop-color='#f8175d'/></linearGradient><linearGradient id='linear-gradient-3' x1='89.32' y1='-15.44' x2='77.95' y2='194.08' xlink:href='#linear-gradient'/></defs><title>Ativo 1</title><g id='Camada_2' data-name='Camada 2'><g id='Layer_2' data-name='Layer 2'><path class='cls-1' d='M214.43,17.63A4.82,4.82,0,0,0,209.81,21l-7.61,25-7.13-24.49a5.46,5.46,0,0,0-10.48,0l-7.07,24.48-7.61-25a4.85,4.85,0,1,0-9.22,3l9.22,26.42a7.66,7.66,0,0,0,14.46,0l2.12-6.06,3.37-12.64,3.37,12.64,2.12,6.06a7.65,7.65,0,0,0,14.45,0L219,24A4.82,4.82,0,0,0,214.43,17.63Z'/><path class='cls-1' d='M243.2,16.55c-12.26,0-20.07,8.28-20.07,19.77,0,12.11,7.73,20.15,20.76,20.15a25.76,25.76,0,0,0,11.75-2.81,4.24,4.24,0,0,0,1-6.76,4.29,4.29,0,0,0-4.95-.73A18.1,18.1,0,0,1,244,48c-6.59,0-10.65-3.37-11.26-8h24a5.54,5.54,0,0,0,5.53-6C261.48,22.37,254.11,16.55,243.2,16.55ZM232.93,32.18c1.38-4.9,5.52-7.35,10.58-7.35,5.36,0,9.19,2.45,9.8,7.35Z'/><path class='cls-1' d='M290.1,16.78c-4,0-10.19,2.15-12.42,6.06V6.59a4.68,4.68,0,0,0-9.35,0V50.85a4.63,4.63,0,0,0,9.22.54l.13-1.12c2.92,4.52,7.59,6,12.19,6,11.11,0,19.46-7.36,19.46-19.77C309.33,23.53,301.13,16.78,290.1,16.78Zm-.85,30.88A10.7,10.7,0,0,1,278.3,36.55a10.77,10.77,0,0,1,10.95-11c6,0,10.73,4.21,10.73,11C300,43.14,295.23,47.66,289.25,47.66Z'/><path class='cls-1' d='M331.81,32.26c-4.83-.31-7.05-1.68-7.05-4.14s2.45-3.75,6.89-3.75a14,14,0,0,1,6.72,1.47,4,4,0,0,0,5-.89h0a4,4,0,0,0-1.12-6.08,22.44,22.44,0,0,0-10.76-2.23c-6.9,0-15.94,3.07-15.94,11.8s8.51,11.19,15.63,11.72c5.37.31,7.51,1.38,7.51,4s-3.29,4.59-6.82,4.52A22.72,22.72,0,0,1,322,45.75a4.19,4.19,0,0,0-4.56,7c4.62,3.34,9.48,4,14.34,4C342.53,56.78,348,51,348,44.37,348,34.33,338.93,32.72,331.81,32.26Z'/><path class='cls-1' d='M374.28,47.42a8.25,8.25,0,0,1-1.19.09c-2.91,0-4.9-1.76-4.9-5.36V25.82h6.47a4,4,0,0,0,0-8h-6.4V12.25a4.67,4.67,0,1,0-9.34,0v5.53h-3a4,4,0,1,0,0,8h3V42.15c0,9.42,5.36,14.09,13.56,13.79a22.73,22.73,0,0,0,3.08-.28,4.17,4.17,0,0,0-1.28-8.24Z'/><path class='cls-1' d='M402.54,16.94c-12,0-19.54,8.88-19.54,19.69s7.35,19.69,19.61,19.69,19.7-8.81,19.7-19.69S414.57,16.94,402.54,16.94Zm.07,30.8c-6.82,0-10.26-5.37-10.26-11.11s3.52-11.19,10.26-11.19c6.29,0,10.27,5.52,10.27,11.19S409.43,47.74,402.61,47.74Z'/><path class='cls-1' d='M453.76,17.66a15.73,15.73,0,0,0-5.36-.95c-3.83,0-7.74.68-10.65,5.36l-.07-.43a4.67,4.67,0,0,0-9.28.73V50.81a4.67,4.67,0,0,0,4.67,4.67h0a4.67,4.67,0,0,0,4.67-4.67V35.56c0-7,4.52-9.58,9.42-9.58a10.68,10.68,0,0,1,3.4.48,4.54,4.54,0,0,0,5.49-2.16l.18-.35A4.49,4.49,0,0,0,453.76,17.66Z'/><path class='cls-1' d='M499.52,32C498,21.7,490.84,16.55,480.58,16.55c-12.26,0-20.08,8.28-20.08,19.77,0,12.11,7.74,20.15,20.77,20.15A25.8,25.8,0,0,0,493,53.66a4.24,4.24,0,0,0,1-6.76,4.29,4.29,0,0,0-4.95-.73,18.17,18.17,0,0,1-7.66,1.8c-6.59,0-10.65-3.37-11.26-8h22.5A6.94,6.94,0,0,0,499.52,32Zm-29.21.21c1.38-4.9,5.52-7.35,10.58-7.35,5.36,0,9.19,2.45,9.8,7.35Z'/><path class='cls-2' d='M54.5,42.13,45.15,27.68,33.73,10A8.6,8.6,0,0,0,30,6.87L15.71.44A5,5,0,0,0,10.93.8L2.3,6.4A5,5,0,0,0,0,10.6V26.5a7.91,7.91,0,0,0,1.28,4.32l11.51,17.8L22.74,64a19.27,19.27,0,0,0,27.5,5.12C58.69,63,60.17,50.89,54.5,42.13Zm-38-16.34a7,7,0,1,1,7-7A7,7,0,0,1,16.52,25.79Z'/><path class='cls-3' d='M79.39,56.47l-1.56,2.26c8.88,5.75,21.79,14.69,27.54,5.81l22.64-35A19.16,19.16,0,0,0,95.84,8.75l-22.63,35C67.46,52.61,70.51,50.73,79.39,56.47Z'/><path class='cls-4' d='M122.63,35.05h0a19.15,19.15,0,0,1-26.52-5.5L89.2,19h0L82.39,8.65A19.16,19.16,0,0,0,55.86,3.14h0a19.16,19.16,0,0,0-5.5,26.53L73.21,64.49a19.3,19.3,0,0,0,32.25-.08L127.05,31A18.79,18.79,0,0,1,122.63,35.05Z'/></g></g></svg></a></divwstag></divwstag></divwstag>" +
             "<style rel='wstokencss" + ObjAtualWsToken + "'>" +
             "body .random1 { background-color:#FFF !important;padding:10px; }" +
             "body .random1 #random1 {display:table !important;margin:0 auto !important;font-size:11px !important;font-family:Arial !important;color:#999;clear:both !important;}" +
             "body .random1 #random1 divwstag {} " +
             "body .random1 divwstag spanwstag {display:inline-block !important;padding:6px !important;float:left !important;}" +
-            "body .random1 divwstag a {display:inline-block !important;background-image:url(/lojas/img/Webstore-Assinatura.png) !important;background-repeat:no-repeat !important;width:111px;height:21px;overflow:hidden;text-indent:-12000px;opacity: 0.5;-webkit-filter: grayscale(100%); filter: grayscale(100%); transition: -webkit-filter 0.5s, filter 0.5s, opacity 0.5s; }" +
+            //"body .random1 divwstag a {display:inline-block !important;background-image:url(/lojas/img/Webstore-Assinatura.png) !important;background-repeat:no-repeat !important;width:111px;height:21px;overflow:hidden;text-indent:-12000px;opacity: 0.5;-webkit-filter: grayscale(100%); filter: grayscale(100%); transition: -webkit-filter 0.5s, filter 0.5s, opacity 0.5s; }" +
+            "body .random1 divwstag a {display:inline-block !important;opacity: 0.5;-webkit-filter: grayscale(100%); filter: grayscale(100%); transition: -webkit-filter 0.5s, filter 0.5s, opacity 0.5s; }" +
+            "body .random1 divwstag a svg { width:111px; }" +
             "body .random1 divwstag a:hover {opacity: 1 !important;-webkit-filter: grayscale(0%) !important; filter: grayscale(0%) !important; }" +
             "</style>";
 
@@ -1255,7 +1267,7 @@ function funcaoWsTokenStart() {
         WsTokenOk = "1";
 
 
-        window.setTimeout("funcaoWsTokenStart()", 5000);
+        //window.setTimeout("funcaoWsTokenStart()", 5000);
 
     } catch (e) { }
 }

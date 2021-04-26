@@ -323,7 +323,7 @@ function BlocoProduto(OBJ, TEMPLATE) {
         var replace = [OBJ.id, CLASS, FOTO, DESTAQUE, ADD, NOME, PRECO, VEZES, UMA, COMPRAR, FAB, STARS, MAIS, LINK, FRETE, DISPONIBILIDADE];
 		TEMPLATE = replaceStr(TEMPLATE, find, replace);
 
-	    //console.log(COMPRAR);
+		//console.log("ID:" + OBJ.id + "\nCLASS:" + CLASS + "\nFOTO:" + FOTO + "\nDESTAQUE:" + DESTAQUE + "\nADD:" + ADD + "\nNOME:" + NOME + "\nPRECO:" + PRECO + "\nVEZES:" + VEZES + "\nUMA:" + UMA + "\nCOMPRAR:" + COMPRAR + "\nFAB:" + FAB + "\nSTARS:" + CLASS + "\nMAIS:" + MAIS + "\nLINK:" + LINK + "\nFRETE:" + FRETE + "\nDISPONIBILIDADE:" + DISPONIBILIDADE);
         
 		if (typeof call_after_bloco_produto !== 'undefined') {
 		    try

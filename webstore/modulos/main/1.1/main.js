@@ -84,6 +84,7 @@ function InfosLojasRetorno() {
 
         //console.log("NOTbuySamePage:"+NOTbuySamePage);
         setTagsWs(obj, "InfosLojas");
+        cookieAskMsg(obj);
 
         if (typeof buySamePage !== 'undefined') {
             if (typeof NOTbuySamePage !== 'undefined') {
@@ -100,6 +101,7 @@ function InfosLojasRetorno() {
 			contato = obj.dadoscontato,
 			estrutura = obj.estrutura,
 			institucional = obj.menuinstitucional,
+            condicoes = obj.condicoes,
 			li = '';
 
         cliente = obj.cliente;
@@ -219,6 +221,11 @@ function InfosLojasRetorno() {
             li = '';
             
         }
+
+
+        if (condicoes.length) {
+            FuncExibeCondicoes(condicoes);
+        };
 
         // window.setTimeout("CategoriasLista()", 1);
 
@@ -547,6 +554,36 @@ function getScrollTop() {
     }
 }
 
+function getElementPositionPage(elemID, tipo) {
+
+    // onde elemID é o id do objeto que quero detectar a posicao no meu caso a imagem.
+    var offsetTrail = document.getElementById(elemID);
+    var i = 0;
+    var offsetLeft = 0;
+    var offsetTop = 0;
+    while (offsetTrail || i > 1) {
+        offsetLeft += offsetTrail.offsetLeft;
+        offsetTop += offsetTrail.offsetTop;
+        offsetTrail = offsetTrail.offsetParent;
+    }
+    if (navigator.userAgent.indexOf("Mac") != -1 &&
+        typeof document.body.leftMargin != "undefined") {
+        offsetLeft += document.body.leftMargin;
+        offsetTop += document.body.topMargin;
+    }
+
+    // return {left:offsetLeft, top:offsetTop};
+    //alert(offsetLeft+"----"+offsetTop);
+    if (tipo == "L") {
+        return offsetLeft;
+    }
+    else {
+        return offsetTop;
+    }
+
+}
+
+
 function AjustaMoney(VALOR) {
 	return VALOR.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,").replace(",", "|").replace(".", ",").replace("|", ".");
 }
@@ -853,4 +890,129 @@ function FuncFecharAskAddProd() {
 
 function FuncSomeMsgAddProd() {
     $("#retornoBtComprar").remove();
+}
+
+function FuncExibeCondicoes(condicoes) {
+
+    try {
+
+        if (typeof over_condicoes !== 'undefined') { try { eval(over_condicoes); return; } catch (e) { console.log(e.message); } }
+
+        var htmlCondicoes = '<div class="condicoes-loja" id="condicoes-loja">' +
+            '<div class="row container">';
+
+        for (c = 0; c < condicoes.length; c++) {
+
+            var Link = '<a href="' + condicoes[c].url + '" title="' + condicoes[c].titulo + ' ' + condicoes[c].subtitulo + '">';
+            var LinkFim = '</a>';
+
+            if (condicoes[c].url == "") { Link = ""; LinkFim = ""; }
+
+            htmlCondicoes += '<div class="condicao-item condicao-item-' + condicoes.length + '"> ' +
+                '<div class="condicao-item-int">' +
+                Link +
+                '   <div class="condicao-icone">' + condicoes[c].icone + '</div>' +
+                '   <div class="condicao-textos">' +
+                '       <h3 class="condicao-titulo">' + condicoes[c].titulo + '</h3>' +
+                '       <p class="condicao-subtitulo">' + condicoes[c].subtitulo + '</p>' +
+                '   </div>' +
+                LinkFim +
+                '</div>' +
+                '</div>';
+
+        }
+
+        htmlCondicoes += '</div></div>';
+
+        var verifObjtoput = $("span[data-condicoes-loja]").length;
+
+        if (!(verifObjtoput > 0)) {
+            $(".homepage #div-conteudo").before(htmlCondicoes);
+        } else {
+            $("span[data-condicoes-loja]").before(htmlCondicoes);
+            $("span[data-condicoes-loja]").remove();
+        }
+
+        if (typeof $clamp === "function") {
+            $('#condicoes-loja .condicao-titulo').each(function (index, el) {
+                $clamp(el, { clamp: 1, useNativeClamp: true });
+            });
+            $('#condicoes-loja .condicao-subtitulo').each(function (index, el) {
+                $clamp(el, { clamp: 1, useNativeClamp: true });
+            });
+        }
+
+        if (typeof after_condicoes !== 'undefined') { try { eval(after_condicoes); } catch (e) { console.log(e.message); } }
+
+    } catch (e) {
+
+        console.log("falha ao exibir condi&ccedil;ões:" + e.message);
+
+    }
+
+}
+
+function cookieAskMsg(obj) {
+
+    try {
+
+        console.log("Starting cookies ask");
+
+        var cookieLink = "";
+
+        if (typeof over_cookieAsk !== 'undefined') { try { eval(over_cookieAsk); return; } catch (e) { console.log(e.message); } }
+
+        var HTML_cookie_msg = "Este site usa cookies para gerar estat&iacute;sticas e para melhorar sua experi&ecirc;ncia de navega&ccedil;&atilde;o.<br/>" +
+            "Ao continuar, voc&ecirc; declara que est&aacute; de acordo.";
+
+        if (typeof over_cookieLink !== 'undefined') { try { cookieLink = over_cookieLink; } catch (e) { console.log(e.message); } } else {
+            for (i = 0; i < obj.menuinstitucional.length; i++) {
+                if (obj.menuinstitucional[i].titulo.toLowerCase().indexOf("privacidade") >= 0) {
+                    cookieLink = obj.menuinstitucional[i].url;
+                }
+            }
+        }
+
+        if (cookieLink != "") {
+            HTML_cookie_msg = "Este site usa cookies para gerar estat&iacute;sticas e para melhorar sua experi&ecirc;ncia de navega&ccedil;&atilde;o.<br/>" +
+                "Ao continuar, voc&ecirc; declara que est&aacute; de acordo com a nossa <a href=\"" + cookieLink + "\" title=\"Pol&iacute;tica de Privacidade\">Pol&iacute;tica de Privacidade</a>.";
+        }
+
+        if (typeof over_cookieMsg !== 'undefined') { try { HTML_cookie_msg = over_cookieMsg; } catch (e) { console.log(e.message); } }
+
+        var HTML_cookieAsk = "<div id=\"aceite_privacidade\" style=\"display: block;\">" +
+            "<div class=\"row\">" +
+            "<div class=\"col-md-9\">" +
+            "<p>" + HTML_cookie_msg + "</p> " +
+            "</div>" +
+            "<div class=\"col-md-3\">" +
+            "<button id=\"linkConfirmCookies\" onclick=\"cookieAceitePrivacidade()\" class=\"btn\">Aceitar</button>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "";
+
+        var jaClicou = localStorage["cookieAsk"];;
+
+        if (localStorage["cookieAsk"]) {
+            if (localStorage["cookieAsk"] != "1") {
+                $("body").append(HTML_cookieAsk);
+            }
+        } else {
+            $("body").append(HTML_cookieAsk);
+        }
+
+        $("#linkConfirmCookies").click(function () { cookieAceitePrivacidade(); });
+
+        console.log("jaClicou:" + jaClicou);
+
+    } catch (e) { console.log("Falha cookie ask:" + e.message); }
+
+}
+
+function cookieAceitePrivacidade() {
+    try {
+        localStorage["cookieAsk"] = "1";
+        $("#aceite_privacidade").fadeOut("fast");
+    } catch (e) { console.log("Falha ao ocultar msg de cookies."); }
 }

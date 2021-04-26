@@ -158,6 +158,21 @@
 	padding-top: 1.5rem;
 	line-height: 2rem;
 }
+.paginacao-bottom.paginacaoviewmoreOption {
+	text-align:center;
+}
+.paginacao-bottom.paginacaoviewmoreOption ul {
+	display: table;
+	margin: 10px auto;
+	float:none;
+}
+	.paginacao-bottom.paginacaoviewmoreOption ul li a {
+		font-size: 16px;
+		padding: 10px 20px;
+		background-color: <!--###PREF_48###-->;
+		color: white;
+	}
+
 
 /*LISTAGEM*/
 .item-tipo-lista {
@@ -248,4 +263,11 @@
 		line-height: 4rem;
 		padding-top: 1rem;
 	}
+	.paginacao-bottom.paginacaoviewmoreOption ul li a {
+		font-size: 14px;
+		height: initial;
+		line-height: initial;
+		width: initial;
+	}
+
 }

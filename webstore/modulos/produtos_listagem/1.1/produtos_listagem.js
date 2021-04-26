@@ -1,4 +1,7 @@
-$(document).ready(function(){
+var viewmoreOption = false;
+var firstpage = true;
+
+$(document).ready(function () {
 	try{
 		if ($("#HdEtapaLoja").val() == "LISTAGEM"){
 			isReady("cfg['estrutura']", "ProdutosListagem()");
@@ -13,7 +16,12 @@ function ProdutosListagem() {
 function ProdutosListagemRetorno() {
 	try {
 
+		
 		modulos_completed++;
+
+		if (typeof viewmoreOption_over !== 'undefined') {
+			viewmoreOption = viewmoreOption_over;
+		}
 
 		if($('#template').length){
 			var template = $('#template').html();
@@ -21,69 +29,107 @@ function ProdutosListagemRetorno() {
 			var template = $('#prod-list').html();
 		}
 
-
-        $('#LV_COMBO_ORDEM').html('' +
-            '<option value="5">Mais Relevantes</option>' +
-            '<option value="1">A - Z</option>' +
-            '<option value="2">Z - A</option>' +
-            '<option value="3">Menor Pre&ccedil;o</option>' +
-            '<option value="4">Maior Pre&ccedil;o</option>' +
-            '');
+		if (firstpage) {
+			$('#LV_COMBO_ORDEM').html('' +
+				'<option value="5">Mais Relevantes</option>' +
+				'<option value="1">A - Z</option>' +
+				'<option value="2">Z - A</option>' +
+				'<option value="3">Menor Pre&ccedil;o</option>' +
+				'<option value="4">Maior Pre&ccedil;o</option>' +
+				'');
+		}
 
 		var OBJETO = ApiWS.Json;
 		objetos.ProdutosListagem = OBJETO;
 		var obj = jQuery.parseJSON(OBJETO);
 
-		$("#prod-list").html("").css('display', 'none');
+		if (firstpage) {
+			$("#prod-list").html("").css('display', 'none');
+		}
+
 		if (obj.totalitens != null && obj.totalitens != undefined) {
 			if (obj.totalitens > 0) {
 
-				if(obj.ordem_atual.length == 0){
-					$('#LV_COMBO_ORDEM option[value="PROD.PROD_NOME"]').attr('selected', 'selected');
-				}else{
-					$('#LV_COMBO_ORDEM option[value="' + obj.ordem_atual + '"]').attr('selected', 'selected');
+				if (firstpage) {
+					if (obj.ordem_atual.length == 0) {
+						$('#LV_COMBO_ORDEM option[value="PROD.PROD_NOME"]').attr('selected', 'selected');
+					} else {
+						$('#LV_COMBO_ORDEM option[value="' + obj.ordem_atual + '"]').attr('selected', 'selected');
+					}
 				}
 
 				if (obj.paginacao != null) {
+
 					var qtdPaginas = obj.paginacao.qtd_paginas;
 					var pgAtual = obj.paginacao.pagina_atual;
 
-					$('.resultado-paginacao').html(obj.paginacao.total_itens + ' itens');
-					
-					if (pgAtual != 1){
-                        $('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
-                        $('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
-                    }
+					if (!viewmoreOption) {
 
-					for (c = 0; c < qtdPaginas; c++){
-						var d = c + 1;
-						if(
-							d >= (pgAtual - 2) &&
-							d <= (pgAtual + 2)
-						){
-							if (d == pgAtual) {
-                                $('.lista-paginacao').append('<li class="active"><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
-							}else{
-								if(
-									d == (pgAtual - 2) &&
-									(pgAtual - 2) > 1
-								){
-									//$('.lista-paginacao').append('<li><a>...</a></li>');
-								}
-                                $('.lista-paginacao').append('<li><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
-								if(
-									d == (pgAtual + 2) &&
-									(pgAtual + 2) < qtdPaginas
-								){
-									//$('.lista-paginacao').append('<li><a>...</a></li>');
+						$('.resultado-paginacao').html(obj.paginacao.total_itens + ' itens');
+
+						if (pgAtual != 1) {
+							$('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+							$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+						}
+
+						for (c = 0; c < qtdPaginas; c++) {
+							var d = c + 1;
+							if (
+								d >= (pgAtual - 2) &&
+								d <= (pgAtual + 2)
+							) {
+								if (d == pgAtual) {
+									$('.lista-paginacao').append('<li class="active"><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
+								} else {
+									if (
+										d == (pgAtual - 2) &&
+										(pgAtual - 2) > 1
+									) {
+										//$('.lista-paginacao').append('<li><a>...</a></li>');
+									}
+									$('.lista-paginacao').append('<li><a href="?pagina=' + d + '" title="Ir para p&aacute;gina ' + d + '">' + d + '</a></li>');
+									if (
+										d == (pgAtual + 2) &&
+										(pgAtual + 2) < qtdPaginas
+									) {
+										//$('.lista-paginacao').append('<li><a>...</a></li>');
+									}
 								}
 							}
 						}
+						if (pgAtual != qtdPaginas) {
+							$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+							$('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+						}
+
+					} else {
+
+						/*VER MAIS OPÇÃO*/
+						if (qtdPaginas > pgAtual) {
+
+							if (firstpage) {
+								if (typeof viewmoreOptionInfinity !== 'undefined') {
+									$(window).scroll(function () {
+										funcListInfinity();
+									});
+								}
+							}
+
+							$('.paginacao-bottom').show();
+							window.setTimeout("funcSetInfinityFree()", 3000);
+							$('.paginacao-bottom').addClass("paginacaoviewmoreOption");
+							if (firstpage) {
+								$('.lista-paginacao').append('<li><a href="#pagina=' + (pgAtual + 1) + '" onclick="funcChangePage(' + (pgAtual + 1) + ')" id="linkLoadInfinity" title="Carregar mais produtos">Carregar mais produtos</a></li>');
+							} else {
+								$('.lista-paginacao').html('<li><a href="#pagina=' + (pgAtual + 1) + '" onclick="funcChangePage(' + (pgAtual + 1) + ')" id="linkLoadInfinity" title="Carregar mais produtos">Carregar mais produtos</a></li>');
+							}
+
+						} else {
+							$('.lista-paginacao').hide();
+						}						
+
 					}
-					if (pgAtual != qtdPaginas) {
-                        $('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
-                        $('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
-					}
+
 				}else{
 					if (obj.totalitens == 1) {
 						$('.resultado-paginacao').html(obj.totalitens + ' item');
@@ -92,26 +138,28 @@ function ProdutosListagemRetorno() {
 					}
 				}
 
-				if(obj.migalha != null && obj.migalha != undefined){
-					var qtd = 0;
-					for (b = 0; b < obj.migalha.length; b++){
-						qtd++;
-						if (obj.migalha[b].nome == "P&aacute;gina inicial") {
-							obj.migalha[b].nome = '<i class="fa fa-home"></i>';
-						}
+				if (firstpage) {
+					if (obj.migalha != null && obj.migalha != undefined) {
+						var qtd = 0;
+						for (b = 0; b < obj.migalha.length; b++) {
+							qtd++;
+							if (obj.migalha[b].nome == "P&aacute;gina inicial") {
+								obj.migalha[b].nome = '<i class="fa fa-home"></i>';
+							}
 
-						if (obj.migalha[b].atual == true){
-							$('#lista-migalha').append('<li><a href="' + obj.migalha[b].url + '" class="active">' + obj.migalha[b].nome + '</a></li>');
-						}else{
-							$('#lista-migalha').append('<li><a href="' + obj.migalha[b].url + '">' + obj.migalha[b].nome + '</a></li>');
-						}
+							if (obj.migalha[b].atual == true) {
+								$('#lista-migalha').append('<li><a href="' + obj.migalha[b].url + '" class="active">' + obj.migalha[b].nome + '</a></li>');
+							} else {
+								$('#lista-migalha').append('<li><a href="' + obj.migalha[b].url + '">' + obj.migalha[b].nome + '</a></li>');
+							}
 
-						if(qtd != obj.migalha.length){
-							$('#lista-migalha').append('<li class="separador">/</li>');					
+							if (qtd != obj.migalha.length) {
+								$('#lista-migalha').append('<li class="separador">/</li>');
+							}
 						}
+					} else {
+						$('#lista-migalha').hide();
 					}
-				}else{
-					$('#lista-migalha').hide();
 				}
 
 				var lista = "";
@@ -143,6 +191,8 @@ function ProdutosListagemRetorno() {
 		if(cfg['menu_lateral'] == true){
 			lateralEsq = true;
 		}
+
+		firstpage = false;
 
 		FrameworkResponsivo();
         ConteudoResponsivo();
@@ -184,4 +234,37 @@ function SemProdutos() {
 	$('#lista-migalha').hide();
 
 	return content;
+}
+
+function funcChangePage(page) {
+
+	try {
+
+		$('.paginacao-bottom').fadeOut("fast");
+		console.log("Carregando mais produtos, pagina(" + page + ")");
+		ApiWS.ListaProdutosPags("ProdutosListagemRetorno", page);
+
+	} catch (e) {
+		console.log("Falha carregando mais produtos." + e.message);
+	}
+
+}
+
+var CarregarGoInfinity = false;
+function funcListInfinity() {
+	if (CarregarGoInfinity) {
+		var linkTop = getElementPositionPage('linkLoadInfinity', 'T');
+		var windowH = $(window).height();
+		var scrollTopP = $(window).scrollTop();
+		//console.log("scrollTopP:" + scrollTopP + " >= (linkTop:" + linkTop + " - " + "WindowHeight:" + windowH);
+		if (scrollTopP >= (linkTop - (windowH * 2))) {
+			CarregarGoInfinity = false;
+			console.log("Carregar mais.");
+			$("#linkLoadInfinity").click();
+		}
+	}
+}
+
+function funcSetInfinityFree() {
+	CarregarGoInfinity = true;
 }
