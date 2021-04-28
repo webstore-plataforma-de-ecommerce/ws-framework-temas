@@ -1,4 +1,4 @@
-/*HEADER*/
+﻿/*HEADER*/
 header{
 	background-color: <!--###PREF_2###-->;
 	color: <!--###PREF_5###-->;
@@ -277,7 +277,6 @@ span.CarOnPageCodigoProduto {
 	height: 4rem;
 	text-align: center;
 	width: 4rem;
-    margin-top:20px;
 }
 #header-mobile .link-carrinho-mobile{
 	border-radius: 4px;
@@ -287,10 +286,6 @@ span.CarOnPageCodigoProduto {
 	height: 4rem;
 	text-align: center;
 	width: 4rem;
-    margin-top:20px;
-}
-.header-fixed .link-carrinho-mobile, .header-fixed .link-menu{
-    margin-top:0px !important;
 }
 #header-mobile .link-user span,
 #header-mobile .link-carrinho-mobile span,

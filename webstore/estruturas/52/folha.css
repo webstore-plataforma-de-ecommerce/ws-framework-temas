@@ -1,4 +1,4 @@
-#produtos .div-grupo .slick-arrow{
+﻿#produtos .div-grupo .slick-arrow{
 	display: inline-block!important;
 }
 footer .input-news{
@@ -375,20 +375,15 @@ header #social-topo li {
 	height: 4rem;
 	text-align: center;
 	width: 4rem;
-    margin-top:20px;
 }
-#header-mobile .link-carrinho-mobile{
+#header-mobile .link-carrinho{
 	display: inline-block;
 	float: right;
 	height: 4rem;
 	text-align: center;
 	width: 4rem;
-    margin-top:20px;
 }
-.header-fixed .link-carrinho-mobile, .header-fixed .link-menu{
-    margin-top:0px !important;
-}
-#header-mobile .link-carrinho-mobile span,
+#header-mobile .link-carrinho span,
 #header-mobile .link-menu span,
 #header-mobile .link-user span{
 	color: <!--###PREF_4###-->;

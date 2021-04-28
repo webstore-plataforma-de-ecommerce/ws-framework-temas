@@ -1,4 +1,4 @@
-/*HEADER*/
+﻿/*HEADER*/
 header{
 	background-color: <!--###PREF_1###-->;
 	color: <!--###PREF_4###-->;
@@ -549,4 +549,68 @@ span.CarOnPageCodigoProduto {
 .div-carrinho .fa-shopping-cart,
 .div-item .prod-botao-comprar span a{
 	transition: 150ms ease;
+}
+
+
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+header .topo .telefone-topo a {
+	font-size: 1.2rem;
+}
+
+nav#float-menu, nav.menu-topo {
+	border-top: 1px solid <!--###PREF_2###-->;
+}
+
+.departamentos-nav {
+	text-align: center;
+}
+
+	.departamentos-nav > li > a, .departamentos-nav > li > p {
+		font-size: 1.3rem;
+	}
+
+header .botao-busca {
+	background-color: #fff;
+	color: #999;
+}
+
+header .div-carrinho .cart-content {
+	background-color: <!--###PREF_2###-->;
+	border: 0px;
+	color: <!--###PREF_5###-->;
+	height: 4.2rem;
+	text-align: right;
+	padding: 1rem;
+}
+
+header .div-carrinho .fa-shopping-cart {
+	background-color: <!--###PREF_2###-->;
+	border: 0px;
+	color: <!--###PREF_5###-->;
+	height: 4.2rem;
+	line-height: 4.2rem;
+}
+
+#barra-flutuante #burguer-menu:hover, #barra-flutuante .div-carrinho:hover, #botao-news:hover, .botao-busca:hover, .div-carrinho:hover .fa-shopping-cart, .div-item .prod-botao-comprar span a:hover {
+	opacity: 1 !important;
+}
+
+header .div-carrinho p {
+	line-height: 2.2rem;
+}
+
+header .div-carrinho .carrinho-texto {
+	display: none;
+}
+
+footer .input-news {
+	background-color: <!--###PREF_31###-->;
+}
+
+footer #botao-news {
+	color: <!--###PREF_34###-->;
 }

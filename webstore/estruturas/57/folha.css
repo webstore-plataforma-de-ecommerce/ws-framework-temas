@@ -1,4 +1,4 @@
-fieldset{
+﻿fieldset{
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -373,7 +373,7 @@ span.CarOnPageCodigoProduto {
 	text-align: center;
 	width: 4rem;
 }
-#header-mobile .link-carrinho-mobile{
+#header-mobile .link-carrinho{
 	border-radius: 4px;
 	display: inline-block;
 	float: right;
@@ -382,14 +382,11 @@ span.CarOnPageCodigoProduto {
 	text-align: center;
 	width: 4rem;
 }
-#header-mobile .link-user span, #header-mobile .link-carrinho-mobile span, #header-mobile .link-menu span {
+#header-mobile .link-user span, #header-mobile .link-carrinho span, #header-mobile .link-menu span {
 	color: <!--###PREF_3###-->;
 	line-height: 4rem;
 	line-height: calc(4rem - 2px);
 	width: 100%;
-}
-#header-mobile .logo-container{
-    
 }
 #header-mobile .logo-container .LV_LogotipoImg, #header-mobile .logo-container .LV_LOGO_TOPO {
 	display: block;
@@ -399,13 +396,13 @@ span.CarOnPageCodigoProduto {
 	position: relative;
 	transition: 0.2s ease;
 	width: 100%;
-	width: calc(100% - 20rem);
+	width: calc(100% - 14rem);
 }
 #header-mobile .logo-container .LV_LogotipoImg img, #header-mobile .logo-container .LV_LOGO_TOPO img {
 	bottom: 0;
 	left: 0;
 	margin: auto;
-	max-height: 60%;
+	max-height: 100%;
 	max-width: 100%;
 	position: absolute;
 	right: 0;
