@@ -76,6 +76,7 @@ request.get('https://adminloja.webstore.net.br/lojas/dados/dadosloja/?LV_ID=' + 
 
         app.listen(3000, function () {
             console.log("server runing on port 3000");
+            console.log("Acesse http://localhost:3000 em seu navegador");
         });
 
     } else {
@@ -100,8 +101,8 @@ function htmlModulos() {
         js += moduloJs + '\n';
 
     }
-    var compress = uglify.minify(js);
-    js = compress.code;
+    /*var compress = uglify.minify(js);
+    js = compress.code;*/
 
     css += fs.readFileSync('./webstore/layout/folha.css').toString();
 
