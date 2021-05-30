@@ -1,0 +1,52 @@
+Para utilizar módulos personalizados da loja siga as instruções abaixo.
+
+1 - O módulo deve conter uma pasta dentro de layout/modulos_loja
+
+2 - O nome dessa pasta não deve conter caracteres especiais ou espaços EX: (modulo_exemplo)
+
+3 - Dentro da pasta, deverão existir 3 arquivos com o mesmo nome da pasta. Um js, um css e um html.
+EX: 
+    pasta: modulo_exemplo
+          arquivos: modulo_exemplo.js
+                    modulo_exemplo.css
+                    modulo_exemplo.html
+
+4 - Após criar a pasta do módulo abra o arquivo de configuração na pasta layout/config/config.json e insira o módulo em "modulos_loja"
+EX:
+
+{
+  "modulos": [...],
+  "modulos_loja": [
+    {
+      "nome": "modulo_exemplo",
+      "etapa": "HOME"
+    }
+  ]
+}
+
+5 - A etapa define em qual página o módulo será válido. Possíveis etapas são:
+
+* - Todas  as páginas
+HOME - Página inicial da loja
+LISTAGEM - Página de categorias e resultados de busca
+PRODUTO - Página de visualização dos produtos
+CARRINHO - Página do carrinho de compras da loja
+CONTATO - Página "Fale conosco"
+FORMAS_PAGAMENTO - Página do checkout
+FinalPagamento - Página de finalização do pedido
+login - Página onde o usuário faz login ou inicia cadastro
+menu-cliente - Página do menu do cliente, onde são vistos os pedidos, dados cadastrais, etc...
+PAGINAS_INST - Páginas institucionais da loja (Páginas adicionais)
+
+
+6 - O css e js do módulo será incorpordado automaticamente com os da loja, porém caso o módulo precise de tags HTML, serão inseridas no arquivo
+html do módulo e deverá ser utilizada uma TAG para puxar esse código dentro de algum arquivo padrão do layout.
+
+EX:
+No arquivo estrutura_index.html insira a TAG abaixo.
+<!--##[LOJA]MODULO_EXEMPLO##-->
+A tag seguirá o padrão iniciando com "<!--##[LOJA]" após isso o nome do modulo em caixa alta "MODULO_EXEMPLO" e terminando com "##-->"
+Ou seja, se por acaso o modulo tivesse o nome listagem_produto_diferente a tag seria: <!--##[LOJA]LISTAGEM_PRODUTO_DIFERENTE##-->
+
+
+7 - Ao terminar a personalização da loja e realizar o processo de deploy, o módulo existirá na loja em produção.

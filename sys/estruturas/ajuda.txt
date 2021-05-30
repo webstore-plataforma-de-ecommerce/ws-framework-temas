@@ -1,0 +1,35 @@
+[Estruturas padrões da Webstore]
+
+Ao solicitar a criação de um tema personalizado, o mesmo é iniciado sem nenhum conteúdo.
+
+Uma dica para criação de um tema personalizado é verificar qual tema padrão chega mais 
+próximo do resultado final que você deseja e utilizar o mesmo como base.
+
+Para iniciar o projeto usando um tema padrão como base, 
+execute o comando "node config" e informe o token do tema padrão que deseja utilizar.
+
+O token é obtido dentro do painel da loja no menu LAYOUT > PERSONALIZAR > AVANÇADO > EDIÇÃO REMOTA
+
+Após isso, execute o comando "node download", com isso o sistema irá baixar os códigos do tema padrão selecionado
+para seu projeto.
+Porém, você verá que o arquivo folha.css estará vazio, uma vez que o sistema entende que você apenas está modificando uma 
+estrutura padrão criando algumas classes apenas para depois replicar novamente.
+
+Como você irá utilizar o conteúdo para criar um novo tema, dentro do projeto, vá até a pasta webstore/estruturas e localize a pasta 
+com o nome do tema padrão escolhido.
+Dentro dessa pasta você localizará o CSS do tema.
+Abra o arquivo, copie o conteúdo e cole no arquivo folha.css localizado dentro da pasta webstore/layout.
+
+E pronto, agora você já está pronto para iniciar a personalização do tema usando um tema padrão como base.
+
+Agora pegue o TOKEN do tema personalizado e realize novamente o processo de configuração com "node config".
+ATENÇÃO!
+Lembre-se de NÃO executar o processo de download após isso, pois caso o faça, o sistema baixará novamente o tema personalizado
+apagando o processo que acabou de realizar.
+
+Após finalizar toda a personalização, utilize o processo de "node upload" para fazer o deploy do tema criado.
+
+Ao temas personalizados você poderá criar módulos para a loja dentro da pasta modulos_loja dentro de webstore/layout
+
+Para mais informações sobre como criar módulos, acesse o arquivo ajuda dentro da pasta webstore/layout/modulos_loja 
+ou então, acesse https://edittemas.developers.webstore.net.br e saiba mais.

@@ -4,19 +4,34 @@
   "description": "site da casa do codigo",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.9",
+    "colors": "^1.4.0",
+    "connect-livereload": "^0.6.1",
     "edit-file": "^0.3.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-load": "^1.1.16",
+    "livereload": "^0.9.3",
     "mysql": "^2.15.0",
+    "nodemon": "^2.0.7",
     "npm": "^6.0.1",
-    "request": "^2.88.0",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2",
+    "terminal-link": "^3.0.0",
     "uglify-js": "^3.3.25"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "graceful-fs": "^4.2.6"
   },
-  "author": "alefbarbeli",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "watch": "nodemon --ignore public"
+  },
+  "resolutions": {
+    "graceful-fs": "4.2.4"
+  },
+  "author": "Webstore lojas virtuais",
   "license": "ISC"
 }
