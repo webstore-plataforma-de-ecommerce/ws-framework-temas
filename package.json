@@ -25,9 +25,14 @@
     "graceful-fs": "^4.2.6"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "watch": "nodemon --ignore public"
+    "start": "node --max-http-header-size=120000 app",
+    "config": "node config",
+    "help": "node help",
+    "mod": "node mod",
+    "pull": "node pull",
+    "push": "node push",
+    "setpage": "node setpage",
+    "status": "node status"
   },
   "resolutions": {
     "graceful-fs": "4.2.4"
