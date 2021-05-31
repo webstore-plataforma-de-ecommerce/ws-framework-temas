@@ -24,7 +24,7 @@ console.log("");
 console.log("node status ".yellow.bold);
 console.log("Executando esse comando voce sabera qual loja e tema esta personalizando no momento");
 console.log("");
-console.log("node app ".yellow.bold);
+console.log("npm start ".yellow.bold + "(atencao pois e o unico comando que ao inves de node utiliza npm no inicio)");
 console.log("Ao executar esse comando, voce podera visualizar o andamento da loja no seu navegador atraves do link http://localhost:3000");
 console.log("");
 console.log("node setpage ".yellow.bold);
