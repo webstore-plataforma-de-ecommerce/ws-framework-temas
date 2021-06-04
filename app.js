@@ -6,22 +6,15 @@ const axios = require('axios')
 var serverOn = false;
 const cheerio = require('cheerio');
 const colors = require('colors');
+const livereload = require("livereload"), liveReloadServer = livereload.createServer();
 
 console.log(" ");
 
-/*
-const livereload = require("livereload");
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch((__dirname, 'public'));
-const connectLivereload = require("connect-livereload");
-app.use(connectLivereload());
 liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
         liveReloadServer.refresh("/");
-    }, 100);
+    }, 10);
 });
-*/
-
 
 var pageURL = "";
 var result;
