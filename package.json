@@ -25,7 +25,8 @@
     "graceful-fs": "^4.2.6"
   },
   "scripts": {
-    "start": "node --max-http-header-size=120000 app",
+    "dev": "node --max-http-header-size=120000 app",
+    "start": "nodemon --quiet",
     "config": "node config",
     "help": "node help",
     "mod": "node mod",
@@ -33,6 +34,20 @@
     "push": "node push",
     "setpage": "node setpage",
     "status": "node status"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "execMap": {
+      "ts": "npm run dev"
+    },
+    "ignore": [
+      "./public/",
+      "package.json"
+    ],
+    "watch": [
+      "layout"
+    ],
+    "ext": "html js css json"
   },
   "resolutions": {
     "graceful-fs": "4.2.4"
