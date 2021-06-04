@@ -115,10 +115,10 @@ function showPage() {
 
         if (urlComplete != "" || 1==1) {
             
-            if (protocolo.indexOf("lojas.webstore") >= 0) { protocolo = "http://"; }
+            if (objJ.dominio.indexOf("lojas.webstore") >= 0) { protocolo = "http://"; }
 
             axios
-                .post(protocolo + objJ.dominio + urlComplete +"?edicao_remota=true", {
+                .post(protocolo + objJ.dominio + urlComplete + "?edicao_remota=true&token=" + LOJA, {
                     Html_index: index,
                     Html_listagem: listagem,
                     Html_sem_direita: sem_direita,
