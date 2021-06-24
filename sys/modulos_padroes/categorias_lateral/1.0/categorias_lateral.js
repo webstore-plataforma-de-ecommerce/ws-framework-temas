@@ -12,6 +12,7 @@ function CategoriaLateral() {
         var DepartamentosLateral = Departamentos(departamento, 0, registro);
         $('#departamentos-lateral').append(DepartamentosLateral);
         if (typeof call_after_categoria_lateral !== 'undefined') { try { eval(call_after_categoria_lateral); } catch (e) { console.log("Falha call_after_categoria_lateral" + e.message); } }
+        WsModifiersCall("categorias_lateral_1_0");
     } catch (e) {
         console.log("Falha Categorias Lateral:" + e.message);
     }

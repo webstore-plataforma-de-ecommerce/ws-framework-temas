@@ -79,6 +79,7 @@ function FabricantesRetorno() {
 		}
 
 		if (typeof call_after_fabricantes !== 'undefined') { try { eval(call_after_fabricantes); } catch (e) { console.log("Falha call_after_fabricantes" + e.message); } }
+		WsModifiersCall("fabricantes_1_0");
 
 	} catch (e) { console.log(e.message); }
 }

@@ -219,7 +219,7 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					        txtBtComprar = textBotaoCompra;
 					    }
 
-					    COMPRAR = '<span class="prod-no-qty"><a href="' + OBJ.links.botao_comprar + '"><i class="fa fa-shopping-cart"></i> ' + txtBtComprar + '</a></span>';
+						COMPRAR = '<span class="prod-no-qty"><a data-sku="'+ OBJ.codigo +'" href="' + OBJ.links.botao_comprar + '"><i class="fa fa-shopping-cart"></i> ' + txtBtComprar + '</a></span>';
 					    blocoBotaoComprar = true;
 
 						var CampoQtd = "";

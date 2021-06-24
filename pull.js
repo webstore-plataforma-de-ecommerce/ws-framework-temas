@@ -38,6 +38,7 @@ try {
                 fs.writeFile('./layout/include/esquerda.html', objJ.esquerda, (err) => { if (err) throw err; });
 
                 fs.writeFile('./layout/assets/folha.css', objJ.folha, (err) => { if (err) throw err; });
+                fs.writeFile('./public/css/cssBase.css', objJ.cssBase, (err) => { if (err) throw err; });
                 fs.writeFile('./layout/assets/functions.js', objJ.js, (err) => { if (err) throw err; });
 
                 fs.writeFile('./layout/estrutura_index.html', objJ.index, (err) => { if (err) throw err; });

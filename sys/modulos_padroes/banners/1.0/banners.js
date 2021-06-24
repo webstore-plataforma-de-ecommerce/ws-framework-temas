@@ -54,6 +54,8 @@ function BannersRetorno(getJson) {
 					var li = "";
 					var img = "";
 
+					if (banner.tipo == '24') { banner.tipo == 'full'; }
+
 					var bannerDispositivo = "D";
 					try { bannerDispositivo = banner.dispositivos; } catch (e) { }
 
@@ -101,6 +103,11 @@ function BannersRetorno(getJson) {
 								li += '<li id="slide-' + banner.id + '">';
 								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a></li>';
 
+							} else if (banner.tipo == 'full') {
+
+								li += '<li id="slide-' + banner.id + '">';
+								li += '<a ' + href + ' target="' + banner.target + '">' + img + '</a></li>';
+
 							} else if (banner.tipo == 'lateral') {
 								lateralDir = true;
 								FrameworkResponsivo();
@@ -120,7 +127,6 @@ function BannersRetorno(getJson) {
 							}
 
 						}
-
 
 						if ($('#banner-' + banner.tipo).length) {
 
@@ -157,7 +163,7 @@ function BannersRetorno(getJson) {
 					try { $('#banner-' + tipo[b]).parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
 					try { $('#banner-' + tipo[b]).parent().parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
 
-					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape"){
+					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape" || tipo[b] == "full" || tipo[b] == "24"){
 						$('#banner-' + tipo[b])
 							.removeClass('hidden')
 							.css('visibility', 'hidden')
@@ -229,6 +235,7 @@ function BannersRetorno(getJson) {
         LazyLoadApply();
 
 		if (typeof call_after_banners !== 'undefined') { try { eval(call_after_banners); } catch (e) { console.log("Falha call_after_banners" + e.message); } }
+		WsModifiersCall("banners_1_0");
 
 	} catch (e) { console.log('BannersRetorno: '+e.message); }
 }

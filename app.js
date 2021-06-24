@@ -115,7 +115,7 @@ function showPage() {
 
         if (urlComplete != "" || 1==1) {
             
-            if (objJ.dominio.indexOf("lojas.webstore") >= 0) { protocolo = "http://"; }
+            if (objJ.dominio.indexOf("lojas.webstore") >= 0 || objJ.dominio.indexOf("lojamodelolocal") >= 0) { protocolo = "http://"; }
 
             axios
                 .post(protocolo + objJ.dominio + urlComplete + "?edicao_remota=true&token=" + LOJA, {
@@ -274,7 +274,7 @@ function htmlModulos() {
 
         try {
             if (LayInt < 1000) {
-                css = fs.readFileSync('./sys/estruturas/' + objConfig.temaNome + '/css.css').toString() + css;
+                css = fs.readFileSync('./public/css/cssBase.css').toString() + css;
             }
         } catch (e) { }
 

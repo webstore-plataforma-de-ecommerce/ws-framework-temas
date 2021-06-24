@@ -179,6 +179,7 @@ function ProdutosGruposRetorno() {
         LazyLoadApply();
 
         if (typeof call_after_produtos_grupos !== 'undefined') { try { eval(call_after_produtos_grupos); } catch (e) { console.log("Falha call_after_produtos_grupos" + e.message); } }
+        WsModifiersCall("produtos_grupos_1_1");
 
     } catch (e) { console.log('ProdutosGruposRetorno: ' + e.message); }
 

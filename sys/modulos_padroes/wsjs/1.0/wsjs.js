@@ -96,10 +96,10 @@ ApiWS.ApiStart = function () {
                         UrlApi = "https://apilojaws.plataformawebstore.com.br";
                     }
                     else {
+                        //UrlApi = "https://apiloja.wscache.webstore.net.br";
                         UrlApi = "https://apilojaws.wslojas.com.br";
                     }
-
-                    //UrlApi = "http://localhost:9696";//OCULTAR APOS AJUSTES
+                    //UrlApi = "https://apiloja.wscache.webstore.net.br";
 
                     if (GetTypeCdnApi != "" && GetTypeCdnApi != undefined && GetTypeCdnApi != null) {
                         UrlApi = GetTypeCdnApi;
@@ -1221,8 +1221,8 @@ function funcaoWsToken() {
 var WsTokenOk = "";
 var ObjAtualWsToken = "";
 function funcaoWsTokenStart() {
-    try {
 
+    try {
         
         var ObjWsExist = $("#" + ObjAtualWsToken).html();
 
@@ -1270,4 +1270,21 @@ function funcaoWsTokenStart() {
         //window.setTimeout("funcaoWsTokenStart()", 5000);
 
     } catch (e) { }
+
+}
+
+
+function WsModifiersCall(name) {
+
+    try {
+        if (typeof eval("callafter_" + name) !== 'undefined') {
+            console.log("Modificador localizado: " + "callafter_" + name);
+            var FuncaoName = eval("callafter_" + name);
+            try {
+                eval(FuncaoName);
+                console.log("Modificador executado: " + FuncaoName);
+            } catch (e) { console.log("Falha call_after " + FuncaoName + ": " + e.message); }
+        }
+    } catch (e) { }
+
 }

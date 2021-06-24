@@ -165,6 +165,8 @@ function ProdutoDadosRetorno() {
             $("#calcula-frete").hide();
         }
 
+        $('#LV_BT_COMPRAR').attr('data-sku', obj.codigo);
+
         if (obj.migalha != null && obj.migalha != undefined) {
             var qtd = 0;
             for (b = 0; b < obj.migalha.length; b++) {
@@ -282,9 +284,15 @@ function ProdutoDadosRetorno() {
                     tabelaParcelas += '</ul></div></div></div>';
                 }
 
+                var txtBtComprar = "Comprar";
+                if (typeof textBotaoCompraPagProduto !== 'undefined') {
+                    txtBtComprar = textBotaoCompraPagProduto;
+                }
+
                 COMPRAR = '<div class="input-qtd">';
                 COMPRAR += '<input type="number" name="qtd-carrinho" id="qtd-carrinho" value="1" min="1"><span>Qtd</span></div>';
-                COMPRAR += '<a href="javascript:void(FuncaoBotaoComprar())" id="funcao-botao-comprar"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Comprar</a>';
+                COMPRAR += '<a href="javascript:void(FuncaoBotaoComprar())" id="funcao-botao-comprar"><i class="fa fa-shopping-cart" aria-hidden="true"></i>' + txtBtComprar + '</a>';
+
             } else {
                 $('#preco-produto').hide();
                 $('#botao-comprar-produto').css('width', '100%');
@@ -484,6 +492,7 @@ function ProdutoDadosRetorno() {
         $("#produto").prepend("<meta itemprop='priceValidUntil' content='" + date + "'/>");
 
         if (typeof call_after_pag_produto !== 'undefined') { try { eval(call_after_pag_produto); } catch (e) { console.log("Falha call_after_pag_produto" + e.message); } }
+        WsModifiersCall("pag_produto_1_0");
 
         if (typeof WsFavoritos !== 'undefined') {
             if (WsFavoritos) {

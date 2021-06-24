@@ -27,6 +27,7 @@ function Login(){
 		}
 
 		if (typeof call_after_login !== 'undefined') { try { eval(call_after_login); } catch (e) { console.log("Falha call_after_login" + e.message); } }
+		WsModifiersCall("login_1_0");
 
 	} catch (e) { console.log(e.message); }
 }

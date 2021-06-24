@@ -136,6 +136,8 @@ function ProdutosListagemRetorno() {
 		ConteudoResponsivo();
 		ListItemResize();
 		nomeProd();
+
+		WsModifiersCall("produtos_listagem_1_0");
 		
 	} catch (e) { console.log('ProdutosListagemRetorno: '+e.message); }
 }

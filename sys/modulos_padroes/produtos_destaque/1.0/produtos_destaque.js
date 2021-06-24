@@ -57,4 +57,7 @@ function ProdutosDestaqueRetorno() {
 		}
 
 	} catch (e) { console.log('ProdutosDestaqueRetorno: ' + e.message); }
+
+	WsModifiersCall("produtos_destaque_1_0");
+
 }

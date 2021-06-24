@@ -81,6 +81,7 @@ function ListaProdutosUltimosRetorno() {
 				}
 
 				if (typeof call_after_ProdutosUltimos !== 'undefined') { try { eval(call_after_ProdutosUltimos); } catch (e) { console.log("Falha call_after_ProdutosUltimos" + e.message); } }
+				WsModifiersCall("produtos_ultimos_1_1");
 
 			}
 

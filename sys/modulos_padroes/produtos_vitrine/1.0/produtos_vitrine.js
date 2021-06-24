@@ -67,6 +67,7 @@ function ProdutosVitrineRetorno() {
         LazyLoadApply();
 
 		if (typeof call_after_produtos_vitrine !== 'undefined') { try { eval(call_after_produtos_vitrine); } catch (e) { console.log("Falha call_after_produtos_vitrine" + e.message); } }
+		WsModifiersCall("produtos_vitrine_1_0");
 
 	} catch (e) { console.log('ProdutosHomeRetorno: ' + e.message); }
 }

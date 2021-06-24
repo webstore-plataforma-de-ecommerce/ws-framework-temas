@@ -92,6 +92,8 @@ function ProdutosHomeRetorno(getJson) {
 
         LazyLoadApply();
 
+        WsModifiersCall("produtos_home_1_1");
+
     } catch (e) { console.log('ProdutosHomeRetorno: ' + e.message); }
 
 }

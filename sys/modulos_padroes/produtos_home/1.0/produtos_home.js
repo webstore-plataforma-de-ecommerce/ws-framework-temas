@@ -49,5 +49,7 @@ function ProdutosHomeRetorno() {
 
 		window.setTimeout("ConteudoResponsivo()", 5000);
 
+		WsModifiersCall("produtos_home_1_0");
+
 	} catch (e) { console.log('ProdutosHomeRetorno: ' + e.message); }
 }

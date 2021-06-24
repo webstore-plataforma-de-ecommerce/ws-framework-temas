@@ -104,4 +104,7 @@ function ProdutosGruposRetorno() {
 		}
 
 	} catch (e) { console.log('ProdutosGruposRetorno: ' + e.message); }	
+
+	WsModifiersCall("produtos_grupos_1_0");
+
 }
