@@ -17,7 +17,6 @@ console.log("Iniciando o download usando o token " + TOKEN);
 function folderVerify(subdir, dir) {
     let dirToRead = dir ? __dirname + '/' + dir : __dirname
 
-    console.log(subdir)
     subdir.forEach(dirToAppend => {
         let vrfy = false
 
