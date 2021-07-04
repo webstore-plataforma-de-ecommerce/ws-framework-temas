@@ -5,7 +5,6 @@ var request = require('request');
 const colors = require('colors');
 var rimraf = require("rimraf");
 
-
 console.log(" ");
 
 var objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json').toString());
@@ -14,6 +13,25 @@ var objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString(
 var TOKEN = objConfig.token
 
 console.log("Iniciando o download usando o token " + TOKEN);
+
+function folderVerify(subdir, dir) {
+    let vrfy = false
+
+    let dirToRead = dir ? __dirname + '/' + dir : __dirname;
+
+    fs.readdirSync(dirToRead).forEach(file => {
+        vrfy = file == subdir ? true : vrfy || false
+    })
+    vrfy ? null : fs.mkdirSync(dirToRead + '/' + subdir)
+    
+    return
+}
+
+folderVerify('layout')
+folderVerify('assets', 'layout')
+folderVerify('config', 'layout')
+folderVerify('include', 'layout')
+folderVerify('modulos_loja', 'layout')
 
 try {
 
@@ -38,6 +56,7 @@ try {
                 fs.writeFile('./layout/include/esquerda.html', objJ.esquerda, (err) => { if (err) throw err; });
 
                 fs.writeFile('./layout/assets/folha.css', objJ.folha, (err) => { if (err) throw err; });
+                fs.writeFile('./public/css/cssBase.css', objJ.cssBase, (err) => { if (err) throw err; });
                 fs.writeFile('./layout/assets/functions.js', objJ.js, (err) => { if (err) throw err; });
 
                 fs.writeFile('./layout/estrutura_index.html', objJ.index, (err) => { if (err) throw err; });
@@ -90,7 +109,7 @@ try {
 
             } else {
 
-                console.log("Não foi possivel ler as preferencias".red);
+                console.log("Nï¿½o foi possivel ler as preferencias".red);
                 console.log(body);
 
             }
