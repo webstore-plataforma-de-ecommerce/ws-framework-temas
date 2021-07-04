@@ -15,23 +15,24 @@ var TOKEN = objConfig.token
 console.log("Iniciando o download usando o token " + TOKEN);
 
 function folderVerify(subdir, dir) {
-    let vrfy = false
+    let dirToRead = dir ? __dirname + '/' + dir : __dirname
 
-    let dirToRead = dir ? __dirname + '/' + dir : __dirname;
+    console.log(subdir)
+    subdir.forEach(dirToAppend => {
+        let vrfy = false
 
-    fs.readdirSync(dirToRead).forEach(file => {
-        vrfy = file == subdir ? true : vrfy || false
+        fs.readdirSync(dirToRead).forEach(file => {
+            vrfy = file == dirToAppend ? true : vrfy || false
+        })
+        vrfy ? null : fs.mkdirSync(dirToRead + '/' + dirToAppend)
     })
-    vrfy ? null : fs.mkdirSync(dirToRead + '/' + subdir)
+
     
     return
 }
 
-folderVerify('layout')
-folderVerify('assets', 'layout')
-folderVerify('config', 'layout')
-folderVerify('include', 'layout')
-folderVerify('modulos_loja', 'layout')
+folderVerify(['layout'])
+folderVerify(['assets', 'config', 'include', 'modulos_loja'], 'layout')
 
 try {
 
