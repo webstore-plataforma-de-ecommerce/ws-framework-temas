@@ -1,6 +1,7 @@
 var viewmoreOption = false;
 var firstpage = true;
 
+
 $(document).ready(function () {
 	try{
 		if ($("#HdEtapaLoja").val() == "LISTAGEM"){
@@ -68,8 +69,13 @@ function ProdutosListagemRetorno() {
 						$('.resultado-paginacao').html(obj.paginacao.total_itens + ' itens');
 
 						if (pgAtual != 1) {
-							$('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
-							$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+							if (typeof paginacaoSemSeta !== 'undefined') {
+								$('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina">Primeira</a></li>');
+								$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '">Anterior</a></li>');
+							} else {
+								$('.lista-paginacao').append('<li><a href="?pagina=1" title="Ir para a primeira p&aacute;gina"><span class="fa fa-angle-left" aria-hidden="true"></span><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+								$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual - 1) + '" title="Ir para p&aacute;gina ' + (pgAtual - 1) + '"><span class="fa fa-angle-left" aria-hidden="true"></span></a></li>');
+                            }
 						}
 
 						for (c = 0; c < qtdPaginas; c++) {
@@ -98,8 +104,15 @@ function ProdutosListagemRetorno() {
 							}
 						}
 						if (pgAtual != qtdPaginas) {
-							$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
-							$('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+
+							if (typeof paginacaoSemSeta !== 'undefined') {
+								$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '">Pr&oacute;xima</a></li>');
+								$('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina">&Uacute;ltima</a></li>');
+							} else {
+								$('.lista-paginacao').append('<li class="hidden-xs"><a href="?pagina=' + (pgAtual + 1) + '" title="Ir para p&aacute;gina ' + (pgAtual + 1) + '"><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+								$('.lista-paginacao').append('<li><a href="?pagina=' + qtdPaginas + '" title="Ir para a &uacute;ltima p&aacute;gina"><span class="fa fa-angle-right" aria-hidden="true"></span><span class="fa fa-angle-right" aria-hidden="true"></span></a></li>');
+                            }
+
 						}
 
 					} else {
@@ -198,7 +211,9 @@ function ProdutosListagemRetorno() {
         ConteudoResponsivo();
         window.setTimeout("blocoHeightAjusta()", 2000);
         nomeProd("#prod-list");
-        LazyLoadApply();
+		LazyLoadApply();
+
+		WsModifiersCall("produtos_listagem_1_1");
 		
 	} catch (e) { console.log('ProdutosListagemRetorno: '+e.message); }
 }

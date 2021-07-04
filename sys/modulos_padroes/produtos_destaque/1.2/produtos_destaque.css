@@ -1,4 +1,4 @@
-/*PRODUTOS DESTAQUE*/
+/*PRODUTOS DESTAQUE 1.2*/
 #prod-destaque {
 	margin: 0 0 1rem;
     padding-left: 0.5rem;
@@ -38,7 +38,7 @@
 }
 #prod-destaque .div-item .add {
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 }
 #prod-destaque .div-item .add span {
 	background-color: #d7d7d7;

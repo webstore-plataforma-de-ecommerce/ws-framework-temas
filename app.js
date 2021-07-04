@@ -6,22 +6,15 @@ const axios = require('axios')
 var serverOn = false;
 const cheerio = require('cheerio');
 const colors = require('colors');
+const livereload = require("livereload"), liveReloadServer = livereload.createServer();
 
 console.log(" ");
 
-/*
-const livereload = require("livereload");
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch((__dirname, 'public'));
-const connectLivereload = require("connect-livereload");
-app.use(connectLivereload());
 liveReloadServer.server.once("connection", () => {
     setTimeout(() => {
         liveReloadServer.refresh("/");
-    }, 100);
+    }, 10);
 });
-*/
-
 
 var pageURL = "";
 var result;
@@ -122,10 +115,10 @@ function showPage() {
 
         if (urlComplete != "" || 1==1) {
             
-            if (protocolo.indexOf("lojas.webstore") >= 0) { protocolo = "http://"; }
+            if (objJ.dominio.indexOf("lojas.webstore") >= 0 || objJ.dominio.indexOf("lojamodelolocal") >= 0) { protocolo = "http://"; }
 
             axios
-                .post(protocolo + objJ.dominio + urlComplete +"?edicao_remota=true", {
+                .post(protocolo + objJ.dominio + urlComplete + "?edicao_remota=true&token=" + LOJA, {
                     Html_index: index,
                     Html_listagem: listagem,
                     Html_sem_direita: sem_direita,
@@ -281,7 +274,7 @@ function htmlModulos() {
 
         try {
             if (LayInt < 1000) {
-                css = fs.readFileSync('./sys/estruturas/' + objConfig.temaNome + '/css.css').toString() + css;
+                css = fs.readFileSync('./public/css/cssBase.css').toString() + css;
             }
         } catch (e) { }
 

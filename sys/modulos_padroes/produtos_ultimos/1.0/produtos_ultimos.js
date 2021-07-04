@@ -71,6 +71,8 @@ function ListaProdutosUltimosRetorno() {
 					});
 
 					ListItemResize();
+
+					WsModifiersCall("produtos_ultimos_1_0");
 				}
 			}
 		} catch (e) { console.log('ListaProdutosUltimosRetorno: ' + e.message); }

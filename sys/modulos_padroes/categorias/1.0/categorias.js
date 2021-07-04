@@ -154,11 +154,11 @@ function CategoriasManage(obj, ShowStartSub) {
                                 for (b = 0; b < opcao.length; b++) {
                                     if (b >= 5) {
                                         filtro += '<li class="filtro-opcao shrink">';
-                                        filtro += '<a href="' + opcao[b].link + '">' + opcao[b].nome + '</a>';
+                                        filtro += '<a href="' + opcao[b].link + '">' + opcao[b].nome.split('|')[0] + '</a>';
                                         filtro += '</li>';
                                     } else {
                                         filtro += '<li class="filtro-opcao">';
-                                        filtro += '<a href="' + opcao[b].link + '">' + opcao[b].nome + '</a>';
+                                        filtro += '<a href="' + opcao[b].link + '">' + opcao[b].nome.split('|')[0] + '</a>';
                                         filtro += '</li>';
                                     }
                                     if (opcao[b].selecionada == true) {
@@ -178,7 +178,7 @@ function CategoriasManage(obj, ShowStartSub) {
                     if (filtroAtivo != null && filtroAtivo != undefined && filtroAtivo.length > 0) {
                         var span = ""
                         for (i = 0; i < filtroAtivo.length; i++) {
-                            span += '<span class="filtro-ativo">' + filtroAtivo[i].nome + '<a href="' + filtroAtivo[i].link + '">&times;</a></span>';
+                            span += '<span class="filtro-ativo">' + filtroAtivo[i].nome.split('|')[0] + '<a href="' + filtroAtivo[i].link + '">&times;</a></span>';
                         }
                         $('#div-barra-esquerda').prepend(span);
                     }
@@ -237,6 +237,7 @@ function CategoriasManage(obj, ShowStartSub) {
         window.setTimeout("AjustaMegaMenu()", 1000);
 
         if (typeof call_after_categorias !== 'undefined') { try { eval(call_after_categorias); } catch (e) { console.log("Falha call_after_categorias" + e.message); } }
+        WsModifiersCall("categorias_1_0");
 
     } catch (e) {
         console.log("Falha categorias:" + e.message);

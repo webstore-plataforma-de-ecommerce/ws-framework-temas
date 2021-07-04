@@ -108,6 +108,7 @@ function ProdutosDestaqueRetorno() {
         LazyLoadApply();
 
 		if (typeof call_after_destaque !== 'undefined') { try { eval(call_after_destaque); } catch (e) { console.log("Falha call_after_destaque" + e.message); } }
+		WsModifiersCall("produtos_destaque_1_2");
 
 	} catch (e) { console.log('ProdutosDestaqueRetorno: ' + e.message); }
 }
