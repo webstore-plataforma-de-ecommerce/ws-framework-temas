@@ -17,7 +17,7 @@
     "livereload": "^0.9.3",
     "mysql": "^2.15.0",
     "nodemon": "^2.0.7",
-    "npm": "^6.0.1",
+    "npm": "^6.14.6",
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "terminal-link": "^3.0.0",
