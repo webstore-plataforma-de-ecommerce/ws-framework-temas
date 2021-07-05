@@ -5,7 +5,6 @@ var request = require('request');
 const colors = require('colors');
 var rimraf = require("rimraf");
 
-
 console.log(" ");
 
 var objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json').toString());
@@ -14,6 +13,25 @@ var objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString(
 var TOKEN = objConfig.token
 
 console.log("Iniciando o download usando o token " + TOKEN);
+
+function folderVerify(subdir, dir) {
+    let dirToRead = dir ? __dirname + '/' + dir : __dirname
+
+    subdir.forEach(dirToAppend => {
+        let vrfy = false
+
+        fs.readdirSync(dirToRead).forEach(file => {
+            vrfy = file == dirToAppend ? true : vrfy || false
+        })
+        vrfy ? null : fs.mkdirSync(dirToRead + '/' + dirToAppend)
+    })
+
+    
+    return
+}
+
+folderVerify(['layout'])
+folderVerify(['assets', 'config', 'include', 'modulos_loja'], 'layout')
 
 try {
 
@@ -91,7 +109,7 @@ try {
 
             } else {
 
-                console.log("Não foi possivel ler as preferencias".red);
+                console.log("Nao foi possivel ler as preferencias".red);
                 console.log(body);
 
             }
