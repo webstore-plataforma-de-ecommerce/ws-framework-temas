@@ -17,16 +17,12 @@ console.log("Iniciando o download usando o token " + TOKEN);
 function folderVerify(subdir, dir) {
     let dirToRead = dir ? __dirname + '/' + dir : __dirname
 
-    subdir.forEach(dirToAppend => {
-        let vrfy = false
+    dir && fs.existsSync(__dirname + '/layout') ? null : fs.rmdirSync(__dirname + '/layout', {recursive: true, force: true})
 
-        fs.readdirSync(dirToRead).forEach(file => {
-            vrfy = file == dirToAppend ? true : vrfy || false
-        })
-        vrfy ? null : fs.mkdirSync(dirToRead + '/' + dirToAppend)
+    subdir.forEach(dirToAppend => {
+        fs.mkdirSync(dirToRead + '/' + dirToAppend)
     })
 
-    
     return
 }
 
@@ -109,7 +105,7 @@ try {
 
             } else {
 
-                console.log("N�o foi possivel ler as preferencias".red);
+                console.log("Nao foi possivel ler as preferencias".red);
                 console.log(body);
 
             }

@@ -73,16 +73,23 @@ function writingFile(dir, commit) {
 
     // Espera o Rar Como Resposta
     function waitForRar() {
-        if (!fs.existsSync(__dirname + '/backup/' + dir + '/' + getTime(dateMark) + '/' + writeName + '.rar')) { setTimeout(()=>{waitForRar()},100); return }
+
+        //if (!fs.existsSync(__dirname + '/backup/' + dir + '/' + getTime(dateMark) + '/' + writeName + '.rar')) { setTimeout(() => { waitForRar() }, 100); return }
 
         fs.writeFileSync(__dirname + '/backup/' + dir + '/' + getTime(dateMark) + '/' + writeName + '.json', JSON.stringify(mountData(commit)))
 
         console.log('Processo Finalizado!'.green.bold)
+        console.log('Voce pode restaurar seu backup futuramente com o comando ' + 'node restore'.yellow.bold);
 
-        process.exit()
+        setTimeout(finishProcess, 2000);
+        
     }
 
     waitForRar()
+}
+
+function finishProcess() {
+    process.exit();
 }
 
 function mountData(commit) {

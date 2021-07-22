@@ -21,7 +21,8 @@ async function restoreFun (source, target) {
         console.log('\n Extração Completa! \n'.green.bold)
         process.exit()
     } catch (err) {
-        console.log(err.red.bold)
+        console.log("Falha no processo".red.bold);
+        console.log(err);
         // handle any errors
     }
 }
@@ -64,7 +65,7 @@ function restoreBackup(n) {
 }
 
 function confirmQuest(n) {
-    return rl.question('Este processo vai deletar toda sua pasta layout!'.red.bold + '\n (S/N): '.yellow, answer => {
+    return rl.question('Este processo vai substituir toda sua pasta layout atual pelo conteudo do backup selecionado, deseja seguir?'.yellow.bold + '\n (S/N): '.yellow, answer => {
         if (answer != 's' && answer != 'S') { process.exit() }
 
         restoreBackup(n)
