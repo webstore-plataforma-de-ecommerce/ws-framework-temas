@@ -1,9 +1,9 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
+const app = require('./sys/config/express')();
+const uglify = require("uglify-js");
+const fs = require('fs'), request = require('request');
 const colors = require('colors');
 var rimraf = require("rimraf");
+const { exec } = require('child_process')
 
 console.log(" ");
 
@@ -12,7 +12,7 @@ var objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString(
 
 var TOKEN = objConfig.token
 
-console.log("Iniciando o download usando o token " + TOKEN);
+console.log("Iniciando o backup do diretório atual");
 
 function folderVerify(subdir, dir) {
     let dirToRead = dir ? __dirname + '/' + dir : __dirname
@@ -25,6 +25,22 @@ function folderVerify(subdir, dir) {
 
     return
 }
+
+exec('node backup -d', function (error, stdout, stderr) {
+    if (!error) {
+      if (stdout && stdout != undefined && stdout != '') {
+        console.log(stdout)
+        mainFunction()
+      }
+      return
+    } else {
+        console.log(error)
+    }
+})
+
+const mainFunction = () => {
+
+console.log('Inciando o Download da Nuvem utilizando o token', TOKEN)
 
 folderVerify(['layout'])
 folderVerify(['assets', 'config', 'include', 'modulos_loja'], 'layout')
@@ -123,3 +139,5 @@ try {
 console.log(" ");
 
 //process.exit(0);
+
+}
