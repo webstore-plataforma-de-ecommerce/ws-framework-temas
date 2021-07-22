@@ -28,10 +28,19 @@ function mainFun(commit) {
     }
 
     folderVerify('backup')
-    folderVerify(nameShop, 'backup')
-    folderVerify(getTime(dateMark),'backup/'+nameShop)
 
-    writingFile(nameShop, commit)
+    if (process.argv[2] == '-d') {
+        if (fs.existsSync(__dirname + '/backup/LastPull')) {
+            fs.rmdirSync(__dirname + '/backup/LastPull', {recursive: true, force: true})
+        }
+        folderVerify('LastPull', 'backup')
+        folderVerify(getTime(dateMark), 'backup/LastPull')
+        writingFile('LastPull', commit)
+    } else {
+        folderVerify(nameShop, 'backup')
+        folderVerify(getTime(dateMark),'backup/'+nameShop)
+        writingFile(nameShop, commit)
+    }
 }
 
 function folderVerify(subdir, dir) {
@@ -75,7 +84,6 @@ function writingFile(dir, commit) {
     function waitForRar() {
 
         //if (!fs.existsSync(__dirname + '/backup/' + dir + '/' + getTime(dateMark) + '/' + writeName + '.rar')) { setTimeout(() => { waitForRar() }, 100); return }
-
         fs.writeFileSync(__dirname + '/backup/' + dir + '/' + getTime(dateMark) + '/' + writeName + '.json', JSON.stringify(mountData(commit)))
 
         console.log('Processo Finalizado!'.green.bold)
@@ -115,4 +123,10 @@ function getTime(ts,a,b,c) {
 
 }
 
-quest()
+if (process.argv[2] == '-d') {
+    mainFun('Ultimo backup antes do node pull na data específicada.')
+} else if (fs.existsSync(__dirname + '/layout/')) {
+    quest()
+} else {
+    console.log('O diretório de Layout não existe :('.red.bold)
+}
