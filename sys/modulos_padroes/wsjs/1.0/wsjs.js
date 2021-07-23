@@ -1,4 +1,5 @@
-﻿/* 08-05-2019 */
+﻿/* 23-07-2021 */
+
 var ApiWS = {}
 var UrlApi = "";
 var VersaoApi = "api-loja-v2";
@@ -952,6 +953,111 @@ ApiWS.PaginasAdd = function (FuncaoAfter, PaginaSearch) {
 }
 
 
+ApiWS.resultLogin = null;
+ApiWS.Login = function (email, senha, FuncaoAfter) {
+
+    try {
+        var VAR_EMAIL = email;
+        var VAR_SENHA = senha;
+        var LV_ID = $("#HD_LV_ID").val();
+
+        if (VAR_EMAIL == "") {
+            ApiWS.resultLogin = ("Preencha o campo E-Mail");
+            eval(FuncaoAfter + "()");
+            return false;
+        }
+
+        if (VAR_SENHA == "") {
+            ApiWS.resultLogin = ("Preencha o campo Senha");
+            eval(FuncaoAfter + "()");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/loginAJAX/login.aspx",
+            data: "tipo=logar&LV_ID=" + LV_ID + "&LOGIN=" + VAR_EMAIL + "&SENHA=" + VAR_SENHA,
+            beforeSend: function () {
+
+                ApiWS.resultLogin = ("Aguarde... verificando os dados.");
+                eval(FuncaoAfter + "()");
+
+            },
+            error: function (request, status, error) {
+
+                ApiWS.resultLogin = ("Não foi possível efetuar o login, tente novamente.<!--" + request.responseText + "-->");
+                eval(FuncaoAfter + "()");
+
+            },
+            success: function (retorno) {
+
+                if (retorno.indexOf("CODIGO:") >= 0) {
+                    ApiWS.resultLogin = ("Login efetuado com sucesso, aguarde.");
+                    window.location.href = window.location.href;
+                }
+                else if (retorno.indexOf("AFTERLINK:") >= 0) {
+                    ApiWS.resultLogin = ("Login efetuado com sucesso, aguarde.");
+                    window.location.href = window.location.href;
+                }
+                else {
+                    ApiWS.resultLogin = (retorno);
+                }
+                eval(FuncaoAfter + "()");
+
+            }
+        });
+
+    } catch (e) { console.log("Falha ao fazer login:" + e.message); }
+
+}
+
+
+
+ApiWS.FuncAfter_Carrinho = null;
+ApiWS.Carrinho_Tentativas = 0;
+ApiWS.Carrinho = function (FuncaoAfter) {
+
+    ApiWS.LV = $("#HD_LV_ID").val();
+
+    console.log("Iniciando Carrinho OnPage");
+    ApiWS.StartTime();
+    if (FuncaoAfter != null && FuncaoAfter != "") {
+        ApiWS.FuncAfter_Carrinho = FuncaoAfter;
+    } else {
+        FuncaoAfter = ApiWS.FuncAfter_Carrinho;
+    }
+    try {
+        ApiWS.Carrinho_Tentativas++;
+        var Token = $("#HdTokenLojaTemp").val();
+        var URLget = endPointRestCalls + "/CheckoutSmart/CarrinhoSmart.aspx";
+        var Parametros = "tipo=CarrinhoOnPageVrs2&LV_ID=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds;
+        ApiWS.addApiCalls(URLget + "?" + Parametros);
+        $.ajax({
+            type: "GET",
+            url: URLget,
+            data: Parametros,
+            beforeSend: function () { },
+            error: function (e) {
+                console.log("Erro ao verificar carrinho.(" + "LOJA=" + ApiWS.LV + "&LVdashview=" + ApiWS.LVdashview + "&LvToken=" + Token + WsParamAdds + " / " + e.message + ")");
+            },
+            success: function (retorno) {
+                console.log("Carrinho retornou");
+                retorno = ApiWS.LimpaJson(retorno);
+                try {
+                    JSON.parse(retorno);
+                    objetos.Carrinho = retorno;
+                    try { eval(FuncaoAfter + "()"); } catch (e) { }
+                } catch (e) {
+                    console.log("Falha Carrinho " + e.message + " - " + retorno);
+                }
+            }
+        });
+    ApiWS.EndTime("Carrinho");
+    } catch (e) { console.log(e.message); console.log("Erro ao verificar informações da loja(Carrinho):" + e.message); }
+
+}
+
+
 
 ApiWS.CadastraNews = function (Nome, Email, FuncaoAfter) {
     try {
@@ -1288,3 +1394,5 @@ function WsModifiersCall(name) {
     } catch (e) { }
 
 }
+
+
