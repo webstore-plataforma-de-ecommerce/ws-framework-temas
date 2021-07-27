@@ -12,36 +12,32 @@ const rl = readline.createInterface({
 
 var objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json').toString());
 
-
-console.log("Configurando modulo de edicao remota.");
-console.log("Informe o Token de edicao remota obtido no painel da loja.");
-
+console.log("Configurando módulo de edicão remota.\nInforme o Token de edicão remota obtido no painel da loja.");
 
 var objConfig;
 
+const quest = () => {
+    rl.question("Token:", function (GetToken) {
 
-rl.question("Token:", function (GetToken) {
+        objConfig = {
+            token: GetToken,
+            tipo: "",
+            loja: "",
+            temaNome: "",
+            usuario: "",
+            senha: "",
+            temaBase: "",
+            editar_pagina: "",
+            ultimoPull: "",
+            ultimoPush: ""
+        };
 
-    objConfig = {
-        token: GetToken,
-        tipo: "",
-        loja: "",
-        temaNome: "",
-        usuario: "",
-        senha: "",
-        temaBase: "",
-        editar_pagina: "",
-        ultimoPull: "",
-        ultimoPush: ""
-    };
+        rl.close();
 
-    rl.close();
+    });
+}
 
-});
-
-
-rl.on("close", function () {
-
+const mainFunction = () => {
     request.get(objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + objConfig.token, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
@@ -113,5 +109,30 @@ rl.on("close", function () {
 
         }
     });
+}
+
+rl.on("close", function () {
+
+    mainFunction()
 
 });
+
+if (process.argv[2] && process.argv[2] != '') {
+
+    objConfig = {
+        token: process.argv[2],
+        tipo: "",
+        loja: "",
+        temaNome: "",
+        usuario: "",
+        senha: "",
+        temaBase: "",
+        editar_pagina: "",
+        ultimoPull: "",
+        ultimoPush: ""
+    };
+
+    mainFunction()
+} else {
+    quest()
+}
