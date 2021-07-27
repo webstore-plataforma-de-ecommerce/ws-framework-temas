@@ -30,7 +30,17 @@ exec('node backup -d', function (error, stdout, stderr) {
     if (!error) {
       if (stdout && stdout != undefined && stdout != '') {
         console.log(stdout)
-        mainFunction()
+        exec('node preset -s', function (error, stdout, stderr) {
+            if (!error) {
+              if (stdout && stdout != undefined && stdout != '') {
+                console.log(stdout)
+                mainFunction()
+              }
+              return
+            } else {
+                console.log(error)
+            }
+        })
       }
       return
     } else {
