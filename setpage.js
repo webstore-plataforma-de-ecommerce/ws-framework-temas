@@ -4,6 +4,7 @@ var fs = require('fs');
 var request = require('request');
 const readline = require("readline");
 const colors = require('colors');
+const { exec } = require('child_process')
 
 const rl = readline.createInterface({
     input: process.stdin,
