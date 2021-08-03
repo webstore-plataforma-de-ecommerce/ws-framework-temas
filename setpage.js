@@ -4,6 +4,7 @@ var fs = require('fs');
 var request = require('request');
 const readline = require("readline");
 const colors = require('colors');
+const { exec } = require('child_process');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -40,6 +41,15 @@ const mainFunction = () => {
         if (!error) {
           if (stdout && stdout != undefined && stdout != '') {
             console.log(stdout)
+
+            var config = JSON.stringify(configLoja);
+
+            fs.writeFileSync('./sys/config/config.json', config, (err) => {
+                if (err) throw err;
+            });
+            console.log("\nPagina configurada com sucesso".green.bold);
+
+            process.exit()
           }
           return
         } else {
@@ -47,14 +57,7 @@ const mainFunction = () => {
         }
     })
     
-    var config = JSON.stringify(configLoja);
-
-    fs.writeFileSync('./sys/config/config.json', config, (err) => {
-        if (err) throw err;
-    });
-    console.log("\nPagina configurada com sucesso".green.bold);
-
-    process.exit()
+    
 }
 
 if (process.argv[2] != '' && process.argv[2] && process.argv[2].startsWith('/')) {

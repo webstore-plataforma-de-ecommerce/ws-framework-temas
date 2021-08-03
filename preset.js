@@ -4,14 +4,15 @@ let id = 0, presetToWork, delFunc = false, saveFunc = false;
 
 folderVerify('presets')
 const presets = getPresets()
+let fun;
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-const quest = (fun) => {
-    rl.question("Informe o ID do preset que deseja " + fun + '. \n', function (answer) {
+const quest = () => {
+    rl.question("Informe o ID do preset que deseja " + fun + '. (Certifque-se de estar com o tema ativo) \n', function (answer) {
 
         presetToWork = answer
 
@@ -39,7 +40,23 @@ function  mainFunction() {
             if (fileToSave == '' || !fileToSave) {
                 console.log('Não há loja configurada.' )
             } else {
-                if (verifyForCopies(fileToSave)) {
+                let presetToVerify = JSON.parse(fileToSave)
+                let vrfy = false;
+            
+                if (presets <= 0) {
+                    vrfy = false
+                } else {
+                    let presetCopies = getPresets();
+                    presetCopies.forEach(prs => {
+                        if (prs.token == presetToVerify.token) {
+                            if (prs.editar_pagina == presetToVerify.editar_pagina && prs.temaNome == presetToVerify.temaNome) {
+                                vrfy = true
+                            }
+                        }
+                    })
+                }
+            
+                if (vrfy) {
                     console.log('Este preset já está salvo.')
                 } else {
                     fs.writeFileSync(__dirname + '/presets/preset_' + (presets.length) + '.json', fileToSave)
@@ -68,6 +85,7 @@ function  mainFunction() {
         if (!error) {
           if (stdout && stdout != undefined && stdout != '') {
             console.log(stdout)
+            if (presets[parseInt(presetToWork)].editar_pagina != '') {
                 exec('node setpage ' + presets[parseInt(presetToWork)].editar_pagina, function (error, stdout, stderr) {
                     if (!error) {
                     if (stdout && stdout != undefined && stdout != '') {
@@ -89,6 +107,19 @@ function  mainFunction() {
                         console.log(error)
                     }
                 })
+            } else {
+                exec('node pull', function (error, stdout, stderr) {
+                    if (!error) {
+                      if (stdout && stdout != undefined && stdout != '') {
+                        console.log(stdout)
+                        return
+                      }
+                      return
+                    } else {
+                        console.log(error)
+                    }
+                })
+            }
           }
           return
         } else {
@@ -96,26 +127,6 @@ function  mainFunction() {
         }
     })
 
-}
-
-function verifyForCopies(presetToVerify) {
-    presetToVerify = JSON.parse(presetToVerify)
-    let vrfy = false;
-
-    if (presets <= 0) {
-        return false
-    }
-
-    let presetCopies = getPresets();
-    presetCopies.forEach(prs => {
-        if (prs.token == presetToVerify.token) {
-            if (prs.editar_pagina == presetToVerify.editar_pagina && prs.temaNome == presetToVerify.temaNome) {
-                vrfy = true
-            }    
-        }
-    })
-
-    return vrfy
 }
 
 function showPresets() {
@@ -169,7 +180,8 @@ if (params && params != '') {
         } else {
             delFunc = true;
             showPresets()
-            quest('deletar')
+            fun = 'deletar'
+            quest()
             return 
         }
         return
@@ -184,11 +196,13 @@ if (params && params != '') {
         mainFunction()
     } else {
         showPresets()
-        quest('recuperar')
+        fun = 'recuperar'
+        quest()
     }
 
     return
 }
 
 showPresets()
-quest('recuperar')
+fun = 'recuperar'
+quest()
