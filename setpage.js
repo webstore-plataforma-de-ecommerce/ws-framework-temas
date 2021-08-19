@@ -37,27 +37,26 @@ const quest = () => {
 }
 
 const mainFunction = () => {
-    exec('node preset -s', function (error, stdout, stderr) {
-        if (!error) {
-          if (stdout && stdout != undefined && stdout != '') {
-            console.log(stdout)
+    var config = JSON.stringify(configLoja);
 
-            var config = JSON.stringify(configLoja);
+    fs.writeFileSync('./sys/config/config.json', config, (err) => {
+        if (err) throw err;
 
-            fs.writeFileSync('./sys/config/config.json', config, (err) => {
-                if (err) throw err;
-            });
-            console.log("\nPagina configurada com sucesso".green.bold);
+        exec('node preset -s', function (error, stdout, stderr) {
+            if (!error) {
+              if (stdout && stdout != undefined && stdout != '') {
+                console.log(stdout)
 
-            process.exit()
-          }
-          return
-        } else {
-            console.log(error)
-        }
-    })
-    
-    
+                process.exit()
+              }
+              return
+            } else {
+                console.log(error)
+            }
+        })
+    });
+
+    console.log("\nPagina configurada com sucesso".green.bold);    
 }
 
 if (process.argv[2] != '' && process.argv[2] && process.argv[2].startsWith('/')) {
