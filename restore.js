@@ -4,7 +4,8 @@ const colors = require('colors');
 const nameShop = JSON.parse(fs.readFileSync(__dirname + '/sys/config/config.json', 'utf-8')).loja
 
 if (!folderVerify('backup') || !folderVerify(nameShop, 'backup')) {
-    console.log('Não Existem Backups Da Loja Atual!'.red.bold)
+    console.log('Não Existem Backups Da Loja Atual! '.red.bold)
+    console.log('Tente Novamente')
     process.exit()
 }
 
