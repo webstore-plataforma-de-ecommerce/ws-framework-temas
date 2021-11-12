@@ -139,6 +139,9 @@ function BlocoProduto(OBJ, TEMPLATE) {
 					    else if (tipoDesconto == "2") {
                             ADD += '<span class="prod-desconto tags-listagem-produto">-' + PORCENTAGEM + '%</span>';
 					    }
+						else {
+							ADD += '<span class="prod-desconto tags-listagem-produto">-' + PORCENTAGEM + '%' + tipoDesconto + '</span>';
+						}
 
 						PRECODE = PRECO;
 						PRECO = PROMOCAO;
