@@ -139,6 +139,8 @@ function CategoriasManage(obj, ShowStartSub) {
 
 
             var filtroAtivo = [];
+            var qtdFiltrosShow = 5;
+            if (typeof overqtdFiltrosShow !== 'undefined') { try { qtdFiltrosShow = overqtdFiltrosShow; } catch (e) { } }
             if (obj.Filtros != null && obj.Filtros != undefined) {
                 if (obj.Filtros.length > 0) {
                     var filtroLigado = false;
@@ -149,10 +151,10 @@ function CategoriasManage(obj, ShowStartSub) {
                             filtro += '<li class="filtro-' + item[a].tipo + '">';
                             filtro += '<span class="titulo-filtro">' + item[a].titulo + '</span>';
                             if (item[a].opcoes != null && item[a].opcoes != undefined && item[a].opcoes.length > 0) {
-                                filtro += '<ul class="filtro-opcoes">';
+                                filtro += '<ul class="filtro-opcoes" data-filter-type="' + item[a].titulo + '">';
                                 var opcao = item[a].opcoes;
                                 for (b = 0; b < opcao.length; b++) {
-                                    if (b >= 5) {
+                                    if (b >= qtdFiltrosShow) {
                                         filtro += '<li class="filtro-opcao shrink">';
                                         filtro += '<a href="' + opcao[b].link + '">' + opcao[b].nome.split('|')[0] + '</a>';
                                         filtro += '</li>';
@@ -165,7 +167,7 @@ function CategoriasManage(obj, ShowStartSub) {
                                         var objFiltro = { 'nome': opcao[b].nome, 'link': opcao[b].link };
                                         filtroAtivo.push(objFiltro);
                                     }
-                                    if (b == (opcao.length - 1) && opcao.length > 5) {
+                                    if (b == (opcao.length - 1) && opcao.length > qtdFiltrosShow) {
                                         filtro += '<li class="filtro-opcao ver-mais">(+) Ver mais</li>';
                                     }
                                 }

@@ -452,6 +452,19 @@
         min-height: initial;
         height: 1px;
     }
+
+    #produto #produtos-relacionados .titulo-grupo h3 {
+        margin-top: 0px;
+    }
+
+    #produto #produtos-relacionados .arrow {
+        position: absolute;
+        display: block;
+        float: initial;
+        width: 100%;
+        top: 27px;
+    }
+
 }
 
 .tarja-produto {
@@ -492,11 +505,15 @@
     margin-bottom:5px;
 }
 
-    .sub-produtos select {
+    .sub-produtos select, .sub-produtos input {
         width: 100%;
         padding: 10px;
         color: #666;
         border: 1px solid #d7d7d7;
+    }
+
+    .sub-produtos input {
+        padding:10px 15px;
     }
 
     .LV_GENERE_LISTA {
@@ -1256,11 +1273,33 @@ div#DIV_FACA_LOGIN {
 }
 
 .LV_CAMPOS_ADD_PROD {
-    margin: 10px 0px;
+    margin: 0px 0px;
+    margin-top:5px;
+}
+
+.LV_CAMPOS_ADD_PROD label {
+    margin:0px;
+    margin-bottom:10px;
+    display:block;
 }
 
 span.LVCampoAddTit {
     margin-right: 15px;
+    font-size:12px;
+    margin-bottom:5px;
+    display:none;
+}
+
+.LV_CAMPOS_ADD_PROD ::-webkit-input-placeholder { /* Edge */
+    
+}
+
+.LV_CAMPOS_ADD_PROD :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    
+}
+
+.LV_CAMPOS_ADD_PROD ::placeholder {
+    
 }
 
 
@@ -1705,3 +1744,16 @@ span.LVCampoAddTit {
     .kits-produto .kit-nome {
         color:#333;
     }
+
+@media screen and (max-width:700px) {
+    #produtos-relacionados .right-arrow {
+        display: block;
+        position: absolute;
+        right: 0px;
+    }
+
+    #produtos-relacionados .titulo-grupo h3 {
+        margin-top: -20px;
+        display: block;
+    }
+}

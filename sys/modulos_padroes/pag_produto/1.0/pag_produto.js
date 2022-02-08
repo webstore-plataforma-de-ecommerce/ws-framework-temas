@@ -1,3 +1,5 @@
+/*updated 17-11-2021*/
+
 var overObjSetForm = "";
 var overIsContatPage = false;
 var pagesfieldsContact = "";
@@ -712,7 +714,8 @@ function ListaProdutosRelacionados() {
 }
 
 function ListaProdutosRelacionadosRetorno() {
-	try {
+    try {
+
 		var template = $('#lista-relacionados').html();
 
 		var OBJETO = ApiWS.Json;
@@ -738,9 +741,8 @@ function ListaProdutosRelacionadosRetorno() {
 
 				}
 			}
-
-
-			$('#lista-relacionados').slick({
+            
+            $('#produtos-relacionados.com-slider #lista-relacionados').slick({
 				infinite: true,
 				slidesToShow: 4,
 				prevArrow: $('#produtos-relacionados .left-arrow'),
@@ -767,7 +769,7 @@ function ListaProdutosRelacionadosRetorno() {
 					}
 				}]
 			});
-
+            
 		    blocoHeight('#lista-relacionados');
 
 		}else{

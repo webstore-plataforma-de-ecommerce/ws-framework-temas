@@ -306,6 +306,8 @@ function funcAddFieldsContact() {
 
         $("[data-insert-fields]").remove();
 
+        WsModifiersCall("fale_conosco_1_0");
+
     } catch (e) {
         console.log("Erro funcAddFieldsContact:" + e.message);
     }

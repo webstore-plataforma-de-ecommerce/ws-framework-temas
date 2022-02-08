@@ -89,8 +89,8 @@ fieldset{
 		width: 1200px;
 	}
 }
-.bandeira1, .bandeira2, .bandeira3, .bandeira4, .bandeira5, .bandeira6, .bandeira7, .bandeira8, .bandeira9, .bandeira10, .bandeira11, .bandeira12, .bandeira13, .bandeira14, .bandeira15, .bandeira16{
-	background: url('https://cdn.webstore.net.br/wsfiles/estrutura/img/bandeiras.png') no-repeat;
+.bandeira1, .bandeira2, .bandeira3, .bandeira4, .bandeira5, .bandeira6, .bandeira7, .bandeira8, .bandeira9, .bandeira10, .bandeira11, .bandeira12, .bandeira13, .bandeira14, .bandeira15, .bandeira16, .bandeira17, .bandeira18{
+	background: url('https://cdn.webstore.net.br/wsfiles/estrutura/img/bandeiras-v2.png') no-repeat;
 	display: inline-block;
 	overflow: hidden;
 	text-align: left;
@@ -134,6 +134,16 @@ fieldset{
 .bandeira16 {
 	background-position: -128px -30px;
 	width: 40px;
+	height: 28px;
+}
+.bandeira17 {
+	background-position: 3px -119px;
+	width: 71px;
+	height: 28px;
+}
+.bandeira18 {
+	background-position: -77px -122px;
+	width: 75px;
 	height: 28px;
 }
 .bandeira2 {
@@ -707,7 +717,36 @@ fieldset{
 
 }
 
+@media screen and (max-width: 500px) {
 
+	.condicoes-loja .condicao-item.condicao-item-4 {
+		width: 100%;
+	}
+
+	.condicoes-loja .condicao-item .condicao-item-int {
+		max-width: 100%;
+	}
+
+	.condicoes-loja .condicao-item .condicao-textos {
+		padding-left: 0px;
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	.condicoes-loja .condicao-item .condicao-icone {
+		float: none;
+		margin: 15px 2px;
+		position: initial;
+		margin: 0 auto;
+		display: block;
+		text-align: center;
+	}
+
+	.condicoes-loja .condicao-item .condicao-subtitulo {
+		font-size: 1.6rem;
+	}
+}
 
 
 

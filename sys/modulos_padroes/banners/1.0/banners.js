@@ -2,7 +2,7 @@ var useLazyLoadBanner = true;
 var banners_finished;
 
 $(document).ready(function () {
-	try{
+	try {
 		var etapa = $("#HdEtapaLoja").val();
 		if (etapa == "HOME" || etapa == "LISTAGEM") {
 			isReady("cfg['estrutura']", "Banners()");
@@ -22,21 +22,21 @@ function BannersRetorno(getJson) {
 			dispositivousing = "M";
 		}
 
-        if (typeof LazyLoadOver !== 'undefined') {
-            useLazyLoadBanner = LazyLoadOver;
-        }
+		if (typeof LazyLoadOver !== 'undefined') {
+			useLazyLoadBanner = LazyLoadOver;
+		}
 
-        var classLazyLoad = "lazyload";
-        var addCodeLazyLoad = "data-obj-img-load src='https://fileswscdn.wslojas.com.br/wsfiles/images/LoadBeforeShowImg.jpg' data-";
-        if (!useLazyLoadBanner) { addCodeLazyLoad = ""; classLazyLoad = ""; }
+		var classLazyLoad = "lazyload";
+		var addCodeLazyLoad = "data-obj-img-load src='https://fileswscdn.wslojas.com.br/wsfiles/images/LoadBeforeShowImg.jpg' data-";
+		if (!useLazyLoadBanner) { addCodeLazyLoad = ""; classLazyLoad = ""; }
 
-        var OBJETO = "";
+		var OBJETO = "";
 
-        if (getJson) {
-            OBJETO = getJson;
-        } else {
-            OBJETO = ApiWS.Json;
-        }
+		if (getJson) {
+			OBJETO = getJson;
+		} else {
+			OBJETO = ApiWS.Json;
+		}
 
 		//var OBJETO = ApiWS.Json;
 		objetos.Banners = OBJETO;
@@ -49,12 +49,18 @@ function BannersRetorno(getJson) {
 		if (obj.banners != null && obj.banners != undefined) {
 			if (obj.banners.length > 0) {
 
-				for(a = 0; a < obj.banners.length; a++){
+				for (a = 0; a < obj.banners.length; a++) {
 					var banner = obj.banners[a];
 					var li = "";
 					var img = "";
 
-					if (banner.tipo == '24') { banner.tipo == 'full'; }
+					if (banner.tipo == '24') { banner.tipo = 'full'; }
+
+					if (banner.tipo == 'category_description') {
+						if (!$("#banner-category_description").length) {
+							$("#div-conteudo").prepend("<div id='banner-category_description' class='hidden'></div>");
+						}
+					}
 
 					var bannerDispositivo = "D";
 					try { bannerDispositivo = banner.dispositivos; } catch (e) { }
@@ -141,13 +147,13 @@ function BannersRetorno(getJson) {
 
 				}
 
-				if (typeof bannerFull !== 'undefined'){
+				if (typeof bannerFull !== 'undefined') {
 					$('#slider').find('.container').removeClass('container');
 				}
 
 				var speedBann = 4000;
 				if (typeof speedBanners !== 'undefined') {
-				    speedBann = speedBanners;
+					speedBann = speedBanners;
 				}
 
 				var dotsBann = false;
@@ -155,7 +161,7 @@ function BannersRetorno(getJson) {
 					dotsBann = dotsBanner;
 				}
 
-				for (b = 0; b < tipo.length; b++){
+				for (b = 0; b < tipo.length; b++) {
 
 					try { $('#banner-' + tipo[b]).removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
 					try { $('#banner-' + tipo[b]).parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
@@ -163,7 +169,7 @@ function BannersRetorno(getJson) {
 					try { $('#banner-' + tipo[b]).parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
 					try { $('#banner-' + tipo[b]).parent().parent().parent().parent().removeClass('hidden').removeClass('hidden-xs').removeClass('hidden-md').removeClass('hidden-sm').removeClass('hidden-lg') } catch (e) { }
 
-					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape" || tipo[b] == "full" || tipo[b] == "24"){
+					if (tipo[b] == "topo" || tipo[b] == "mobile" || tipo[b] == "rodape" || tipo[b] == "full" || tipo[b] == "24") {
 						$('#banner-' + tipo[b])
 							.removeClass('hidden')
 							.css('visibility', 'hidden')
@@ -173,45 +179,48 @@ function BannersRetorno(getJson) {
 								slidesToShow: 1,
 								slidesToScroll: 1,
 								autoplaySpeed: speedBann,
-							  	prevArrow: '<i class="fa fa-angle-left slick-prev"></i>',
+								prevArrow: '<i class="fa fa-angle-left slick-prev"></i>',
 								nextArrow: '<i class="fa fa-angle-right slick-next"></i>',
 								autoplay: true
 							})
 							.css('visibility', 'visible');
 					}
-					
-					if(tipo[b] == "popup"){
+
+					if (tipo[b] == "popup") {
 						$("#banner-flutua").modal('show');
 					}
-					if(tipo[b] == "mini"){
+					if (tipo[b] == "mini") {
 						$("#banner-mini").removeClass('hidden').removeClass('hidden-xs');
 					}
-					if(tipo[b] == "tarja"){
+					if (tipo[b] == "tarja") {
 						$("#banner-tarja").removeClass('hidden').removeClass('hidden-xs');
 					}
-					if(tipo[b] == "rodape"){
+					if (tipo[b] == "rodape") {
 						$("#banner-section").removeClass('hidden').removeClass('hidden-xs');
+					}
+					if (tipo[b] == "category_description") {
+						$("#banner-category_description").removeClass('hidden').removeClass('hidden-xs');
 					}
 				}
 
-				if (tipo.indexOf('mini') != -1){
+				if (tipo.indexOf('mini') != -1) {
 					var length = $('#banner-mini li').length;
-					
+
 					if (length == 1) {
 						$('#banner-mini li').addClass('col-xs-12');
-					}else if(length == 2) {
+					} else if (length == 2) {
 						$('#banner-mini li').addClass('col-xs-12 col-sm-6');
-					}else if(length == 3) {
+					} else if (length == 3) {
 						$('#banner-mini li').addClass('col-xs-12 col-sm-4');
-					}else if(length >= 4) {
+					} else if (length >= 4) {
 						$('#banner-mini li').addClass('col-xs-6 col-sm-3');
 					}
 
 				}
-			}else{
+			} else {
 				empty('banner');
 			}
-		}else{
+		} else {
 			empty('banner');
 		}
 
@@ -219,42 +228,42 @@ function BannersRetorno(getJson) {
 		var Etapa = $("#HdEtapaLoja").val();
 
 		if (Etapa == "HOME") {
-			if(cfg['produtos_linha'] == 0){
+			if (cfg['produtos_linha'] == 0) {
 				ColunasResponsivo('#prod-list .list-item, #ultimos-list .list-item', 2, 2, 3, 3);
-			}else{
+			} else {
 				ColunasResponsivo('#prod-list .list-item, #ultimos-list .list-item', 2, 2, 3, cfg['produtos_linha']);
 			}
 			if (cfg['menu_lateral_home'] == true) {
 				lateralEsq = true;
 				FrameworkResponsivo();
 			}
-        }
+		}
 
 		banners_finished = "ok";
 
-        LazyLoadApply();
+		LazyLoadApply();
 
 		if (typeof call_after_banners !== 'undefined') { try { eval(call_after_banners); } catch (e) { console.log("Falha call_after_banners" + e.message); } }
 		WsModifiersCall("banners_1_0");
 
-	} catch (e) { console.log('BannersRetorno: '+e.message); }
+	} catch (e) { console.log('BannersRetorno: ' + e.message); }
 }
 
 
 function SetBannerSlick(id, show, speed, scroll, auto) {
 
-    try {
-        $(id).css('visibility', 'hidden')
-            .slick({
-                infinite: true,
-                slidesToShow: show,
-                slidesToScroll: scroll,
-                autoplaySpeed: speed,
-                prevArrow: '<i class="fa fa-angle-left slick-prev"></i>',
-                nextArrow: '<i class="fa fa-angle-right slick-next"></i>',
-                autoplay: auto
-            })
-            .css('visibility', 'visible');
-    } catch (e) { console.log("Falha SetBannerSlick:" + e.message); }
+	try {
+		$(id).css('visibility', 'hidden')
+			.slick({
+				infinite: true,
+				slidesToShow: show,
+				slidesToScroll: scroll,
+				autoplaySpeed: speed,
+				prevArrow: '<i class="fa fa-angle-left slick-prev"></i>',
+				nextArrow: '<i class="fa fa-angle-right slick-next"></i>',
+				autoplay: auto
+			})
+			.css('visibility', 'visible');
+	} catch (e) { console.log("Falha SetBannerSlick:" + e.message); }
 
 }

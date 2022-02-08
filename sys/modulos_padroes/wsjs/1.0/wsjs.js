@@ -75,7 +75,37 @@ ApiWS.ApiStart = function () {
         //ApiWS.LVdashview = "1"; //APAGAR!!!
         var GetTypeCdn = $("#HD_TYPE_CDN").val();
         var GetTypeCdnApi = $("#HD_TYPE_CDN_API").val();
+        var CdnOption = $("#HD_CDN_OPT").val();
+        var CdnKind = $("#HD_CDN_KIND").val();
         //console.log("GetTypeCdn:" + GetTypeCdn);
+
+        var CdnKindChoice = "";
+        var CdnKindChoiceMatch = "";
+        try {
+
+            if (CdnKind != "" && CdnOption != "" && CdnKind != undefined && CdnOption != undefined) {
+
+                var objCdnOptions = JSON.parse(CdnOption);
+
+                for (o = 0; o < objCdnOptions.length; o++) {
+
+                    if (objCdnOptions[o].kind == CdnKind) {
+                        CdnKindChoice = objCdnOptions[o].url;
+                        CdnKindChoiceMatch = "1";
+                    } else if (CdnKindChoiceMatch == "") {
+                        CdnKindChoice = objCdnOptions[o].url;
+                    }
+
+                }
+
+            }
+
+        } catch (e) { }
+
+        console.log("CdnKindChoice:" + CdnKindChoice);
+        console.log("CdnKind:" + CdnKind);
+        //console.log("CdnOption:" + CdnOption);
+
 
         if (UrlNavegador.indexOf(":3000") > 0) {
             GetTypeCdn = "wslojas.com.br";
@@ -89,21 +119,31 @@ ApiWS.ApiStart = function () {
 
                 if (UseCdn == true) {
 
-                    console.log("XCDNTRUE001");
+                    if (CdnKindChoice != "") {
 
-                    if (GetTypeCdn.indexOf("wslojas.com.br") >= 0) {
-                        UrlApi = "https://apilojaws.wslojas.com.br";
-                    } else if (GetTypeCdn.indexOf("plataformawebstore.com.br") >= 0) {
-                        UrlApi = "https://apilojaws.plataformawebstore.com.br";
-                    }
-                    else {
-                        //UrlApi = "https://apiloja.wscache.webstore.net.br";
-                        UrlApi = "https://apilojaws.wslojas.com.br";
-                    }
-                    //UrlApi = "https://apiloja.wscache.webstore.net.br";
+                        console.log("CDN_Option_" + CdnKind + "");
+                        UrlApi = CdnKindChoice;
 
-                    if (GetTypeCdnApi != "" && GetTypeCdnApi != undefined && GetTypeCdnApi != null) {
-                        UrlApi = GetTypeCdnApi;
+                    } else {
+
+                        console.log("XCDNTRUE001");
+
+                        /*if (GetTypeCdn.indexOf("wslojas.com.br") >= 0) {
+                            UrlApi = "https://apilojaws.wslojas.com.br";
+                        } else if (GetTypeCdn.indexOf("plataformawebstore.com.br") >= 0) {
+                            UrlApi = "https://apilojaws.plataformawebstore.com.br";
+                        }
+                        else {
+                            UrlApi = "https://apilojaws.wslojas.com.br";
+                        }*/
+
+                        UrlApi = "https://apilojaws.wslojas.com.br";
+                        /*UrlApi = "https://cdn-api-ws5.webstore.com.br";*/
+
+                        if (GetTypeCdnApi != "" && GetTypeCdnApi != undefined && GetTypeCdnApi != null) {
+                            UrlApi = GetTypeCdnApi;
+                        }
+
                     }
 
                 }
@@ -123,6 +163,9 @@ ApiWS.ApiStart = function () {
         console.log(e.message);
     }
 }
+
+
+
 
 
 ApiWS.FuncAfter_ListaProdutosHome = null;
@@ -604,7 +647,7 @@ ApiWS.ListaFiltros = function (FuncaoAfter, Categoria, FiltroSearch, Fabricante,
                 "&FiltrosFiltro2=" + Filtro2 +
                 "&FiltrosFiltro3=" + Filtro3;
 
-            //console.log("Parametros:" + Parametros);
+            //console.log("Parametros:" + URLget + "?" + Parametros);
             ApiWS.addApiCalls(URLget + "?" + Parametros + cacheAdjust);
             $.ajax({
                 type: "GET",
