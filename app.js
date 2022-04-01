@@ -288,6 +288,30 @@ function htmlModulos() {
             replace.push("#" + value)
         }
 
+        //Grupo de preferências 
+        var findGroup = [];
+        var replaceGroup = [];
+        if (configJs.PreferenciasSets) {
+            var prefsSets = configJs.PreferenciasSets;
+            for (var i = 0; i < prefsSets.length; i++) {
+
+                var tag = prefsSets[i].id;
+                var value = prefsSets[i].valor;
+
+                if (prefsSets[i].tipo == "color") { value = "#" + value; }
+
+                findGroup.push("-" + tag + ""); replaceGroup.push(value)
+                findGroup.push("<!--##" + tag + "##-->"); replaceGroup.push(value)
+                findGroup.push("{" + tag + "}"); replaceGroup.push(value)
+
+            }
+            css = replaceStr(css, findGroup, replaceGroup);
+            js = replaceStr(js, findGroup, replaceGroup);
+            result = replaceStr(result, findGroup, replaceGroup);
+        }
+        //Fim - Grupo de preferências
+
+
         css = replaceStr(css, find, replace);
 
         find = ["<!--###IMAGENS_CLIENTE###-->"];
