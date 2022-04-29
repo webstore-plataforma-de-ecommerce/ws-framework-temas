@@ -54,7 +54,6 @@ rl.on("close", function () {
         var sem_direita = (fs.readFileSync('./layout/estrutura_outras_paginas.html').toString());
         var produto_detalhes = (fs.readFileSync('./layout/estrutura_pagina_produto.html').toString());
 
-
         var topo = (fs.readFileSync('./layout/include/topo.html').toString());
         var barra = (fs.readFileSync('./layout/include/barra.html').toString());
         var esquerda = (fs.readFileSync('./layout/include/esquerda.html').toString());
@@ -62,6 +61,8 @@ rl.on("close", function () {
         var rodape = (fs.readFileSync('./layout/include/rodape.html').toString());
         var complemento = (fs.readFileSync('./layout/include/complemento.html').toString());
 
+        var head = (fs.readFileSync('./layout/include/add_tags/head.html').toString());
+        var body = (fs.readFileSync('./layout/include/add_tags/body.html').toString());
 
         var css = (fs.readFileSync('./layout/assets/folha.css').toString());
         var js = (fs.readFileSync('./layout/assets/functions.js').toString());
@@ -133,6 +134,9 @@ rl.on("close", function () {
             estrutura_listagem: listagem,
             estrutura_outras_paginas: sem_direita,
             estrutura_pagina_produto: produto_detalhes,
+
+            include_head: head,
+            include_body_end: body,
 
             include_topo: topo,
             include_barra: barra,

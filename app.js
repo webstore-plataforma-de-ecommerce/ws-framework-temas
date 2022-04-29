@@ -32,7 +32,7 @@ var LOJA = objConfig.token;
 var PAGE = objConfig.editar_pagina;
 
 
-var head = "";//fs.readFileSync('./public/head.html').toString();
+//var head = "";//fs.readFileSync('./public/head.html').toString();
 var bottom = "";//fs.readFileSync('./public/bottom.html').toString();
 var logo = "";//fs.readFileSync('./public/logo.html').toString();
 var includes = fs.readFileSync('./public/includes.html').toString();
@@ -50,6 +50,9 @@ var esquerda = htmlModulosTagsHtml(fs.readFileSync('./layout/include/esquerda.ht
 var direita = htmlModulosTagsHtml(fs.readFileSync('./layout/include/direita.html').toString());
 var rodape = htmlModulosTagsHtml(fs.readFileSync('./layout/include/rodape.html').toString());
 var complemento = htmlModulosTagsHtml(fs.readFileSync('./layout/include/complemento.html').toString());
+
+var head = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/head.html').toString());
+var body_end = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/body.html').toString());
 
 
 var QueryLayout = "";
@@ -113,8 +116,8 @@ function showPage() {
             urlComplete = pageURL.replace("/" + objJ.loja_nome, "");
         }
 
-        if (urlComplete != "" || 1==1) {
-            
+        if (urlComplete != "" || 1 == 1) {
+
             if (objJ.dominio.indexOf("lojas.webstore") >= 0 || objJ.dominio.indexOf("lojamodelolocal") >= 0) { protocolo = "http://"; }
 
             axios
@@ -123,6 +126,8 @@ function showPage() {
                     Html_listagem: listagem,
                     Html_sem_direita: sem_direita,
                     Html_produto_detalhes: produto_detalhes,
+                    Html_head: head,
+                    Html_body: body_end,
                     Html_topo: topo,
                     Html_barra: barra,
                     Html_esquerda: esquerda,
@@ -185,7 +190,7 @@ function showPage_step2(bodyPage) {
         var replace = [topo, barra, esquerda, rodape, complemento];
         index = replaceStr(index, find2, replace);
 
-        result = head + index + bottom;
+        result = index + bottom;
 
         find = ["<!--###IMAGENS_CLIENTE###-->"];
         replace = ["http://images.webstore.net.br/files/" + LOJA + "/" + LayInt + "/"];
@@ -204,14 +209,14 @@ function showPage_step2(bodyPage) {
         if (!serverOn) {
             app.listen(3000, function () {
                 console.log(" ");
-                console.log("Acesse " + "http://localhost:3000".green.bold +" em seu navegador para visualizar a loja.");
+                console.log("Acesse " + "http://localhost:3000".green.bold + " em seu navegador para visualizar a loja.");
                 console.log("__________________________________________________________________________________________");
 
                 console.log(" ");
                 serverOn = true;
             });
         }
-                
+
 
     } catch (e) {
         console.log(e.message);
@@ -371,21 +376,21 @@ function htmlModulosTagsHtml(conteudo) {
 }
 
 function getModuloHtml(modulo, tipo) {
-    
+
     var caminho = "";
     if (tipo == "padrao") {
         caminho = './sys/modulos_padroes/' + modulo.nome + '/' + modulo.versao + '/' + modulo.nome + '.html';
     } else {
         caminho = './layout/modulos_loja/' + modulo.nome + '/' + modulo.nome + '.html';
     }
-	try{
-		var retorno = fs.readFileSync(caminho).toString();
-		return retorno
+    try {
+        var retorno = fs.readFileSync(caminho).toString();
+        return retorno
     } catch (e) {
         //console.log("Trying to get " + modulo.nome + " - " + tipo);
         //console.log(e.message);
-		return ""
-	}
+        return ""
+    }
 }
 
 function getModuloCss(modulo, tipo) {
@@ -396,15 +401,15 @@ function getModuloCss(modulo, tipo) {
         caminho = './layout/modulos_loja/' + modulo.nome + '/' + modulo.nome + '.css';
     }
 
-	try{
-		var retorno = fs.readFileSync(caminho).toString();
-		return retorno
-	}catch(e){
-		return ""
-	}
+    try {
+        var retorno = fs.readFileSync(caminho).toString();
+        return retorno
+    } catch (e) {
+        return ""
+    }
 }
 
-function getModuloJs(modulo, tipo){
+function getModuloJs(modulo, tipo) {
     var caminho = "";
     if (tipo == "padrao") {
         caminho = './sys/modulos_padroes/' + modulo.nome + '/' + modulo.versao + '/' + modulo.nome + '.js';
@@ -412,15 +417,15 @@ function getModuloJs(modulo, tipo){
         caminho = './layout/modulos_loja/' + modulo.nome + '/' + modulo.nome + '.js';
     }
 
-	try{
-		var retorno = fs.readFileSync(caminho).toString();
-		return retorno
-	}catch(e){
-		return ""
-	}
+    try {
+        var retorno = fs.readFileSync(caminho).toString();
+        return retorno
+    } catch (e) {
+        return ""
+    }
 }
 
-function createTag(modulo, tipo){
+function createTag(modulo, tipo) {
     nome = modulo.nome.toUpperCase();
     if (tipo == "padrao") {
         return "<!--##" + nome + modulo.versao + "##-->";
@@ -430,17 +435,17 @@ function createTag(modulo, tipo){
 }
 
 function replaceStr(str, find, replace) {
-	for (var i = 0; i < find.length; i++) {
-		str = str.replace(new RegExp(find[i], 'gi'), replace[i]);
-	}
-	return str;
+    for (var i = 0; i < find.length; i++) {
+        str = str.replace(new RegExp(find[i], 'gi'), replace[i]);
+    }
+    return str;
 }
 
 function ajustaUrlsAssets(conteudo) {
 
     while (conteudo.indexOf("src=\"/lojas/") >= 0 || conteudo.indexOf("src='/lojas/") >= 0) {
 
-        conteudo = conteudo.replace("src=\"/lojas/", "src=\""+ protocolo + objJ.dominio + "/lojas/");
+        conteudo = conteudo.replace("src=\"/lojas/", "src=\"" + protocolo + objJ.dominio + "/lojas/");
         conteudo = conteudo.replace("src='/lojas/", "src='" + protocolo + objJ.dominio + "/lojas/");
 
     }
