@@ -10,7 +10,7 @@
     "colors": "^1.4.0",
     "connect-livereload": "^0.6.1",
     "edit-file": "^0.3.0",
-    "ejs": "^2.6.1",
+    "ejs": "^3.1.7",
     "express": "^4.16.3",
     "express-load": "^1.1.16",
     "extract-zip": "^2.0.1",
