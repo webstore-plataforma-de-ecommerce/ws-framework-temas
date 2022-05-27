@@ -1,11 +1,4 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
-const axios = require('axios')
-var serverOn = false;
-const cheerio = require('cheerio');
-const colors = require('colors');
+require('colors');
 
 console.log("");
 console.log("Modulo de edicao remota WEBSTORE".green.bold);
@@ -43,7 +36,7 @@ console.log("node restore ".yellow.bold);
 console.log("Rastaura na pasta layout um backup criado anteriormente com o comando node backup");
 console.log("");
 console.log("node pref ".yellow.bold);
-console.log("Cria e gerencia preferências do layout, como cores e opções a serem escolhidas no painel pelo lojista.");
+console.log("Cria e gerencia preferï¿½ncias do layout, como cores e opï¿½ï¿½es a serem escolhidas no painel pelo lojista.");
 console.log("");
 console.log("");
 console.log("Em caso de duvidas, conte com nosso time de especialistas atraves do email abaixo.");

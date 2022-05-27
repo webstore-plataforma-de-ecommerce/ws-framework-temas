@@ -1,89 +1,65 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
-const axios = require('axios')
+const express = require('express'), app = express();
+const fs = require('fs');
+const axios = require('axios');
 var serverOn = false;
 const cheerio = require('cheerio');
-const colors = require('colors');
-const livereload = require("livereload"), liveReloadServer = livereload.createServer();
+
+require('colors');
 
 console.log(" ");
 
-liveReloadServer.server.once("connection", () => {
-    setTimeout(() => {
-        liveReloadServer.refresh("/");
-    }, 10);
-});
+let pageURL = "";
+let result;
+let objJ;
+let etapaAtual = "";
+let protocolo = "https://";
 
-var pageURL = "";
-var result;
-var objJ;
-var etapaAtual = "";
-var protocolo = "https://";
+let LayInt;
+let objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json').toString());
+let objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString());
+let configJs = JSON.parse(fs.readFileSync('./layout/config/config.json'));
 
-var LayInt;
-var objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json').toString());
-var objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString());
-var configJs = JSON.parse(fs.readFileSync('./layout/config/config.json'));
-
-
-var LOJA = objConfig.token;
-var PAGE = objConfig.editar_pagina;
-
+let LOJA = objConfig.token;
+let PAGE = objConfig.editar_pagina || '';
 
 //var head = "";//fs.readFileSync('./public/head.html').toString();
-var bottom = "";//fs.readFileSync('./public/bottom.html').toString();
-var logo = "";//fs.readFileSync('./public/logo.html').toString();
-var includes = fs.readFileSync('./public/includes.html').toString();
+let bottom = "";//fs.readFileSync('./public/bottom.html').toString();
+let logo = "";//fs.readFileSync('./public/logo.html').toString();
+let includes = fs.readFileSync('./public/includes.html').toString();
 
+let index = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_index.html').toString());
+let listagem = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_listagem.html').toString());
+let sem_direita = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_outras_paginas.html').toString());
+let produto_detalhes = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_pagina_produto.html').toString());
+let topo = htmlModulosTagsHtml(fs.readFileSync('./layout/include/topo.html').toString());
+let barra = htmlModulosTagsHtml(fs.readFileSync('./layout/include/barra.html').toString());
+let esquerda = htmlModulosTagsHtml(fs.readFileSync('./layout/include/esquerda.html').toString());
+let direita = htmlModulosTagsHtml(fs.readFileSync('./layout/include/direita.html').toString());
+let rodape = htmlModulosTagsHtml(fs.readFileSync('./layout/include/rodape.html').toString());
+let complemento = htmlModulosTagsHtml(fs.readFileSync('./layout/include/complemento.html').toString());
 
-var index = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_index.html').toString());
-var listagem = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_listagem.html').toString());
-var sem_direita = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_outras_paginas.html').toString());
-var produto_detalhes = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_pagina_produto.html').toString());
+let head = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/head.html').toString());
+let body_end = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/body.html').toString());
 
-
-var topo = htmlModulosTagsHtml(fs.readFileSync('./layout/include/topo.html').toString());
-var barra = htmlModulosTagsHtml(fs.readFileSync('./layout/include/barra.html').toString());
-var esquerda = htmlModulosTagsHtml(fs.readFileSync('./layout/include/esquerda.html').toString());
-var direita = htmlModulosTagsHtml(fs.readFileSync('./layout/include/direita.html').toString());
-var rodape = htmlModulosTagsHtml(fs.readFileSync('./layout/include/rodape.html').toString());
-var complemento = htmlModulosTagsHtml(fs.readFileSync('./layout/include/complemento.html').toString());
-
-var head = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/head.html').toString());
-var body_end = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/body.html').toString());
-
-
-var QueryLayout = "";
+let QueryLayout = "";
 if (objConfig.temaBase) { QueryLayout = "&layout=" + objConfig.temaBase; }
 
+axios({
+    url: objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + LOJA + QueryLayout,
+    method: 'GET'
+}).then(response => {
+    objJ = response.data;
+    showPage();
+})
+.catch(err => {
+    console.log(err)
+    console.log("\nNão foi possível iniciar o processo".red.bold);
+    console.log("Verifique se o token informado á válido.\n");
+})
 
-request.get(objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + LOJA + QueryLayout, function (error, response, body) {
 
-    if (!error && response.statusCode == 200) {
-
-        try {
-
-            objJ = JSON.parse(body);
-            showPage();
-
-        } catch (e) {
-
-            console.log("")
-            console.log("Nao foi possivel iniciar o processo".red.bold);
-            console.log("verifique se o token informado e valido.");
-            console.log("")
-
-        }
-
-    } else {
-        console.log("Falha ao iniciar projeto:".red + response.statusCode);
-    }
-});
-
+app.use(express.static('./public'));
 app.get('*', (req, res, next) => {
-
     if (req.url.indexOf(".ico") >= 0
         || req.url.indexOf('/CheckoutSmart/') >= 0
         || req.url.indexOf('.jpg') >= 0
@@ -94,9 +70,7 @@ app.get('*', (req, res, next) => {
     ) {
         return next();
     }
-
     res.sendFile(__dirname + '/public/index.html');
-
 });
 
 function showPage() {
@@ -108,8 +82,8 @@ function showPage() {
         pageURL = PAGE;
         if (pageURL == "") { pageURL = "/"; }
 
-        console.log("Codigo da loja:".bold + LOJA);
-        console.log("Editando a pagina:".bold + pageURL);
+        console.log("Código da loja:".bold + LOJA);
+        console.log("Editando a página:".bold + pageURL);
 
         var urlComplete = "";
         if (pageURL != "/") {
@@ -293,7 +267,7 @@ function htmlModulos() {
             replace.push("#" + value)
         }
 
-        //Grupo de prefer�ncias 
+        //Grupo de prefer�ncias 
         var findGroup = [];
         var replaceGroup = [];
         if (configJs.PreferenciasSets) {
@@ -314,7 +288,7 @@ function htmlModulos() {
             js = replaceStr(js, findGroup, replaceGroup);
             result = replaceStr(result, findGroup, replaceGroup);
         }
-        //Fim - Grupo de prefer�ncias
+        //Fim - Grupo de prefer�ncias
 
 
         css = replaceStr(css, find, replace);
