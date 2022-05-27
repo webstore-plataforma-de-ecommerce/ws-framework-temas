@@ -1,4 +1,4 @@
-const express = require('express'), app = express();
+// const express = require('express'), app = express();
 const fs = require('fs');
 const axios = require('axios');
 var serverOn = false;
@@ -6,10 +6,8 @@ const cheerio = require('cheerio');
 
 require('colors');
 
-console.log(" ");
-
 if (!fs.existsSync('./layout')) {
-    console.log('Verifique se você executou o node pull.\n'.red.bold);
+    console.log('\nVerifique se você executou o node pull.\n'.red.bold);
     process.exit(0);
 }
 
@@ -27,58 +25,25 @@ let configJs = JSON.parse(fs.readFileSync('./layout/config/config.json'));
 let LOJA = objConfig.token;
 let PAGE = objConfig.editar_pagina || '';
 
-//var head = "";//fs.readFileSync('./public/head.html').toString();
-let bottom = "";//fs.readFileSync('./public/bottom.html').toString();
-let logo = "";//fs.readFileSync('./public/logo.html').toString();
-let includes = fs.readFileSync('./public/includes.html').toString();
+function compileTheme() {
+    //var head = "";//fs.readFileSync('./public/head.html').toString();
+    let bottom = "";//fs.readFileSync('./public/bottom.html').toString();
+    let logo = "";//fs.readFileSync('./public/logo.html').toString();
+    let includes = fs.readFileSync('./public/includes.html').toString();
 
-let index = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_index.html').toString());
-let listagem = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_listagem.html').toString());
-let sem_direita = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_outras_paginas.html').toString());
-let produto_detalhes = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_pagina_produto.html').toString());
-let topo = htmlModulosTagsHtml(fs.readFileSync('./layout/include/topo.html').toString());
-let barra = htmlModulosTagsHtml(fs.readFileSync('./layout/include/barra.html').toString());
-let esquerda = htmlModulosTagsHtml(fs.readFileSync('./layout/include/esquerda.html').toString());
-let direita = htmlModulosTagsHtml(fs.readFileSync('./layout/include/direita.html').toString());
-let rodape = htmlModulosTagsHtml(fs.readFileSync('./layout/include/rodape.html').toString());
-let complemento = htmlModulosTagsHtml(fs.readFileSync('./layout/include/complemento.html').toString());
+    let index = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_index.html').toString());
+    let listagem = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_listagem.html').toString());
+    let sem_direita = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_outras_paginas.html').toString());
+    let produto_detalhes = htmlModulosTagsHtml(fs.readFileSync('./layout/estrutura_pagina_produto.html').toString());
+    let topo = htmlModulosTagsHtml(fs.readFileSync('./layout/include/topo.html').toString());
+    let barra = htmlModulosTagsHtml(fs.readFileSync('./layout/include/barra.html').toString());
+    let esquerda = htmlModulosTagsHtml(fs.readFileSync('./layout/include/esquerda.html').toString());
+    let direita = htmlModulosTagsHtml(fs.readFileSync('./layout/include/direita.html').toString());
+    let rodape = htmlModulosTagsHtml(fs.readFileSync('./layout/include/rodape.html').toString());
+    let complemento = htmlModulosTagsHtml(fs.readFileSync('./layout/include/complemento.html').toString());
 
-let head = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/head.html').toString());
-let body_end = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/body.html').toString());
-
-let QueryLayout = "";
-if (objConfig.temaBase) { QueryLayout = "&layout=" + objConfig.temaBase; }
-
-axios({
-    url: objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + LOJA + QueryLayout,
-    method: 'GET'
-}).then(response => {
-    objJ = response.data;
-    showPage();
-})
-.catch(err => {
-    console.log(err)
-    console.log("\nNão foi possível iniciar o processo".red.bold);
-    console.log("Verifique se o token informado á válido.\n");
-})
-
-
-app.use(express.static('./public'));
-app.get('*', (req, res, next) => {
-    if (req.url.indexOf(".ico") >= 0
-        || req.url.indexOf('/CheckoutSmart/') >= 0
-        || req.url.indexOf('.jpg') >= 0
-        || req.url.indexOf('.gif') >= 0
-        || req.url.indexOf('.png') >= 0
-        || req.url.indexOf('.css') >= 0
-        || req.url.indexOf('.js') >= 0
-    ) {
-        return next();
-    }
-    res.sendFile(__dirname + '/public/index.html');
-});
-
-function showPage() {
+    let head = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/head.html').toString());
+    let body_end = htmlModulosTagsHtml(fs.readFileSync('./layout/include/add_tags/body.html').toString());
 
     try {
 
@@ -87,8 +52,8 @@ function showPage() {
         pageURL = PAGE;
         if (pageURL == "") { pageURL = "/"; }
 
-        console.log("Código da loja:".bold + LOJA);
-        console.log("Editando a página:".bold + pageURL);
+        console.log("\nCódigo da loja: ".bold + LOJA.green.bold);
+        console.log("Editando a página: ".bold + pageURL.green.bold);
 
         var urlComplete = "";
         if (pageURL != "/") {
@@ -131,77 +96,108 @@ function showPage() {
         console.log(e.message);
     }
 
-}
+    function showPage_step2(bodyPage) {
 
-function showPage_step2(bodyPage) {
-
-    try {
-
-        const $ = cheerio.load(bodyPage);
-        etapaAtual = $('#HdEtapaLoja').val();
-
-        LOJA = objJ.loja;
-
-        logo = logo.replace("##CAMINHOLOGO##", "http://images.webstore.net.br/files/" + LOJA + "/" + objJ.logotipo);
-
-        LayInt = Number(objJ.layout);
         try {
-            if (objConfig.temaBase) {
-                LayInt = Number(objConfig.temaBase);
-                console.log("Usando layout (" + LayInt + ") como base");
+    
+            const $ = cheerio.load(bodyPage);
+            etapaAtual = $('#HdEtapaLoja').val();
+    
+            LOJA = objJ.loja;
+    
+            logo = logo.replace("##CAMINHOLOGO##", "http://images.webstore.net.br/files/" + LOJA + "/" + objJ.logotipo);
+    
+            LayInt = Number(objJ.layout);
+            try {
+                if (objConfig.temaBase) {
+                    LayInt = Number(objConfig.temaBase);
+                    console.log("Usando layout (" + LayInt + ") como base");
+                }
+            } catch (e) { }
+    
+            console.log("Etapa: ".bold + etapaAtual.green.bold);
+            console.log("Dominio: ".bold + objJ.dominio.green.bold);
+            console.log("Nome da loja: ".bold + objJ.loja_nome.green.bold);
+            console.log('Compilação: '.bold + 'SUCESSO ✅'.green.bold)
+    
+    
+            var find = ["<!--##CLEAR_CSS##-->", "<!--##H1_DIV##-->", "<!--##LOGOTIPO##-->", "<!--##VALOR_PRODUTOS_CARRINHO##-->"];
+            var replace = ["", "h1", logo, "00"];
+            topo = replaceStr(topo, find, replace);
+    
+    
+            rodape = replaceStr(rodape, find, replace);
+            complemento = replaceStr(complemento, find, replace);
+    
+            var find2 = ["<!--###TOPO###-->", "<!--###BARRA###-->", "<!--###BARRA_ESQUERDA###-->", "<!--###RODAPE###-->", "<!--###COMPLEMENTO###-->"];
+            var replace = [topo, barra, esquerda, rodape, complemento];
+            index = replaceStr(index, find2, replace);
+    
+            result = index + bottom;
+    
+            find = ["<!--###IMAGENS_CLIENTE###-->"];
+            replace = ["http://images.webstore.net.br/files/" + LOJA + "/" + LayInt + "/"];
+            result = replaceStr(result, find, replace);
+    
+            result += "<input type='hidden' id='LOJA' value='" + LOJA + "'/>";
+            result += "<input type='hidden' id='HdTokenLojaTemp' value='" + objSysConfig.tokenSys + "'/>";
+    
+    
+            if (bodyPage != "") {
+                result = bodyPage + includes;
             }
-        } catch (e) { }
-
-        console.log("Etapa:".bold + etapaAtual);
-        console.log("Dominio:".bold + objJ.dominio);
-        console.log("Nome da loja:".bold + objJ.loja_nome);
-
-
-        var find = ["<!--##CLEAR_CSS##-->", "<!--##H1_DIV##-->", "<!--##LOGOTIPO##-->", "<!--##VALOR_PRODUTOS_CARRINHO##-->"];
-        var replace = ["", "h1", logo, "00"];
-        topo = replaceStr(topo, find, replace);
-
-
-        rodape = replaceStr(rodape, find, replace);
-        complemento = replaceStr(complemento, find, replace);
-
-        var find2 = ["<!--###TOPO###-->", "<!--###BARRA###-->", "<!--###BARRA_ESQUERDA###-->", "<!--###RODAPE###-->", "<!--###COMPLEMENTO###-->"];
-        var replace = [topo, barra, esquerda, rodape, complemento];
-        index = replaceStr(index, find2, replace);
-
-        result = index + bottom;
-
-        find = ["<!--###IMAGENS_CLIENTE###-->"];
-        replace = ["http://images.webstore.net.br/files/" + LOJA + "/" + LayInt + "/"];
-        result = replaceStr(result, find, replace);
-
-        result += "<input type='hidden' id='LOJA' value='" + LOJA + "'/>";
-        result += "<input type='hidden' id='HdTokenLojaTemp' value='" + objSysConfig.tokenSys + "'/>";
-
-
-        if (bodyPage != "") {
-            result = bodyPage + includes;
+    
+            htmlModulos();
+    
+            if (!serverOn) {
+                // app.listen(3000, function () {
+                //     console.log(" ");
+                //     console.log("Acesse " + "http://localhost:3000".green.bold + " em seu navegador para visualizar a loja.");
+                //     console.log("__________________________________________________________________________________________");
+    
+                //     console.log(" ");
+                //     serverOn = true;
+                // });
+            }
+    
+    
+        } catch (e) {
+            console.log(e.message);
         }
-
-        htmlModulos();
-
-        if (!serverOn) {
-            app.listen(3000, function () {
-                console.log(" ");
-                console.log("Acesse " + "http://localhost:3000".green.bold + " em seu navegador para visualizar a loja.");
-                console.log("__________________________________________________________________________________________");
-
-                console.log(" ");
-                serverOn = true;
-            });
-        }
-
-
-    } catch (e) {
-        console.log(e.message);
+    
     }
-
 }
+
+
+let QueryLayout = "";
+if (objConfig.temaBase) { QueryLayout = "&layout=" + objConfig.temaBase; }
+
+axios({
+    url: objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + LOJA + QueryLayout,
+    method: 'GET'
+}).then(response => {
+    objJ = response.data;
+    compileTheme();
+})
+.catch(err => {
+    console.log(err)
+    console.log("\nNão foi possível iniciar o processo".red.bold);
+    console.log("Verifique se o token informado á válido.\n");
+})
+
+
+let fsTimeout
+
+fs.watch('./layout', { recursive:true }, (eventType, filename) => {
+    if (!fsTimeout) {
+        compileTheme();
+        // console.log("\nThe file was edited");
+        // console.log(eventType)
+        // console.log(filename)
+        // console.log(fs.readFileSync('./layout/' + filename, 'utf-8'))
+        fsTimeout = setTimeout(function() { fsTimeout=null }, 1000) 
+    }
+})
 
 function htmlModulos() {
 
