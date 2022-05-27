@@ -8,6 +8,11 @@ require('colors');
 
 console.log(" ");
 
+if (!fs.existsSync('./layout')) {
+    console.log('Verifique se você executou o node pull.\n'.red.bold);
+    process.exit(0);
+}
+
 let pageURL = "";
 let result;
 let objJ;
