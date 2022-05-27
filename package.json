@@ -4,13 +4,10 @@
   "description": "Webstore Theme Editor",
   "main": "app.js",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cheerio": "^1.0.0-rc.9",
     "colors": "^1.4.0",
     "express": "^4.16.3"
-  },
-  "bin": {
-    "boom": "boom-cli.js"
   },
   "scripts": {
     "start": "node --max-http-header-size=120000 app",
