@@ -1,9 +1,10 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
-const readline = require("readline");
-const colors = require('colors');
+
+const 
+    fs = require('fs'), 
+    axios = require('axios'),
+    readline = require("readline")
+
+require('colors');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -14,123 +15,76 @@ var objSysConfig = JSON.parse(fs.readFileSync('./sys/config/system_access.json')
 
 console.log("Configurando módulo de edicão remota.\nInforme o Token de edicão remota obtido no painel da loja.");
 
-var objConfig;
+let objConfig = {
+    token: ''
+};
 
-const quest = () => {
-    rl.question("Token:", function (GetToken) {
+async function mainFunction() {
+    try {
+        let response = await axios({
+            url: objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + objConfig.token,
+            method: 'GET'
+        })
+        
+        let jsonRetorno = response.data;
 
-        objConfig = {
-            token: GetToken,
-            tipo: "",
-            loja: "",
-            temaNome: "",
-            usuario: "",
-            senha: "",
-            temaBase: "",
-            editar_pagina: "",
-            ultimoPull: "",
-            ultimoPush: ""
-        };
+        if (!jsonRetorno.layout) throw 'Falha na configuração Verifique se seu token é válido ' + response.data 
+        
+        objConfig['temaBase'] = null;
+        objConfig['tipo'] = jsonRetorno.tipo;
+        objConfig['temaNome'] = jsonRetorno.layout_nome;
+        objConfig['loja'] = jsonRetorno.loja_nome;
+        objConfig['editar_pagina'] = '/';
 
-        rl.close();
+        fs.writeFileSync('./sys/config/config.json', JSON.stringify(objConfig));
 
-    });
-}
+        if (jsonRetorno.tipo == "Padrao") {
 
-const mainFunction = () => {
-    request.get(objSysConfig.endpoint + '/lojas/dados/dadosloja/?LV_ID=' + objConfig.token, function (error, response, body) {
-
-        if (!error && response.statusCode == 200) {
-
-            JsonRetorno = JSON.parse(body);
-
-            if (JsonRetorno.layout) {
-
-                objConfig.temaBase = null;//JsonRetorno.layout;
-                objConfig.tipo = JsonRetorno.tipo;
-                objConfig.temaNome = JsonRetorno.layout_nome;
-                objConfig.loja = JsonRetorno.loja_nome;
-
-                var config = JSON.stringify(objConfig);
-
-                fs.writeFileSync('./sys/config/config.json', config, (err) => {
-                    if (err) throw err;
-                });
-
-                if (JsonRetorno.tipo == "Padrao") {
-
-                    console.log(" ");
-                    console.log("**************************".yellow);
-                    console.log("!Atencao!".yellow.bold);
-                    console.log("Voce esta personalizando um tema " + "padrao".bold +". Modificacoes em modulos nao sao replicaveis.");
-                    console.log("Caso deseje criar modulos personalizados solicite a criacao de um tema personalizado seguindo as orientacoes de nosso manual.");
-                    console.log("**************************".yellow);
-                    console.log(" ");
-
-                } else {
-
-                    console.log(" ");
-                    console.log("**************************".yellow);
-                    console.log("!Atencao!".yellow.bold);
-                    console.log("Voce esta editando um tema " + "personalizado".bold +".");
-                    console.log("Esse tema nao utiliza o CSS default de nenhum tema inicialmente. ");
-                    console.log("Voce pode copiar o CSS de alguma das estruturas padroes dentro da  pasta " + "sys / estruturas".bold + ".");
-                    console.log("**************************".yellow);
-                    console.log(" ");
-
-                }
-
-                console.log(" ");
-                console.log("Tipo de tema: " + JsonRetorno.tipo);
-                console.log("Loja: " + JsonRetorno.loja_nome);
-                console.log("Dominio: " + JsonRetorno.dominio);
-                console.log("Codigo do tema: " + JsonRetorno.layout);
-                console.log("Nome do tema: " + JsonRetorno.layout_nome);
-                console.log("_____________________________________");
-                console.log(" ");
-
-                console.log("Processo concluido com sucesso".green.bold + " Execute(node pull) para baixar os dados para edicao.");
-
-                console.log(" ");
-                console.log(" ");
-
-
-            } else {
-
-                console.log("Falha na configuracao!! Verifique se o token e valido." + body);
-
-            }
-
-            process.exit(0);
+            console.log("\n**************************".yellow);
+            console.log("!Atenção!".yellow.bold);
+            console.log("Você está personalizando um tema " + "padrão".bold +". Modificacões em módulos não são replicáveis.");
+            console.log("Caso deseje criar módulos personalizados solicite a criação de um tema personalizado seguindo as orientações de nosso manual.");
+            console.log("**************************\n".yellow);
 
         } else {
 
-            console.log("Falha ao iniciar projeto:" + response.statusCode);
+            console.log("\n**************************".yellow);
+            console.log("!Atenção!".yellow.bold);
+            console.log("Você está editando um tema " + "personalizado".bold +".");
+            console.log("Esse tema não utiliza o CSS default de nenhum tema inicialmente. ");
+            console.log("Você pode copiar o CSS de alguma das estruturas padrões dentro da pasta " + "/sys/estruturas".bold + ".");
+            console.log("**************************\n".yellow);
 
         }
+
+        console.log("Tipo de tema: " + jsonRetorno.tipo);
+        console.log("Loja: " + jsonRetorno.loja_nome);
+        console.log("Domínio: " + jsonRetorno.dominio);
+        console.log("Código do tema: " + jsonRetorno.layout);
+        console.log("Nome do tema: " + jsonRetorno.layout_nome);
+        console.log("_____________________________________\n");
+
+        console.log("Processo concluído com sucesso".green.bold + " Execute " + '(node pull)'.bold + " para baixar os dados para edicão.\n\n");
+
+        process.exit();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function quest () {
+    rl.question("Token:", function (GetToken) {
+
+        objConfig['token'] = GetToken;
+
+        mainFunction()
+
     });
 }
 
-rl.on("close", function () {
-
-    mainFunction()
-
-});
-
 if (process.argv[2] && process.argv[2] != '') {
 
-    objConfig = {
-        token: process.argv[2],
-        tipo: "",
-        loja: "",
-        temaNome: "",
-        usuario: "",
-        senha: "",
-        temaBase: "",
-        editar_pagina: "",
-        ultimoPull: "",
-        ultimoPush: ""
-    };
+    objConfig['token'] = process.argv[2]
 
     mainFunction()
 } else {

@@ -1,10 +1,6 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
-const colors = require('colors');
-var rimraf = require("rimraf");
-const readline = require("readline");
+const fs = require('fs'), readline = require('readline');
+
+require('colors');
 
 const rl = readline.createInterface({
     input: process.stdin,

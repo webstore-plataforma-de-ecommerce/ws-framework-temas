@@ -1,7 +1,4 @@
-var app = require('./sys/config/express')();
-var uglify = require("uglify-js");
-var fs = require('fs');
-var request = require('request');
+const fs = require('fs');
 const axios = require('axios')
 const colors = require('colors');
 const { Console } = require('console');
