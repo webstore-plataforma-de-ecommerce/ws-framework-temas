@@ -25,7 +25,7 @@ let configJs = JSON.parse(fs.readFileSync('./layout/config/config.json'));
 let LOJA = objConfig.token;
 let PAGE = objConfig.editar_pagina || '';
 
-function compileTheme() {
+function compileTheme(vrf) {
     //var head = "";//fs.readFileSync('./public/head.html').toString();
     let bottom = "";//fs.readFileSync('./public/bottom.html').toString();
     let logo = "";//fs.readFileSync('./public/logo.html').toString();
@@ -52,8 +52,10 @@ function compileTheme() {
         pageURL = PAGE;
         if (pageURL == "") { pageURL = "/"; }
 
-        console.log("\nCódigo da loja: ".bold + LOJA.green.bold);
-        console.log("Editando a página: ".bold + pageURL.green.bold);
+        if (vrf) {
+            console.log("\nCódigo da loja: ".bold + LOJA.green.bold);
+            console.log("Editando a página: ".bold + pageURL.green.bold);
+        }
 
         var urlComplete = "";
         if (pageURL != "/") {
@@ -80,7 +82,7 @@ function compileTheme() {
                     Html_complemento: complemento
                 })
                 .then(res => {
-                    showPage_step2(res.data);
+                    showPage_step2(res.data, vrf);
                 })
                 .catch(error => {
                     console.error(error);
@@ -88,7 +90,7 @@ function compileTheme() {
 
         } else {
 
-            showPage_step2("");
+            showPage_step2("", vrf);
 
         }
 
@@ -114,11 +116,15 @@ function compileTheme() {
                     console.log("Usando layout (" + LayInt + ") como base");
                 }
             } catch (e) { }
-    
-            console.log("Etapa: ".bold + etapaAtual.green.bold);
-            console.log("Dominio: ".bold + objJ.dominio.green.bold);
-            console.log("Nome da loja: ".bold + objJ.loja_nome.green.bold);
-            console.log('Compilação: '.bold + 'SUCESSO ✅'.green.bold)
+            
+            if (vrf) {
+                console.log("Etapa: ".bold + etapaAtual.green.bold);
+                console.log("Dominio: ".bold + objJ.dominio.green.bold);
+                console.log("Nome da loja: ".bold + objJ.loja_nome.green.bold);
+            }
+
+                
+                process.stdout.write('\nCompilação: '.bold + 'SUCESSO ✅'.green.bold);
     
     
             var find = ["<!--##CLEAR_CSS##-->", "<!--##H1_DIV##-->", "<!--##LOGOTIPO##-->", "<!--##VALOR_PRODUTOS_CARRINHO##-->"];
@@ -177,7 +183,7 @@ axios({
     method: 'GET'
 }).then(response => {
     objJ = response.data;
-    compileTheme();
+    compileTheme(true);
 })
 .catch(err => {
     console.log(err)
@@ -190,7 +196,7 @@ let fsTimeout
 
 fs.watch('./layout', { recursive:true }, (eventType, filename) => {
     if (!fsTimeout) {
-        compileTheme();
+        compileTheme(false);
         // console.log("\nThe file was edited");
         // console.log(eventType)
         // console.log(filename)
@@ -442,3 +448,15 @@ function ajustaUrlsAssets(conteudo) {
     return conteudo;
 
 }
+
+const liveServer = require("live-server");
+
+const params = {
+	port: 3000, // Set the server port. Defaults to 8080.
+	root: "./public", // Set root directory that's being served. Defaults to cwd.
+	open: true, // When false, it won't load your browser by default.
+	file: "index.html", // When set, serve this file (server root relative) for every 404 (useful for single-page applications)
+	wait: 0, // Waits for all changes, before reloading. Defaults to 0 sec.
+	logLevel: 0, // 0 = errors only, 1 = some, 2 = lots
+};
+liveServer.start(params);
