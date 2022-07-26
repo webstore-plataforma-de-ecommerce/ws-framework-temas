@@ -448,6 +448,7 @@ const liveServer = require("live-server");
 const params = {
 	port: 3000,
 	root: "./public",
+	host: 'localhost',
 	open: true,
 	file: "index.html",
 	wait: 0,
