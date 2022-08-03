@@ -3,6 +3,7 @@ const fs = require('fs');
 const axios = require('axios');
 var serverOn = false;
 const cheerio = require('cheerio');
+const liveServer = require("live-server");
 
 require('colors');
 
@@ -23,7 +24,7 @@ let objConfig = JSON.parse(fs.readFileSync('./sys/config/config.json').toString(
 let configJs = JSON.parse(fs.readFileSync('./layout/config/config.json'));
 
 let LOJA = objConfig.token;
-let PAGE = objConfig.editar_pagina || '';
+let PAGE = '/' || '';
 
 function compileTheme(vrf) {
     //var head = "";//fs.readFileSync('./public/head.html').toString();
@@ -181,6 +182,29 @@ axios({
 }).then(response => {
     objJ = response.data;
     compileTheme(true);
+
+    liveServer.start({
+      port: 3000,
+      root: "./public",
+      host: 'localhost',
+      open: true,
+      file: "index.html",
+      wait: 0,
+      logLevel: 0,
+        middleware: [
+            (req,res,next) => {
+                let arrUrl = req.url.split('/');
+                if ((arrUrl.length == 0 || arrUrl.length == 1) || (arrUrl[1] != 'css' && arrUrl[1] != 'js' && arrUrl[1] != 'carrinhoAJAX')) {
+                    if (PAGE != req.url) {
+                        PAGE = req.url;
+                        compileTheme();
+                    }
+                }
+                next();
+            }
+        ]
+    });
+
 })
 .catch(err => {
     console.log(err)
@@ -195,7 +219,7 @@ fs.watch('./layout', { recursive:true }, (eventType, filename) => {
     if (!fsTimeout) {
         console.log('ARQUIVO ALTERADO'.yellow, filename.blue.bold)
         setTimeout(() => { compileTheme(false); }, 100)
-        fsTimeout = setTimeout(function() { fsTimeout=null }, 1000) 
+        fsTimeout = setTimeout(function() { fsTimeout=null }, 100) 
     }
 })
 
@@ -442,28 +466,3 @@ function ajustaUrlsAssets(conteudo) {
     return conteudo;
 
 }
-
-const liveServer = require("live-server");
-
-const params = {
-	port: 3000,
-	root: "./public",
-	host: 'localhost',
-	open: true,
-	file: "index.html",
-	wait: 0,
-	logLevel: 0,
-    middleware: [
-        (req,res,next) => {
-            let arrUrl = req.url.split('/');
-            if ((arrUrl.length == 0 || arrUrl.length == 1) || (arrUrl[1] != 'css' && arrUrl[1] != 'js')) {
-                if (PAGE != req.url) {
-                    PAGE = req.url;
-                    compileTheme();
-                }
-            }
-            next();
-        }
-    ]
-};
-liveServer.start(params);

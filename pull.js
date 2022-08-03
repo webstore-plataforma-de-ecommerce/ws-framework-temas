@@ -21,32 +21,11 @@ function folderVerify(subdir, dir) {
     return
 }
 
-// exec('node backup -d', function (error, stdout, stderr) {
-//     if (!error) {
-//         if (stdout && stdout != undefined && stdout != '') {
-//             console.log(stdout)
-//             exec('node preset -s', function (error, stdout, stderr) {
-//                 if (!error) {
-//                     if (stdout && stdout != undefined && stdout != '') {
-//                         console.log(stdout)
-//                         mainFunction()
-//                     }
-//                     return
-//                 } else {
-//                     console.log(error)
-//                 }
-//             })
-//         }
-//         return
-//     } else {
-//         console.log(error)
-//     }
-// })
-
 async function mainFunction() {
     console.log(" ");
     console.log('Inciando o Download da Nuvem utilizando o token', TOKEN.bold)
 
+    try { fs.rmSync('/layout', { recursive: true, force: true}) } catch (err) { }
     folderVerify(['layout']);
     folderVerify(['assets', 'config', 'include', 'include/add_tags', 'modulos_loja'], 'layout')
 
